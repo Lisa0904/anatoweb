@@ -1,0 +1,19 @@
+{
+  "questions": [
+    {
+      "question": "Wie viele Herzkammern hat das menschliche Herz?",
+      "answers": ["2", "3", "4", "5"],
+      "correct": 2
+    },
+    {
+      "question": "Welche Struktur pumpt Blut in den Körper?",
+      "answers": ["Lunge", "Herz", "Leber", "Niere"],
+      "correct": 1
+    },
+    {
+      "question": "Welche der folgenden ist ein Knochen?",
+      "answers": ["Femur", "Alveole", "Neuron", "Arterie"],
+      "correct": 0
+    }
+  ]
+}
