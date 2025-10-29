@@ -1,17 +1,28 @@
+// src/components/Navbar.tsx
 import React from "react";
 import { NavLink } from "react-router-dom";
+import type { JSX } from "react/jsx-runtime";
 
-export default function Navbar(){
+export default function Navbar(): JSX.Element {
   return (
     <nav className="nav">
       <div className="brand">
         <img src="/logo.png" alt="AnatoWeb Logo" className="logo" />
+        <div style={{ marginLeft: 10, fontWeight: 600 }}>AnatoWeb</div>
       </div>
       <div className="links">
-        <NavLink to="/" end className={({isActive}) => isActive ? "active" : ""}>Start</NavLink>
-        <NavLink to="/model" className={({isActive}) => isActive ? "active" : ""}>3D-Modell</NavLink>
-        <NavLink to="/quiz" className={({isActive}) => isActive ? "active" : ""}>Quiz</NavLink>
-        <NavLink to="/about" className={({isActive}) => isActive ? "active" : ""}>Über uns</NavLink>
+        <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>
+          Start
+        </NavLink>
+        <NavLink to="/model" className={({ isActive }) => (isActive ? "active" : "")}>
+          3D-Modell
+        </NavLink>
+        <NavLink to="/quiz" className={({ isActive }) => (isActive ? "active" : "")}>
+          Quiz
+        </NavLink>
+        <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>
+          Über uns
+        </NavLink>
       </div>
     </nav>
   );
