@@ -7,10 +7,8 @@ export default function Navbar(): JSX.Element {
   return (
     <nav className="nav">
       <div className="brand">
-        <NavLink to="/" end className="logo-link">
-          <img src="/logo.png" alt="AnatoWeb Logo" className="logo" />
-          <div style={{ marginLeft: 10, fontWeight: 600}}></div>
-        </NavLink>
+        <img src="/logo.png" alt="AnatoWeb Logo" className="logo" />
+        <div style={{ marginLeft: 10, fontWeight: 600 }}></div>
       </div>
       <div className="links">
         <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>
@@ -18,9 +16,6 @@ export default function Navbar(): JSX.Element {
         </NavLink>
         <NavLink to="/model" className={({ isActive }) => (isActive ? "active" : "")}>
           3D-Modell
-        </NavLink>
-        <NavLink to="/flashcards" className={({ isActive }) => (isActive ? "active" : "")}>
-          Karteikarten
         </NavLink>
         <NavLink to="/quiz" className={({ isActive }) => (isActive ? "active" : "")}>
           Quiz

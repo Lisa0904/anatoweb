@@ -38,7 +38,7 @@ body{
       background-position: center; background: none}
 
 .nav .links{display:flex;gap:18px}
-.nav a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:6px}
+.nav a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:8px}
 .nav a.active, .nav a:hover{color:var(--text);background:var(--glass)}
 
 .nav .logo-link {
@@ -106,7 +106,6 @@ body{
   letter-spacing: -0.02em;
 }
 
-/* Make h3 match the main title color for visual consistency */
 h3 {
   color: var(--text-strong);
 }
