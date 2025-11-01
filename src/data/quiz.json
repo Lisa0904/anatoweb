@@ -3,17 +3,38 @@
     {
       "question": "Wie viele Herzkammern hat das menschliche Herz?",
       "answers": ["2", "3", "4", "5"],
-      "correct": 2
+      "correct": 2,
+      "topic": "Organe"
     },
     {
       "question": "Welche Struktur pumpt Blut in den Körper?",
       "answers": ["Lunge", "Herz", "Leber", "Niere"],
-      "correct": 1
+      "correct": 1,
+      "topic": "Organe"
     },
     {
       "question": "Welche der folgenden ist ein Knochen?",
       "answers": ["Femur", "Alveole", "Neuron", "Arterie"],
-      "correct": 0
+      "correct": 0,
+      "topic": "Skelett"
+    },
+    {
+      "question": "Welcher Muskel ist am Oberarm der stärkste Beuger?",
+      "answers": ["Bizeps", "Trizeps", "Quadrizeps", "Deltamuskel"],
+      "correct": 0,
+      "topic": "Muskeln"
+    },
+    {
+      "question": "Welcher Nerv steuert die Gesichtsmuskulatur?",
+      "answers": ["Vagusnerv", "Facialisnerv", "Ischiasnerv", "Medianusnerv"],
+      "correct": 1,
+      "topic": "Nerven"
+    },
+    {
+      "question": "Wie viele Knochen hat das menschliche Skelett im Erwachsenenalter?",
+      "answers": ["186", "206", "216", "226"],
+      "correct": 1,
+      "topic": "Skelett"
     }
   ]
 }

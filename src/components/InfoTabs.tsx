@@ -6,11 +6,10 @@ const sampleAnatomicText = {
     anatomy: "Das Herz ist ein vierkammeriger Muskel, der Blut durch den Körper pumpt.",
     function: "Pumpt Blut, versorgt Organe mit Sauerstoff.",
     disease: "Krankheiten: KHK, Herzinfarkt, Herzinsuffizienz.",
-    quiz: "Welche Kammer ist am stärksten?",
   },
 };
 
-type TabKey = "Anatomie" | "Funktion" | "Erkrankungen" | "Quizfrage";
+type TabKey = "Anatomie" | "Funktion" | "Erkrankungen";
 
 interface SelectedInfo {
   name?: string;
@@ -21,7 +20,7 @@ interface InfoTabsProps {
   selected?: SelectedInfo;
 }
 
-const tabs: TabKey[] = ["Anatomie", "Funktion", "Erkrankungen", "Quizfrage"];
+const tabs: TabKey[] = ["Anatomie", "Funktion", "Erkrankungen"];
 
 export default function InfoTabs({ selected }: InfoTabsProps) {
   const [tab, setTab] = useState<TabKey>("Anatomie");
@@ -44,7 +43,6 @@ export default function InfoTabs({ selected }: InfoTabsProps) {
           {tab === "Anatomie" && info}
           {tab === "Funktion" && sampleAnatomicText.default.function}
           {tab === "Erkrankungen" && sampleAnatomicText.default.disease}
-          {tab === "Quizfrage" && sampleAnatomicText.default.quiz}
         </div>
       </div>
     </div>

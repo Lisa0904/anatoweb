@@ -1,13 +1,31 @@
 import React from "react";
 
-export default function About(){
+export default function About() {
   return (
-    <div style={{maxWidth:900}}>
+    <div style={{ maxWidth: 900, margin: "0 auto" }}>
       <h1 className="title">Über uns</h1>
-      <p className="lead">AnatoWeb — Projekt im Multimedia-Seminar KMMB4732. Team: Anne, Moritz, Lisa.</p>
-      <div style={{marginTop:18}}>
+
+      <p className="lead">
+        <strong>AnatoWeb</strong> ist ein studentisches Projekt im Rahmen des
+        Multimedia-Seminars <em>KMMB4732</em>. <br/>Entwickelt von Anne Eppendorfer, Moritz Münch und Lisa Taljanovic.
+      </p>
+
+      <div style={{ marginTop: 18 }}>
         <h3>Ziel</h3>
-        <p className="info-text">Interaktive Lernplattform zur Visualisierung der menschlichen Anatomie.</p>
+        <p className="info-text">
+          Unser Ziel ist es, eine interaktive Lernplattform zu schaffen, die
+          komplexe anatomische Strukturen verständlich und anschaulich
+          visualisiert.
+        </p>
+      </div>
+
+      <div style={{ marginTop: 18 }}>
+        <h3>Vision</h3>
+        <p className="info-text">
+          Wir möchten das Lernen der menschlichen Anatomie modern, digital und
+          zugänglich gestalten – für Schüler:innen, Studierende, Lehrende und alle
+          Wissbegierigen.
+        </p>
       </div>
     </div>
   );
