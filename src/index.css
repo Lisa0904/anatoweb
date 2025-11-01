@@ -4,7 +4,8 @@
   --muted:#9aa3aa;
   --accent:#22c55e;
   --glass: rgba(255,255,255,0.03);
-  --text:#e6eef0;
+  --text: #f4f4f5; /* angenehmes, neutrales Weiß */
+  --text-strong: #f3ede6; /* optional: leicht warm für große Titel */
 }
 
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
@@ -37,7 +38,7 @@ body{
       background-position: center; background: none}
 
 .nav .links{display:flex;gap:18px}
-.nav a{color:var(--muted);text-decoration:none;padding:6px 8px;border-radius:6px}
+.nav a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:6px}
 .nav a.active, .nav a:hover{color:var(--text);background:var(--glass)}
 
 .nav .logo-link {
@@ -58,7 +59,7 @@ body{
   margin-top: 3rem;
   margin-bottom: 1.5rem;
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -79,10 +80,12 @@ body{
 .viewer{
   border-radius:14px;
   background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-  padding:12px;
+  padding:18px;
   height: 600px;
   position:relative;
   overflow:hidden;
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
 }
 
 /* right panel */
@@ -91,10 +94,21 @@ body{
   border-radius:14px;padding:20px;
   height: 600px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
 }
 
-.title{
-  font-size:44px; font-weight:700; margin-bottom:25px; text-align: left;
+.title {
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: left;
+  color: var(--text-strong);
+  letter-spacing: -0.02em;
+}
+
+/* Make h3 match the main title color for visual consistency */
+h3 {
+  color: var(--text-strong);
 }
 
 .lead{color:var(--muted);margin-bottom:18px;font-size:15px;line-height:1.6}
@@ -104,6 +118,16 @@ body{
 .tab{flex:1;padding:12px;color:var(--muted);cursor:pointer;text-align:center;transition:all 0.2s ease}
 .tab.active{color:var(--text);border-bottom:3px solid var(--accent);background:rgba(255,255,255,0.01)}
 
+/* reusable section box to visually separate content areas */
+.section-box{
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+  border-radius:12px;
+  padding:16px;
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+ 
+
+}
 /* organ info */
 .info-title{font-size:28px;margin-bottom:8px}
 .info-text{color:var(--muted);line-height:1.6}
@@ -116,6 +140,22 @@ body{
   background: rgba(255,255,255,0.04); padding:10px;border-radius:10px; color:var(--muted); cursor:pointer; border:1px solid rgba(255,255,255,0.02); text-decoration: none
 }
 .ctrl-btn:hover{color:var(--text);background:rgba(255,255,255,0.06)}
+
+/* 🎥 Home Video Animation */
+.video-container video {
+  opacity: 0.8;
+  filter: brightness(1.1) contrast(1.05) saturate(1.1);
+  animation: videoPulse 12s infinite alternate ease-in-out;
+}
+
+@keyframes videoPulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.02);
+  }
+}
 
 
 /* responsive */

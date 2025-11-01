@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import quizData from "../data/quiz.json";
 import "../Flashcards.css";
 
-type Topic = "Alle" | "Muskeln" | "Skelett" | "Nerven" | "Organe";
+type Topic = "Alle" | "Muskeln" | "Skelett" | "Arterien" | "Organe";
 
 export default function Flashcards() {
   const [topic, setTopic] = useState<Topic>("Alle");
@@ -21,9 +21,16 @@ export default function Flashcards() {
   const current = questions[index];
 
   function handleFlip() {
-    if (fading) return;
-    setFlipped((prev) => !prev);
-  }
+  if (fading) return;
+  
+  // 🔊 Flip-Sound abspielen
+  const audio = new Audio("/sounds/swoosh.mp3");  // Pfad zur Datei im public-Ordner
+  audio.play();
+  audio.volume = 0.05; 
+
+  setFlipped((prev) => !prev);
+}
+
 
   // ✨ Wechsel zur nächsten Karte (sofort neuer Inhalt)
   function nextCard() {
@@ -46,13 +53,13 @@ export default function Flashcards() {
     <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
       <h1 className="title">Karteikarten</h1>
       <p style={{ color: "var(--muted)", marginBottom: 24, textAlign: "left" }}>
-        Suche ein Themengebiet aus, klicke auf die Karte, um die Antwort zu sehen, und bewerte dein Wissen.
+        Wähle ein Themengebiet, klicke für die Antwort auf die Karte und bewerte dein Wissen.
         </p>
 
 
       {/* Themenauswahl */}
       <div style={{ display: "flex", justifyContent: "center", gap: 12, marginBottom: 24 }}>
-        {["Alle", "Muskeln", "Skelett", "Nerven", "Organe"].map((t) => (
+        {["Alle", "Muskeln", "Skelett", "Arterien", "Organe"].map((t) => (
           <button
             key={t}
             onClick={() => {

@@ -9,7 +9,7 @@ interface SelectedInfo {
   info?: string;
 }
 
-type Topic = "Ganzer Mensch" | "Muskeln" | "Skelett" | "Nerven" | "Organe";
+type Topic = "Ganzer Mensch" | "Muskeln" | "Skelett" | "Arterien" | "Organe";
 
 export default function ModelPage(): JSX.Element {
   const [selected, setSelected] = useState<SelectedInfo | undefined>(undefined);
@@ -21,7 +21,7 @@ export default function ModelPage(): JSX.Element {
       "Ganzer Mensch": "/models/anatoweb_full.glb",
       Muskeln: "/models/anatoweb_muscles.glb",
       Skelett: "/models/anatoweb_skeleton.glb",
-      Nerven: "/models/anatoweb_nerves.glb",
+      Arterien: "/models/anatoweb_arteries.glb",
       Organe: "/models/anatoweb_organs.glb",
     }),
     []
@@ -42,7 +42,7 @@ export default function ModelPage(): JSX.Element {
 
         {/* Themenauswahl */}
         <div style={{ display: "flex", gap: 10, marginBottom: 14 }}>
-          {["Ganzer Mensch", "Muskeln", "Skelett", "Nerven", "Organe"].map((t) => (
+          {["Ganzer Mensch", "Muskeln", "Skelett", "Arterien", "Organe"].map((t) => (
             <button
               key={t}
               onClick={() => {

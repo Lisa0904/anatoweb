@@ -10,7 +10,7 @@ export default function About() {
         Multimedia-Seminars <em>KMMB4732</em>. <br/>Entwickelt von Anne Eppendorfer, Moritz Münch und Lisa Taljanovic.
       </p>
 
-      <div style={{ marginTop: 18 }}>
+      <div className="section-box" style={{ marginTop: 18 }}>
         <h3>Ziel</h3>
         <p className="info-text">
           Unser Ziel ist es, eine interaktive Lernplattform zu schaffen, die
@@ -19,12 +19,21 @@ export default function About() {
         </p>
       </div>
 
-      <div style={{ marginTop: 18 }}>
+      <div className="section-box" style={{ marginTop: 18 }}>
         <h3>Vision</h3>
         <p className="info-text">
           Wir möchten das Lernen der menschlichen Anatomie modern, digital und
           zugänglich gestalten – für Schüler:innen, Studierende, Lehrende und alle
           Wissbegierigen.
+        </p>
+      </div>
+      <div className="section-box" style={{ marginTop: 18 }}>
+        <h3>Technische Umsetzung</h3>
+        <p className="info-text">
+          Die Website wurde von uns eigenständig mit <strong>TypeScript</strong> und dem modernen
+          Build-Tool <strong>Vite</strong> entwickelt. <br />
+          Durch den Einsatz aktueller Webtechnologien können wir eine schnelle, 
+          interaktive und performante Benutzererfahrung gewährleisten.
         </p>
       </div>
     </div>
