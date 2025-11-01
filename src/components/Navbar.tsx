@@ -17,6 +17,9 @@ export default function Navbar(): JSX.Element {
         <NavLink to="/model" className={({ isActive }) => (isActive ? "active" : "")}>
           3D-Modell
         </NavLink>
+        <NavLink to="/flashcards" className={({ isActive }) => (isActive ? "active" : "")}>
+          Karteikarten
+        </NavLink>
         <NavLink to="/quiz" className={({ isActive }) => (isActive ? "active" : "")}>
           Quiz
         </NavLink>
