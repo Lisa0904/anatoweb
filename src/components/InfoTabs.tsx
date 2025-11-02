@@ -1,13 +1,6 @@
 // src/components/InfoTabs.tsx
 import React, { useState } from "react";
-
-const sampleAnatomicText = {
-  default: {
-    anatomy: "Das Herz ist ein vierkammeriger Muskel, der Blut durch den Körper pumpt.",
-    function: "Pumpt Blut, versorgt Organe mit Sauerstoff.",
-    disease: "Krankheiten: KHK, Herzinfarkt, Herzinsuffizienz.",
-  },
-};
+import anatomyData from "../data/anatomyData.json";
 
 type TabKey = "Anatomie" | "Funktion" | "Erkrankungen";
 
@@ -24,25 +17,38 @@ const tabs: TabKey[] = ["Anatomie", "Funktion", "Erkrankungen"];
 
 export default function InfoTabs({ selected }: InfoTabsProps) {
   const [tab, setTab] = useState<TabKey>("Anatomie");
-  const name = selected?.name ?? "Herz";
-  const info = selected?.info ?? sampleAnatomicText.default.anatomy;
+  const name = selected?.name ?? "Wähle ein Objekt";
+
+  // 🧠 Normalisiere Name (entfernt z. B. ".001" aus "Haut.001")
+  const cleanName = name.replace(/\.\d+$/, "");
+
+  // 🔍 Hole passenden Eintrag aus JSON oder fallback
+  const data = anatomyData[cleanName as keyof typeof anatomyData];
+
+  const anatomyText = data?.anatomy ?? "Keine anatomischen Informationen verfügbar.";
+  const functionText = data?.function ?? "Keine Funktionsbeschreibung verfügbar.";
+  const diseaseText = data?.disease ?? "Keine Erkrankungen zugeordnet.";
 
   return (
     <div>
       <div className="tabs">
         {tabs.map((t) => (
-          <div key={t} className={`tab ${tab === t ? "active" : ""}`} onClick={() => setTab(t)}>
+          <div
+            key={t}
+            className={`tab ${tab === t ? "active" : ""}`}
+            onClick={() => setTab(t)}
+          >
             {t}
           </div>
         ))}
       </div>
 
       <div style={{ marginTop: 12 }}>
-        <div className="info-title">{name}</div>
+        <div className="info-title">{cleanName}</div>
         <div className="info-text" style={{ marginTop: 8 }}>
-          {tab === "Anatomie" && info}
-          {tab === "Funktion" && sampleAnatomicText.default.function}
-          {tab === "Erkrankungen" && sampleAnatomicText.default.disease}
+          {tab === "Anatomie" && anatomyText}
+          {tab === "Funktion" && functionText}
+          {tab === "Erkrankungen" && diseaseText}
         </div>
       </div>
     </div>

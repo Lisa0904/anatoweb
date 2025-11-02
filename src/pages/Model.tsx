@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import AnatomyViewer from "../components/AnatomyViewer";
 import InfoTabs from "../components/InfoTabs";
 
-type Topic = "Ganzer Mensch" | "Muskeln" | "Skelett" | "Nerven" | "Organe";
+type Topic = "Ganzer Mensch" | "Muskeln" | "Skelett" | "Kreislaufsystem" | "Organe";
 
 export default function ModelPage() {
   const [topic, setTopic] = useState<Topic>("Ganzer Mensch");
@@ -13,7 +13,7 @@ export default function ModelPage() {
       "Ganzer Mensch": "/models/anatoweb_full.glb",
       Muskeln: "/models/anatoweb_muscles.glb",
       Skelett: "/models/anatoweb_skeleton.glb",
-      Nerven: "/models/anatoweb_nerves.glb",
+      Kreislaufsystem: "/models/anatoweb_circulatory.glb",
       Organe: "/models/anatoweb_organs.glb",
     }),
     []
@@ -22,6 +22,12 @@ export default function ModelPage() {
   const currentModelUrl = modelPaths[topic];
 
   return (
+    <div style={{ maxWidth: 1370, margin: "0 auto" }}>
+      <h1 className="title">3D-Modell</h1>
+
+      <p className="lead">
+        Klicke auf verschiedene Teile des Modells, um mehr Informationen zu erhalten.
+      </p>
     <div className="page-grid">
       <div className="viewer">
         {/* Themenauswahl */}
@@ -48,6 +54,7 @@ export default function ModelPage() {
       <div className="panel">
         <InfoTabs selected={selected} />
       </div>
+    </div>
     </div>
   );
 }

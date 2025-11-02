@@ -37,8 +37,8 @@ body{
 .brand .logo{  width: 150px; height: auto;    background-size: contain;
       background-position: center; background: none}
 
-.nav .links{display:flex;gap:18px}
-.nav a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:8px}
+.nav .links{display:flex;gap:14px}
+.nav a{color:var(--muted);text-decoration:none;padding:8px 11px;border-radius:8px}
 .nav a.active, .nav a:hover{color:var(--text);background:var(--glass)}
 
 .nav .logo-link {
@@ -81,7 +81,7 @@ body{
   border-radius:14px;
   background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
   padding:18px;
-  height: 600px;
+  height: 650px;
   position:relative;
   overflow:hidden;
   border: 1px solid rgba(255,255,255,0.03);
@@ -92,7 +92,7 @@ body{
 .panel{
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border-radius:14px;padding:20px;
-  height: 600px;
+  height: 650px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.6);
   border: 1px solid rgba(255,255,255,0.03);
 }
@@ -108,6 +108,7 @@ body{
 
 h3 {
   color: var(--text-strong);
+  margin-bottom: 0.5em;
 }
 
 .lead{color:var(--muted);margin-bottom:18px;font-size:15px;line-height:1.6}
@@ -128,7 +129,7 @@ h3 {
 
 }
 /* organ info */
-.info-title{font-size:28px;margin-bottom:8px}
+.info-title{font-size:25px;color: var(--text-strong);margin-bottom:12px}
 .info-text{color:var(--muted);line-height:1.6}
 
 /* small controls */
@@ -139,6 +140,16 @@ h3 {
   background: rgba(255,255,255,0.04); padding:10px;border-radius:10px; color:var(--muted); cursor:pointer; border:1px solid rgba(255,255,255,0.02); text-decoration: none
 }
 .ctrl-btn:hover{color:var(--text);background:rgba(255,255,255,0.06)}
+
+.ctrl-btn.correct {
+  background: #22c55e !important;
+  color: #000 !important;
+}
+.ctrl-btn.wrong {
+  background: #ef4444 !important;
+  color: #fff !important;
+}
+
 
 /* 🎥 Home Video Animation */
 .video-container video {
@@ -167,6 +178,11 @@ h3 {
 .brand a:hover {
   background: none;
 }
+
+circle[stroke="var(--accent)"] {
+  filter: drop-shadow(0 0 2px var(--accent));
+}
+
 
 
 /* responsive */

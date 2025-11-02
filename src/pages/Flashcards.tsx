@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import quizData from "../data/quiz.json";
 import "../Flashcards.css";
 
-type Topic = "Alle" | "Muskeln" | "Skelett" | "Arterien" | "Organe";
+type Topic = "Alle" | "Muskeln" | "Skelett" | "Kreislaufsystem" | "Organe";
 
 export default function Flashcards() {
   const [topic, setTopic] = useState<Topic>("Alle");
@@ -59,7 +59,7 @@ export default function Flashcards() {
 
       {/* Themenauswahl */}
       <div style={{ display: "flex", justifyContent: "center", gap: 12, marginBottom: 24 }}>
-        {["Alle", "Muskeln", "Skelett", "Arterien", "Organe"].map((t) => (
+        {["Alle", "Muskeln", "Skelett", "Kreislaufsystem", "Organe"].map((t) => (
           <button
             key={t}
             onClick={() => {

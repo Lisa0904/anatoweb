@@ -16,35 +16,35 @@ export default function Home() {
     let reversing = false;
     let animationFrame: number;
 
-   
+
 
     // 🎬 Rückwärts-Animation (manuell)
     function smoothReverse() {
-      if (!video) return;
-      
+      const v = videoRef.current;
+      if (!v) return;
 
       setTimeout(() => {
-        
         function step() {
-          if (video.currentTime <= 0) {
+          if (!v) return;
+          if (v.currentTime <= 0) {
             reversing = false;
-            video.play();
-           
+            v.play();
             return;
           }
-          video.currentTime -= 1 / 60; // ca. 60 fps rückwärts
+          v.currentTime -= 1 / 60;
           animationFrame = requestAnimationFrame(step);
         }
         step();
-      }, 400); // 400ms Fade-Delay
+      }, 400);
     }
 
     function handleEnded() {
-      if (!reversing) {
-        reversing = true;
-        video.pause();
-        smoothReverse();
-      }
+      const v = videoRef.current;
+      if (!v || reversing) return;
+
+      reversing = true;
+      v.pause();
+      smoothReverse();
     }
 
     video.addEventListener("ended", handleEnded);
@@ -125,4 +125,5 @@ export default function Home() {
         </Link>
       </div>
     </div>
-  );}
+  );
+}

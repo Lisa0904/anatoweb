@@ -1,0 +1,102 @@
+{
+  "Haut": {
+    "anatomy": "Die Haut ist das größte Organ des Menschen. Sie besteht aus drei Schichten: Epidermis, Dermis und Subcutis.",
+    "function": "Sie schützt den Körper vor äußeren Einflüssen, reguliert die Körpertemperatur und dient der Sinneswahrnehmung.",
+    "disease": "Typische Hauterkrankungen sind Ekzeme, Psoriasis und Hautkrebs."
+  },
+  "Wimpern": {
+    "anatomy": "Wimpern sind kurze, gebogene Haare am Rand der Augenlider.",
+    "function": "Sie schützen die Augen vor Staub, Schweiß und Fremdkörpern.",
+    "disease": "Blepharitis (Lidentzündung) oder Wimpernausfall können auftreten."
+  },
+  "Unterhose": {
+    "anatomy": "Ein Kleidungsstück, das den Unterkörper bedeckt.",
+    "function": "Dient hygienischen Zwecken, keine anatomische Relevanz.",
+    "disease": "Keine medizinischen Erkrankungen direkt zugeordnet."
+  },
+  "Arme": {
+    "anatomy": "Die Arme bestehen aus Oberarm, Unterarm und Hand. Sie enthalten Knochen wie Humerus, Radius und Ulna sowie zahlreiche Muskeln und Sehnen.",
+    "function": "Sie ermöglichen das Greifen, Heben und präzise Manipulieren von Gegenständen.",
+    "disease": "Verletzungen wie Frakturen oder Sehnenrisse sind häufig, ebenso wie Überlastungssyndrome (z. B. Tennisellenbogen)."
+  },
+  "Beine": {
+    "anatomy": "Die Beine bestehen aus Oberschenkel, Unterschenkel und Fuß. Hauptknochen sind Femur, Tibia und Fibula.",
+    "function": "Sie dienen der Fortbewegung, Stabilität und dem Tragen des Körpergewichts.",
+    "disease": "Erkrankungen wie Arthrose, Thrombose oder Muskelzerrungen können auftreten."
+  },
+  "Becken": {
+    "anatomy": "Das Becken bildet die Verbindung zwischen Rumpf und Beinen. Es besteht aus Kreuzbein und Hüftbeinen.",
+    "function": "Es stabilisiert den Oberkörper, trägt die Eingeweide und spielt eine wichtige Rolle bei der Geburt.",
+    "disease": "Typische Erkrankungen sind Beckenfrakturen, Fehlstellungen oder Entzündungen der Iliosakralgelenke."
+  },
+  "Brustkorb": {
+    "anatomy": "Der Brustkorb wird aus Rippen, Brustbein und Teilen der Wirbelsäule gebildet. Er schützt lebenswichtige Organe wie Herz und Lunge.",
+    "function": "Er schützt die inneren Organe und ermöglicht durch seine Beweglichkeit die Atmung.",
+    "disease": "Brustkorbverletzungen, Rippenbrüche oder Deformationen wie Trichterbrust können vorkommen."
+  },
+  "Schädel": {
+    "anatomy": "Der Schädel besteht aus mehreren Knochen, die Gehirn und Sinnesorgane schützen. Er gliedert sich in Hirnschädel und Gesichtsschädel.",
+    "function": "Er schützt das Gehirn und bietet Ansatzstellen für Muskeln und Sinnesorgane.",
+    "disease": "Schädelbrüche, Fehlbildungen oder Tumore können den Schädel betreffen."
+  },
+  "Wirbelsäule": {
+    "anatomy": "Die Wirbelsäule besteht aus 33–34 Wirbeln, die in Hals-, Brust-, Lenden-, Kreuz- und Steißbeinabschnitte gegliedert sind.",
+    "function": "Sie trägt den Körper, ermöglicht Beweglichkeit und schützt das Rückenmark.",
+    "disease": "Häufige Erkrankungen sind Bandscheibenvorfälle, Skoliose und Arthrose."
+  },
+  "Arterien": {
+    "anatomy": "Arterien sind Blutgefäße, die das sauerstoffreiche Blut vom Herzen in den Körper transportieren. Die größte Arterie ist die Aorta.",
+    "function": "Sie verteilen Sauerstoff und Nährstoffe im gesamten Körper und regulieren den Blutdruck durch ihre Elastizität.",
+    "disease": "Arteriosklerose, Aneurysmen oder Embolien sind häufige Erkrankungen der Arterien."
+  },
+  "Venen": {
+    "anatomy": "Venen sind Blutgefäße, die sauerstoffarmes Blut aus dem Körper zurück zum Herzen transportieren. Sie besitzen Venenklappen, um den Rückfluss zu verhindern.",
+    "function": "Sie sorgen für den Rücktransport des Blutes zum Herzen und unterstützen den Blutkreislauf durch Muskelpumpen.",
+    "disease": "Krampfadern, Thrombosen und Venenentzündungen gehören zu den häufigsten Venenerkrankungen."
+  },
+  "Herz": {
+    "anatomy": "Das Herz ist ein muskuläres Hohlorgan mit vier Kammern: zwei Vorhöfen und zwei Kammern. Es liegt im Brustkorb hinter dem Brustbein.",
+    "function": "Es pumpt Blut durch den Körper, versorgt Organe mit Sauerstoff und Nährstoffen und entfernt Kohlendioxid.",
+    "disease": "Häufige Erkrankungen sind koronare Herzkrankheit, Herzinfarkt und Herzinsuffizienz."
+  },
+    "Gehirn": {
+    "anatomy": "Das Gehirn ist das Steuerzentrum des Nervensystems und befindet sich im Schädel.",
+    "function": "Es verarbeitet Informationen, steuert Bewegungen und ermöglicht Denken, Fühlen und Erinnern.",
+    "disease": "Schlaganfall, Demenz und Epilepsie sind häufige Erkrankungen des Gehirns."
+  },
+  "Zwerchfell": {
+    "anatomy": "Das Zwerchfell ist eine flache Muskelplatte zwischen Brust- und Bauchraum.",
+    "function": "Es spielt eine zentrale Rolle bei der Atmung, indem es den Druck zwischen Brust- und Bauchraum reguliert.",
+    "disease": "Zwerchfellbruch oder Lähmung können die Atmung beeinträchtigen."
+  },
+  "Verdauungssystem": {
+    "anatomy": "Das Verdauungssystem umfasst Mund, Speiseröhre, Magen, Darm, Leber, Gallenblase und Bauchspeicheldrüse.",
+    "function": "Es dient der Aufnahme, Verdauung und Aufnahme von Nährstoffen.",
+    "disease": "Gastritis, Reizdarmsyndrom und Lebererkrankungen sind häufige Störungen."
+  },
+  "Augen": {
+    "anatomy": "Die Augen sind die Sinnesorgane des Sehens.",
+    "function": "Sie nehmen Lichtreize auf und wandeln sie in Nervenimpulse um.",
+    "disease": "Kurzsichtigkeit, Grauer Star und Bindehautentzündungen sind häufig."
+  },
+  "Gallenblase": {
+    "anatomy": "Die Gallenblase liegt unterhalb der Leber und speichert Gallenflüssigkeit.",
+    "function": "Sie gibt Galle zur Fettverdauung in den Dünndarm ab.",
+    "disease": "Gallensteine oder Entzündungen (Cholezystitis) können Beschwerden verursachen."
+  },
+  "Lunge": {
+    "anatomy": "Die Lunge besteht aus zwei Flügeln und ist für den Gasaustausch zuständig.",
+    "function": "Sie versorgt das Blut mit Sauerstoff und entfernt Kohlendioxid.",
+    "disease": "Asthma, COPD und Lungenentzündungen gehören zu den häufigsten Erkrankungen."
+  },
+  "Leber": {
+    "anatomy": "Die Leber ist das größte innere Organ und liegt im rechten Oberbauch.",
+    "function": "Sie entgiftet den Körper, speichert Nährstoffe und produziert Galle.",
+    "disease": "Leberzirrhose, Hepatitis und Fettleber sind verbreitete Erkrankungen."
+  },
+  "Harnsystem": {
+    "anatomy": "Das Harnsystem umfasst Nieren, Harnleiter, Blase und Harnröhre.",
+    "function": "Es filtert Abfallstoffe aus dem Blut und scheidet sie als Urin aus.",
+    "disease": "Harnwegsinfekte, Nierensteine und Niereninsuffizienz sind häufige Erkrankungen."
+  }
+}

@@ -1,40 +1,89 @@
 {
   "questions": [
     {
-      "question": "Wie viele Herzkammern hat das menschliche Herz?",
-      "answers": ["2", "3", "4", "5"],
-      "correct": 2,
+      "question": "Welche Schichten besitzt die menschliche Haut?",
+      "answers": [
+        "Epidermis, Dermis und Subcutis",
+        "Epidermis und Endodermis",
+        "Dermis und Cortex",
+        "Nur eine Schicht"
+      ],
+      "correct": 0,
       "topic": "Organe"
     },
     {
-      "question": "Welche Struktur pumpt Blut in den Körper?",
-      "answers": ["Lunge", "Herz", "Leber", "Niere"],
+      "question": "Welche Funktion haben die Wimpern?",
+      "answers": [
+        "Sie schützen die Augen vor Staub und Fremdkörpern",
+        "Sie filtern Lichtwellen für die Netzhaut",
+        "Sie produzieren Tränenflüssigkeit",
+        "Sie regulieren den Blutdruck im Auge"
+      ],
+      "correct": 0,
+      "topic": "Organe"
+    },
+    {
+      "question": "Welches Organ pumpt Blut durch den Körper?",
+      "answers": ["Leber", "Herz", "Lunge", "Magen"],
       "correct": 1,
-      "topic": "Organe"
+      "topic": "Kreislaufsystem"
     },
     {
-      "question": "Welche der folgenden ist ein Knochen?",
-      "answers": ["Femur", "Alveole", "Neuron", "Arterie"],
+      "question": "Wie viele Wirbel hat die menschliche Wirbelsäule?",
+      "answers": ["20–25", "28–30", "33–34", "40–45"],
+      "correct": 2,
+      "topic": "Skelett"
+    },
+    {
+      "question": "Welcher Knochen gehört zum Bein?",
+      "answers": ["Femur", "Radius", "Humerus", "Clavicula"],
       "correct": 0,
       "topic": "Skelett"
     },
     {
-      "question": "Welcher Muskel ist am Oberarm der stärkste Beuger?",
-      "answers": ["Bizeps", "Trizeps", "Quadrizeps", "Deltamuskel"],
+      "question": "Was ist die Hauptaufgabe der Arterien?",
+      "answers": [
+        "Sauerstoffreiches Blut vom Herzen in den Körper zu transportieren",
+        "Kohlendioxid zur Lunge zurückzuführen",
+        "Hormone zu speichern",
+        "Lymphe zu bilden"
+      ],
+      "correct": 0,
+      "topic": "Kreislaufsystem"
+    },
+    {
+      "question": "Welche Funktion erfüllt das Zwerchfell?",
+      "answers": [
+        "Regulation des Drucks zwischen Brust- und Bauchraum",
+        "Speicherung von Galle",
+        "Steuerung des Herzschlags",
+        "Abbau von Milchsäure"
+      ],
+      "correct": 0,
+      "topic": "Organe"
+    },
+    {
+      "question": "Welcher Muskel beugt den Arm im Ellbogengelenk?",
+      "answers": ["Trizeps brachii", "Bizeps brachii", "Deltoideus", "Pectoralis major"],
+      "correct": 1,
+      "topic": "Muskeln"
+    },
+    {
+      "question": "Welcher Muskel ist für die Streckung des Beins verantwortlich?",
+      "answers": ["Quadrizeps femoris", "Bizeps femoris", "Gluteus maximus", "Adduktor longus"],
       "correct": 0,
       "topic": "Muskeln"
     },
     {
-      "question": "Welcher Nerv steuert die Gesichtsmuskulatur?",
-      "answers": ["Vagusnerv", "Facialisnerv", "Ischiasnerv", "Medianusnerv"],
-      "correct": 1,
-      "topic": "Arterien"
-    },
-    {
-      "question": "Wie viele Knochen hat das menschliche Skelett im Erwachsenenalter?",
-      "answers": ["186", "206", "216", "226"],
-      "correct": 1,
-      "topic": "Skelett"
+      "question": "Welche Aufgabe hat die Leber NICHT?",
+      "answers": [
+        "Entgiftung des Körpers",
+        "Produktion von Galle",
+        "Speicherung von Nährstoffen",
+        "Bildung von Blutzellen"
+      ],
+      "correct": 3,
+      "topic": "Organe"
     }
   ]
 }
