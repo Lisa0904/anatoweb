@@ -29,18 +29,6 @@
       "topic": "Kreislaufsystem"
     },
     {
-      "question": "Wie viele Wirbel hat die menschliche Wirbelsäule?",
-      "answers": ["20–25", "28–30", "33–34", "40–45"],
-      "correct": 2,
-      "topic": "Skelett"
-    },
-    {
-      "question": "Welcher Knochen gehört zum Bein?",
-      "answers": ["Femur", "Radius", "Humerus", "Clavicula"],
-      "correct": 0,
-      "topic": "Skelett"
-    },
-    {
       "question": "Was ist die Hauptaufgabe der Arterien?",
       "answers": [
         "Sauerstoffreiches Blut vom Herzen in den Körper zu transportieren",
@@ -52,12 +40,35 @@
       "topic": "Kreislaufsystem"
     },
     {
-      "question": "Welche Funktion erfüllt das Zwerchfell?",
+      "question": "Welche Blutgefäße führen Blut zum Herzen zurück?",
+      "answers": ["Arterien", "Venen", "Kapillaren", "Aorten"],
+      "correct": 1,
+      "topic": "Kreislaufsystem"
+    },
+    {
+      "question": "Welche Struktur trennt Brust- und Bauchraum?",
+      "answers": ["Zwerchfell", "Rippen", "Wirbelsäule", "Becken"],
+      "correct": 0,
+      "topic": "Organe"
+    },
+    {
+      "question": "Welche Aufgabe hat die Leber NICHT?",
       "answers": [
-        "Regulation des Drucks zwischen Brust- und Bauchraum",
-        "Speicherung von Galle",
-        "Steuerung des Herzschlags",
-        "Abbau von Milchsäure"
+        "Entgiftung des Körpers",
+        "Produktion von Galle",
+        "Speicherung von Nährstoffen",
+        "Bildung von Blutzellen"
+      ],
+      "correct": 3,
+      "topic": "Organe"
+    },
+    {
+      "question": "Welche Funktion hat die Lunge?",
+      "answers": [
+        "Sauerstoffaufnahme und Kohlendioxidabgabe",
+        "Produktion von Insulin",
+        "Filterung von Abfallstoffen",
+        "Steuerung der Körpertemperatur"
       ],
       "correct": 0,
       "topic": "Organe"
@@ -75,14 +86,128 @@
       "topic": "Muskeln"
     },
     {
-      "question": "Welche Aufgabe hat die Leber NICHT?",
+      "question": "Welcher Muskel ist der größte im menschlichen Körper?",
+      "answers": ["Latissimus dorsi", "Gluteus maximus", "Quadrizeps femoris", "Pectoralis major"],
+      "correct": 1,
+      "topic": "Muskeln"
+    },
+    {
+      "question": "Welche Muskelschicht trennt Brust- und Bauchraum?",
+      "answers": ["Zwerchfell", "Pectoralis major", "Transversus abdominis", "Obliquus externus"],
+      "correct": 0,
+      "topic": "Muskeln"
+    },
+    {
+      "question": "Welcher Muskel ist beim Atmen aktiv beteiligt?",
+      "answers": ["Zwerchfell", "Trapezius", "Rectus abdominis", "Deltoideus"],
+      "correct": 0,
+      "topic": "Muskeln"
+    },
+    {
+      "question": "Welcher Knochen gehört zum Bein?",
+      "answers": ["Femur", "Radius", "Humerus", "Clavicula"],
+      "correct": 0,
+      "topic": "Skelett"
+    },
+    {
+      "question": "Wie viele Rippen hat der Mensch normalerweise?",
+      "answers": ["10", "12", "14", "16"],
+      "correct": 1,
+      "topic": "Skelett"
+    },
+    {
+      "question": "Wie viele Wirbel hat die menschliche Wirbelsäule?",
+      "answers": ["20–25", "28–30", "33–34", "40–45"],
+      "correct": 2,
+      "topic": "Skelett"
+    },
+    {
+      "question": "Welche Knochen bilden den Brustkorb?",
       "answers": [
-        "Entgiftung des Körpers",
-        "Produktion von Galle",
-        "Speicherung von Nährstoffen",
-        "Bildung von Blutzellen"
+        "Rippen, Brustbein und Teile der Wirbelsäule",
+        "Femur, Tibia und Fibula",
+        "Radius und Ulna",
+        "Becken und Kreuzbein"
       ],
-      "correct": 3,
+      "correct": 0,
+      "topic": "Skelett"
+    },
+    {
+      "question": "Welche Funktion hat das Becken?",
+      "answers": [
+        "Es trägt die Eingeweide und stabilisiert den Oberkörper",
+        "Es pumpt Blut durch den Körper",
+        "Es bildet die Stimmbänder",
+        "Es reguliert den Blutdruck"
+      ],
+      "correct": 0,
+      "topic": "Skelett"
+    },
+    {
+      "question": "Welcher Teil schützt das Gehirn?",
+      "answers": ["Schädel", "Brustkorb", "Becken", "Wirbelsäule"],
+      "correct": 0,
+      "topic": "Skelett"
+    },
+    {
+      "question": "Was ist die Funktion der Venen?",
+      "answers": [
+        "Transport von sauerstoffarmem Blut zum Herzen",
+        "Abgabe von Sauerstoff an Gewebe",
+        "Produktion von Hormonen",
+        "Regulation der Körpertemperatur"
+      ],
+      "correct": 0,
+      "topic": "Kreislaufsystem"
+    },
+    {
+      "question": "Welche Aufgabe erfüllt das Herz?",
+      "answers": [
+        "Es pumpt Blut durch den Körper",
+        "Es speichert Nährstoffe",
+        "Es produziert Hormone",
+        "Es reguliert den Blutdruck"
+      ],
+      "correct": 0,
+      "topic": "Kreislaufsystem"
+    },
+    {
+      "question": "Was gehört zum Verdauungssystem?",
+      "answers": [
+        "Magen, Darm, Leber, Gallenblase",
+        "Herz und Lunge",
+        "Nieren und Blase",
+        "Wirbelsäule und Rippen"
+      ],
+      "correct": 0,
+      "topic": "Organe"
+    },
+    {
+      "question": "Welche Funktion hat die Gallenblase?",
+      "answers": [
+        "Speicherung und Abgabe von Gallenflüssigkeit",
+        "Produktion von Insulin",
+        "Regulierung der Atmung",
+        "Filterung des Blutes"
+      ],
+      "correct": 0,
+      "topic": "Organe"
+    },
+    {
+      "question": "Welche Funktion hat das Gehirn?",
+      "answers": [
+        "Steuerung aller Körperfunktionen und Verarbeitung von Informationen",
+        "Filterung des Blutes",
+        "Produktion von Hormonen",
+        "Regulation der Verdauung"
+      ],
+      "correct": 0,
+      "topic": "Organe"
+    },
+    {
+      "question": "Was gehört NICHT zum Harnsystem?",
+      "answers": ["Lunge", "Nieren", "Blase", "Harnleiter"],
+      "correct": 0,
       "topic": "Organe"
     }
   ]

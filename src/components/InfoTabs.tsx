@@ -46,9 +46,11 @@ export default function InfoTabs({ selected }: InfoTabsProps) {
       <div style={{ marginTop: 12 }}>
         <div className="info-title">{cleanName}</div>
         <div className="info-text" style={{ marginTop: 8 }}>
-          {tab === "Anatomie" && anatomyText}
-          {tab === "Funktion" && functionText}
-          {tab === "Erkrankungen" && diseaseText}
+          {{
+            Anatomie: anatomyText,
+            Funktion: functionText,
+            Erkrankungen: diseaseText,
+          }[tab]}
         </div>
       </div>
     </div>

@@ -22,20 +22,18 @@ export default function Home() {
     function smoothReverse() {
       const v = videoRef.current;
       if (!v) return;
-
-      setTimeout(() => {
-        function step() {
-          if (!v) return;
-          if (v.currentTime <= 0) {
-            reversing = false;
-            v.play();
-            return;
-          }
-          v.currentTime -= 1 / 60;
-          animationFrame = requestAnimationFrame(step);
+      let speed = 1 / 90; // etwas sanfter als 1/60
+      function step() {
+        if (!v) return;
+        if (v.currentTime <= 0) {
+          reversing = false;
+          v.play();
+          return;
         }
-        step();
-      }, 400);
+        v.currentTime -= speed;
+        animationFrame = requestAnimationFrame(step);
+      }
+      step();
     }
 
     function handleEnded() {
@@ -56,12 +54,16 @@ export default function Home() {
   }, []);
 
   return (
-    <div> {/* Text & Buttons */}
-      <div style={{ maxWidth: 900, margin: "0 auto", marginBottom: "2rem", textAlign: "left" }}>
-        <h1 className="title">Explore the Human Body</h1>
-        <p className="lead" style={{ textAlign: "left" }}>
-          Interaktive Lernplattform zur Anatomie. Drehe Modelle, klicke Organe an und vertiefe
-          dein Wissen mit unserem Quiz.
+    <div style={{ paddingTop: "30px" }}> {/* Abstand nach Navbar */}
+      {/* Textblock */}
+      <div style={{
+        maxWidth: "800px",
+        margin: "0 auto 3rem",
+        textAlign: "center"  // zentriert wirkt eleganter
+      }}>
+        <h1 className="title">Anatomie interaktiv erleben</h1>
+        <p className="lead" style={{ fontSize: "17px", lineHeight: 1.7 }}>
+          Entdecke den menschlichen Körper in 3D. Interaktive Modelle, Karteikarten und Quizfragen – alles an einem Ort.
         </p>
       </div>
 
@@ -70,12 +72,13 @@ export default function Home() {
         className="video-container"
         style={{
           position: "relative",
-          borderRadius: "14px",
+          borderRadius: "16px",
           overflow: "hidden",
-          marginBottom: "28px",
-          background: "rgba(34, 197, 94, 0.15)", // sanftes AnatoWeb-Grün
-          boxShadow: "0 6px 18px rgba(0,0,0,0.4)",
-          maxWidth: "800px",
+          marginBottom: "40px",
+          background: "rgba(255,255,255,0.02)",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.35)",
+          backdropFilter: "blur(6px)",
+          maxWidth: "900px",
           margin: "0 auto",
         }}
       >
@@ -106,16 +109,15 @@ export default function Home() {
       </div>
 
       {/* Buttons */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: 20,
-          marginTop: 28,
-        }}
-      >
+      <div style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "16px",
+        marginTop: "32px",
+        flexWrap: "wrap"
+      }}>
         <Link to="/model" className="ctrl-btn" style={{ minWidth: "160px", textAlign: "center" }}>
-          3D-Modell
+          Anatomie-Viewer
         </Link>
         <Link to="/flashcards" className="ctrl-btn" style={{ minWidth: "160px", textAlign: "center" }}>
           Karteikarten

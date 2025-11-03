@@ -23,38 +23,46 @@ export default function ModelPage() {
 
   return (
     <div style={{ maxWidth: 1370, margin: "0 auto" }}>
-      <h1 className="title">3D-Modell</h1>
+      <h1 className="title">Anatomie-Viewer</h1>
 
       <p className="lead">
-        Klicke auf verschiedene Teile des Modells, um mehr Informationen zu erhalten.
+        Klicke auf die verschiedenen Teile der Modelle, um mehr Informationen zu erhalten.
       </p>
-    <div className="page-grid">
-      <div className="viewer">
-        {/* Themenauswahl */}
-        <div style={{ display: "flex", gap: 10, marginBottom: 14 }}>
-          {Object.keys(modelPaths).map((t) => (
-            <button
-              key={t}
-              onClick={() => setTopic(t as Topic)}
-              className={`ctrl-btn ${topic === t ? "active" : ""}`}
-            >
-              {t}
-            </button>
-          ))}
+      <div className="page-grid">
+        <div className="viewer">
+          {/* Themenauswahl */}
+          <div
+            style={{
+              display: "flex",
+              gap: 12,
+              marginBottom: 20,
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            {(["Ganzer Mensch", "Muskeln", "Skelett", "Kreislaufsystem", "Organe"] as Topic[]).map((t) => (
+              <button
+                key={t}
+                onClick={() => setTopic(t)}
+                className={`ctrl-btn ${topic === t ? "active" : ""}`}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+
+          {/* ✅ Hier wird die aktuelle modelUrl übergeben */}
+          <AnatomyViewer
+            key={currentModelUrl}
+            modelUrl={currentModelUrl}
+            onSelect={(objName, info) => setSelected({ name: objName, info })}
+          />
         </div>
 
-        {/* ✅ Hier wird die aktuelle modelUrl übergeben */}
-        <AnatomyViewer
-          key={currentModelUrl}
-          modelUrl={currentModelUrl}
-          onSelect={(objName, info) => setSelected({ name: objName, info })}
-        />
+        <div className="panel">
+          <InfoTabs selected={selected} />
+        </div>
       </div>
-
-      <div className="panel">
-        <InfoTabs selected={selected} />
-      </div>
-    </div>
     </div>
   );
 }

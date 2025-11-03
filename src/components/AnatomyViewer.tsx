@@ -14,31 +14,25 @@ function LoaderFallback() {
   const radius = 34;
   const circumference = 2 * Math.PI * radius;
 
+
   return (
     <Html
+      center
       style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
         width: "100%",
         height: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "rgba(0, 0, 0, 0.3)", // optional Overlay
+        background: "rgba(0, 0, 0, 0.3)",
         backdropFilter: "blur(2px)",
+        pointerEvents: "none",
+        borderRadius: "12px", // optional: passt sich der viewer-Form an
       }}
     >
       <div style={{ textAlign: "center", color: "var(--muted)" }}>
         {/* Kreis */}
-        <div
-          style={{
-            position: "relative",
-            width: 80,
-            height: 80,
-            margin: "0 auto 10px",
-          }}
-        >
+        <div style={{ position: "relative", width: 64, height: 64, margin: "0 auto 8px" }}>
           <svg
             style={{
               transform: "rotate(-90deg)",
@@ -48,18 +42,14 @@ function LoaderFallback() {
           >
             {/* Hintergrund-Kreis */}
             <circle
-              cx="40"
-              cy="40"
-              r={radius}
+              cx="32" cy="32" r="28"
               stroke="rgba(255,255,255,0.1)"
               strokeWidth="6"
               fill="none"
             />
             {/* Fortschritts-Kreis */}
             <circle
-              cx="40"
-              cy="40"
-              r={radius}
+              cx="32" cy="32" r="28"
               stroke="var(--accent)"
               strokeWidth="6"
               fill="none"
@@ -90,7 +80,7 @@ function LoaderFallback() {
           </div>
         </div>
 
-        <p style={{ fontSize: 15, color: "var(--muted)" }}>Lädt 3D-Modell…</p>
+        <p style={{ fontSize: 14, color: "var(--muted)" }}>Lade Modell…</p>
       </div>
     </Html>
   );
@@ -103,7 +93,22 @@ function Model({ url, onSelect }: ModelProps) {
   const gltf = useGLTF(url) as any;
   const scene: THREE.Object3D = gltf.scene;
 
-  useEffect(() => { if (!scene) return; const box = new THREE.Box3().setFromObject(scene); const center = new THREE.Vector3(); box.getCenter(center); scene.position.sub(center); scene.position.y -= 0.5; scene.scale.set(1.1, 1.1, 1.1); scene.traverse((c: any) => { if (c.isMesh) { c.castShadow = true; c.receiveShadow = true; if (!c.name || c.name.trim() === "") c.name = "part"; } }); }, [scene]);
+  useEffect(() => {
+    if (!scene) return;
+
+    const box = new THREE.Box3().setFromObject(scene);
+    const center = new THREE.Vector3();
+    const size = new THREE.Vector3();
+    box.getCenter(center);
+    box.getSize(size);
+
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 3 / maxDim; // dynamisch anpassen
+
+    scene.position.sub(center);
+    scene.scale.setScalar(scale);
+    scene.position.y -= size.y * 0.4 * scale; scene.scale.set(1.1, 1.1, 1.1); scene.traverse((c: any) => { if (c.isMesh) { c.castShadow = true; c.receiveShadow = true; if (!c.name || c.name.trim() === "") c.name = "part"; } });
+  }, [scene]);
 
   function handlePointerDown(e: ThreeEvent<PointerEvent>) {
     e.stopPropagation();
@@ -153,10 +158,11 @@ interface AnatomyViewerProps {
 
 export default function AnatomyViewer({ modelUrl, onSelect }: AnatomyViewerProps) {
   return (
-    <Canvas shadows gl={{ antialias: true }} camera={{ position: [0, 1.6, 6], fov: 35 }}>
-      <ambientLight intensity={0.6} />
-      <directionalLight castShadow intensity={0.8} position={[5, 10, 5]} />
-      <hemisphereLight intensity={0.15} />
+    <Canvas style={{ height: 550 }} shadows gl={{ antialias: true }} camera={{ position: [0, 1.6, 6], fov: 35 }}>
+      <ambientLight intensity={0.5} />
+      <directionalLight castShadow intensity={0.8} position={[5, 10, 5]} color="#ffffff" />
+      <directionalLight intensity={0.5} position={[-5, 2, -5]} color="#9ae6b4" /> {/* leicht grünlich */}
+      <hemisphereLight intensity={0.15} color="#ffffff" groundColor="#1a1a1a" />
 
       <Suspense fallback={<LoaderFallback />}>
         <Model url={modelUrl} onSelect={onSelect} />

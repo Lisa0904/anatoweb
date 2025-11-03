@@ -25,13 +25,21 @@ export default function QuizPage() {
   const [showResult, setShowResult] = useState<boolean>(false);
   const [locked, setLocked] = useState<boolean>(false);
   const [revealCorrect, setRevealCorrect] = useState<boolean>(false);
+  const [autoNextTimer, setAutoNextTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
+  const [resetKey, setResetKey] = useState(0);
 
+  // 💾 Quizdaten filtern & mischen
   const questions = useMemo(() => {
     const filtered = quizData.questions.filter((q) =>
       topic === "Alle" ? true : q.topic === topic
     );
-    return filtered.length > 0 ? filtered : quizData.questions;
-  }, [topic]);
+    const limit =
+      topic === "Alle" ? 10 : ["Muskeln", "Skelett", "Kreislaufsystem", "Organe"].includes(topic)
+        ? 6
+        : filtered.length;
+    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, limit);
+  }, [topic, resetKey]);
 
   const q = questions[index];
 
@@ -43,29 +51,28 @@ export default function QuizPage() {
     const isCorrect = i === q.correct;
     if (isCorrect) setScore((s) => s + 1);
 
-    // ✨ Wenn falsch → erst leicht verzögert die richtige zeigen
-    if (!isCorrect) {
-      setTimeout(() => setRevealCorrect(true), 300);
-    } else {
-      setRevealCorrect(true);
-    }
+    // Optional: Soundeffekt (Datei z. B. public/sounds/correct.mp3)
+    // const sound = new Audio(isCorrect ? "/sounds/correct.mp3" : "/sounds/wrong.mp3");
+    // sound.volume = 0.3;
+    // sound.play();
 
-    // ⏳ Dann nach 1.5 s zur nächsten Frage
-    setTimeout(() => {
-      nextQuestion();
-    }, 2500);
+    setRevealCorrect(true);
+    const timer = setTimeout(nextQuestion, 8000);
+    setAutoNextTimer(timer);
   }
 
   function nextQuestion() {
+    if (autoNextTimer) clearTimeout(autoNextTimer);
     if (index < questions.length - 1) {
       setIndex((i) => i + 1);
+      resetState();
     } else {
       setShowResult(true);
     }
-    resetState();
   }
 
   function prevQuestion() {
+    if (autoNextTimer) clearTimeout(autoNextTimer);
     if (index > 0) {
       setIndex((i) => i - 1);
       resetState();
@@ -79,19 +86,21 @@ export default function QuizPage() {
   }
 
   function resetQuiz() {
+    if (autoNextTimer) clearTimeout(autoNextTimer);
     setIndex(0);
     setScore(0);
     setShowResult(false);
     resetState();
+    setResetKey((k) => k + 1);
   }
 
   const progress = ((index + (showResult ? 1 : 0)) / questions.length) * 100;
 
   return (
     <div style={{ maxWidth: 900, margin: "0 auto" }}>
-      <h1 className="title">Quiz</h1>
-      <p style={{ color: "var(--muted)", marginBottom: 20 }}>
-        Wähle ein Themengebiet, beantworte die Fragen und prüfe dein Wissen.
+      <h1 className="title">Anatomie-Quiz</h1>
+      <p className="lead">
+        Teste dein Wissen zu Muskeln, Organen, Knochen und mehr. <br />
       </p>
 
       {/* Themenauswahl */}
@@ -125,8 +134,8 @@ export default function QuizPage() {
             style={{
               width: "100%",
               height: "8px",
-              background: "rgba(255,255,255,0.1)",
-              borderRadius: "4px",
+              background: "rgba(255,255,255,0.08)",
+              borderRadius: "6px",
               overflow: "hidden",
               marginBottom: "18px",
             }}
@@ -136,60 +145,32 @@ export default function QuizPage() {
                 width: `${progress}%`,
                 height: "100%",
                 background: "linear-gradient(90deg, var(--accent), #34d399)",
-                borderRadius: "4px",
                 transition: "width 0.6s ease",
               }}
             />
           </div>
 
-          <div
-            style={{
-              background: "var(--panel)",
-              padding: 28,
-              borderRadius: 14,
-              boxShadow: "0 6px 18px rgba(0,0,0,0.45)",
-              transition: "all 0.3s ease",
-            }}
-          >
+          {/* Frage-Box */}
+          <div className="panel-quiz" style={{ transition: "all 0.3s ease" }}>
             <div style={{ color: "var(--muted)" }}>
               Frage {index + 1} / {questions.length} — <strong>{topic}</strong>
             </div>
 
-            <h2 style={{ marginTop: 12, lineHeight: 1.4 }}>{q.question}</h2>
+            <h2 style={{ marginTop: 12, lineHeight: 1.5 }}>{q.question}</h2>
 
             <div style={{ display: "grid", gap: 12, marginTop: 20 }}>
               {q.answers.map((a, i) => {
                 const isCorrect = revealCorrect && i === q.correct;
                 const isWrong = selected === i && selected !== q.correct;
-
                 return (
                   <button
                     key={i}
                     onClick={() => answer(i)}
-                    className="ctrl-btn"
+                    className={`ctrl-btn quiz-answer-btn ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
                     style={{
                       textAlign: "left",
                       padding: "12px 16px",
-                      border:
-                        isCorrect
-                          ? "1px solid var(--accent)"
-                          : isWrong
-                          ? "1px solid #ff5c5c"
-                          : "1px solid rgba(255,255,255,0.05)",
-                      background:
-                        isCorrect
-                          ? "rgba(34,197,94,0.15)"
-                          : isWrong
-                          ? "rgba(255,92,92,0.15)"
-                          : "rgba(255,255,255,0.03)",
-                      color:
-                        isCorrect
-                          ? "var(--accent)"
-                          : isWrong
-                          ? "#ff5c5c"
-                          : "var(--text)",
                       pointerEvents: locked ? "none" : "auto",
-                      transition: "all 0.25s ease",
                     }}
                     type="button"
                   >
@@ -199,7 +180,7 @@ export default function QuizPage() {
               })}
             </div>
 
-            {/* Punktzahl + Navigation */}
+            {/* Navigation */}
             <div
               style={{
                 marginTop: 28,
@@ -209,22 +190,17 @@ export default function QuizPage() {
                 color: "var(--muted)",
               }}
             >
-              <div>
-                Punktzahl: {score} / {questions.length}
-              </div>
+              <div>Punktzahl: {score} / {questions.length}</div>
               <div style={{ display: "flex", gap: 10 }}>
                 <button
-                  className="ctrl-btn"
+                  className="ctrl-btn quiz-answer-btn"
                   onClick={prevQuestion}
                   disabled={index === 0}
-                  style={{
-                    opacity: index === 0 ? 0.5 : 1,
-                    cursor: index === 0 ? "default" : "pointer",
-                  }}
+                  style={{ opacity: index === 0 ? 0.5 : 1 }}
                 >
                   ← Zurück
                 </button>
-                <button className="ctrl-btn" onClick={nextQuestion}>
+                <button className="ctrl-btn quiz-answer-btn" onClick={nextQuestion}>
                   Weiter →
                 </button>
               </div>
@@ -232,17 +208,23 @@ export default function QuizPage() {
           </div>
         </>
       ) : (
-        <div style={{ textAlign: "center", padding: "40px 20px" }}>
+        <div className="panel-quiz" style={{ textAlign: "center", padding: "40px 20px" }}>
           <h2>Quiz beendet 🎉</h2>
           <p style={{ marginTop: 12, color: "var(--muted)" }}>
             Du hast <strong>{score}</strong> von{" "}
             <strong>{questions.length}</strong> Fragen richtig beantwortet.
           </p>
-          <button
-            className="ctrl-btn"
-            style={{ marginTop: 28 }}
-            onClick={resetQuiz}
-          >
+
+          {/* 💬 Didaktisches Feedback */}
+          <p style={{ marginTop: 16, color: "var(--muted)" }}>
+            {score / questions.length > 0.8
+              ? "Fantastisch! Dein anatomisches Wissen ist beeindruckend. 🧬"
+              : score / questions.length > 0.5
+                ? "Gute Arbeit! Mit ein wenig Übung wirst du Anatomie-Profi. 💪"
+                : "Nicht aufgeben – Lernen heißt Wiederholen. Probier’s gleich nochmal! 🔁"}
+          </p>
+
+          <button className="ctrl-btn quiz-answer-btn" style={{ marginTop: 28 }} onClick={resetQuiz}>
             Nochmal spielen 🔄
           </button>
         </div>

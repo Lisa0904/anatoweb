@@ -6,6 +6,7 @@
   perspective: 1000px;
   cursor: pointer;
   position: relative;
+  transition: transform 0.4s ease, opacity 0.3s ease;
 }
 
 .flashcard .front,
@@ -14,15 +15,16 @@
   width: 100%;
   height: 100%;
   border-radius: 16px;
-  background: var(--panel);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04));
   color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 50px;
   backface-visibility: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
-  transition: transform 0.45s ease-in-out;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: transform 0.45s ease, box-shadow 0.3s ease;
 }
 
 .flashcard .front {
@@ -41,6 +43,11 @@
   transform: rotateY(360deg);
 }
 
+.flashcard.fade {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
 .question {
   font-size: 22px;
   line-height: 1.4;
@@ -53,12 +60,14 @@
 
 /* Bewertungsbuttons */
 .rating-btn {
-  padding: 12px 20px;
-  border-radius: 10px;
+  padding: 12px 22px;
+  border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
-  border: none;
-  transition: 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
 }
 
 .rating-btn.repeat {
@@ -76,9 +85,31 @@
   color: #22c55e;
 }
 
+/* 🔘 Einheitliches Verhalten */
 .rating-btn:hover {
   transform: translateY(-2px);
-  opacity: 0.9;
+  opacity: 0.95;
+}
+
+/* 🔴 Wiederholen */
+.rating-btn.repeat:hover {
+  background: rgba(255, 80, 80, 0.25);
+  color: #ff7b7b;
+  border-color: rgba(255, 80, 80, 0.3);
+}
+
+/* 🟠 Gut */
+.rating-btn.good:hover {
+  background: rgba(255, 180, 50, 0.25);
+  color: #ffcb5c;
+  border-color: rgba(255, 180, 50, 0.3);
+}
+
+/* 🟢 Sehr gut */
+.rating-btn.great:hover {
+  background: rgba(34, 197, 94, 0.2);
+  color: var(--accent);
+  border-color: rgba(34, 197, 94, 0.35);
 }
 
 /* Themen-Buttons */
@@ -103,4 +134,22 @@
   color: var(--text);
   border-color: var(--accent);
   box-shadow: 0 0 6px rgba(34, 197, 94, 0.3);
+}
+
+@media (max-width: 600px) {
+  .flashcard {
+    width: 100%;
+    height: 240px;
+    padding: 20px;
+  }
+
+  .question,
+  .answer {
+    font-size: 18px;
+  }
+
+  .rating-btn {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
 }

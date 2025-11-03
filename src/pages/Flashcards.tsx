@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import quizData from "../data/quiz.json";
 import "../Flashcards.css";
 
+
 type Topic = "Alle" | "Muskeln" | "Skelett" | "Kreislaufsystem" | "Organe";
 
 export default function Flashcards() {
@@ -19,17 +20,25 @@ export default function Flashcards() {
   }, [topic]);
 
   const current = questions[index];
+  if (!current) {
+    return (
+      <div style={{ textAlign: "center", marginTop: "4rem", color: "var(--muted)" }}>
+        <h2>Keine Karteikarten gefunden</h2>
+        <p>Bitte wähle ein anderes Themengebiet aus.</p>
+      </div>
+    );
+  }
 
   function handleFlip() {
-  if (fading) return;
-  
-  // 🔊 Flip-Sound abspielen
-  const audio = new Audio("/sounds/swoosh.mp3");  // Pfad zur Datei im public-Ordner
-  audio.play();
-  audio.volume = 0.05; 
+    if (fading) return;
 
-  setFlipped((prev) => !prev);
-}
+    // 🔊 Flip-Sound abspielen
+    const audio = new Audio("/sounds/swoosh.mp3");  // Pfad zur Datei im public-Ordner
+    audio.play();
+    audio.volume = 0.03;
+
+    setFlipped((prev) => !prev);
+  }
 
 
   // ✨ Wechsel zur nächsten Karte (sofort neuer Inhalt)
@@ -52,9 +61,9 @@ export default function Flashcards() {
   return (
     <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
       <h1 className="title">Karteikarten</h1>
-      <p style={{ color: "var(--muted)", marginBottom: 24, textAlign: "left" }}>
+      <p className="lead" style={{ color: "var(--muted)", marginBottom: "2em", textAlign: "left" }}>
         Wähle ein Themengebiet, klicke für die Antwort auf die Karte und bewerte dein Wissen.
-        </p>
+      </p>
 
 
       {/* Themenauswahl */}
