@@ -12,6 +12,7 @@ export default function About() {
 
       <div className="section-box">
         <h3>Ziel</h3>
+        <h4>moin</h4>
         <p className="info-text">
           Unser Ziel ist es, eine interaktive Lernplattform zu schaffen, die
           komplexe anatomische Strukturen verständlich und anschaulich
