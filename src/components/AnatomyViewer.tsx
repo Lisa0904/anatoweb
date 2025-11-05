@@ -158,7 +158,12 @@ interface AnatomyViewerProps {
 
 export default function AnatomyViewer({ modelUrl, onSelect }: AnatomyViewerProps) {
   return (
-    <Canvas style={{ height: 550 }} shadows gl={{ antialias: true }} camera={{ position: [0, 1.6, 6], fov: 35 }}>
+    <Canvas
+  style={{ height: 550 }}
+  shadows
+  gl={{ antialias: true }}
+  camera={{ position: [0, 1.6, 350], fov: 35 }} // 👈 war 6, jetzt 10
+>
       <ambientLight intensity={0.5} />
       <directionalLight castShadow intensity={0.8} position={[5, 10, 5]} color="#ffffff" />
       <directionalLight intensity={0.5} position={[-5, 2, -5]} color="#9ae6b4" /> {/* leicht grünlich */}
