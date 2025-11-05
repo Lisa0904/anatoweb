@@ -229,6 +229,52 @@ export default function QuizPage() {
           </button>
         </div>
       )}
+      {/* --- Testbereich: H5P Quiz --- */}
+<div
+  style={{
+    marginTop: "350px", // normaler Abstand wären so 60px
+    padding: "25px",
+    background: "rgba(255,255,255,0.03)",
+    borderRadius: "14px",
+    boxShadow: "0 6px 18px rgba(0,0,0,0.6)",
+  }}
+>
+  <h2 style={{ marginBottom: "20px", color: "var(--text-strong)" }}>
+    H5P-Testeinbettung
+  </h2>
+
+  {/* H5P-Container */}
+  <div
+    style={{
+      position: "relative",
+      paddingBottom: "56.25%",
+      height: 0,
+      overflow: "hidden",
+      borderRadius: "12px",
+      background: "#111",
+    }}
+  >
+    <iframe
+      src="https://h5p.org/h5p/embed/1547415"
+      width="100%"
+      height="100%"
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        border: "none",
+      }}
+      title="H5P Quiz"
+      allowFullScreen
+    ></iframe>
+  </div>
+
+  <p style={{ marginTop: "16px", color: "var(--muted)", fontSize: "14px" }}>
+    Dies ist ein eingebettetes H5P-Quiz
+  </p>
+</div>
     </div>
   );
 }
