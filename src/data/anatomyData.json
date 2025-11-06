@@ -1,12 +1,12 @@
 {
   "Haut": {
-    "anatomy": "Die Haut ist das größte Organ des Menschen. Sie besteht aus drei Schichten: Epidermis, Dermis und Subcutis.",
-    "function": "Sie schützt den Körper vor äußeren Einflüssen, reguliert die Körpertemperatur und dient der Sinneswahrnehmung.",
-    "disease": "Typische Hauterkrankungen sind Ekzeme, Psoriasis und Hautkrebs."
+    "anatomy": "Die Haut ist das größte Organ des menschlichen Körpers und bedeckt seine gesamte äußere Oberfläche. Sie besteht aus drei Schichten: der Oberhaut (Epidermis), der Lederhaut (Dermis) und der Unterhaut (Subcutis). In ihr befinden sich Nerven, Blutgefäße, Schweiß- und Talgdrüsen sowie Haarfollikel.",
+    "function": "Die Haut schützt den Körper vor äußeren Einflüssen wie Keimen, UV-Strahlung, Hitze und Kälte. Sie reguliert die Körpertemperatur, dient als Sinnesorgan für Berührung, Schmerz und Temperatur und spielt eine Rolle bei der Immunabwehr.",
+    "disease": "Typische Hauterkrankungen sind Ekzeme, Akne und Hautkrebs."
   },
   "Wimpern": {
-    "anatomy": "Wimpern sind kurze, gebogene Haare am Rand der Augenlider.",
-    "function": "Sie schützen die Augen vor Staub, Schweiß und Fremdkörpern.",
+    "anatomy": "Die Wimpern sind kurze, gebogene Haare am Rand der Augenlider. Jede Wimper wächst aus einem Follikel in der Lidkante und wird von Talgdrüsen umgeben, die das Auge geschmeidig halten.",
+    "function": "Sie schützen die Augen vor Staub, Schmutz und kleinen Partikeln. Bei Berührung lösen sie den Lidschlussreflex aus, der das Auge vor Verletzungen bewahrt.",
     "disease": "Blepharitis (Lidentzündung) oder Wimpernausfall können auftreten."
   },
   "Unterhose": {
@@ -15,34 +15,34 @@
     "disease": "Keine medizinischen Erkrankungen direkt zugeordnet."
   },
   "Arme": {
-    "anatomy": "Die Arme bestehen aus Oberarm, Unterarm und Hand. Sie enthalten Knochen wie Humerus, Radius und Ulna sowie zahlreiche Muskeln und Sehnen.",
-    "function": "Sie ermöglichen das Greifen, Heben und präzise Manipulieren von Gegenständen.",
-    "disease": "Verletzungen wie Frakturen oder Sehnenrisse sind häufig, ebenso wie Überlastungssyndrome (z. B. Tennisellenbogen)."
+    "anatomy": "Die Arme bestehen aus Oberarm, Unterarm und Hand. Die Knochen – Humerus, Radius und Ulna – sind über Gelenke miteinander verbunden und von Muskeln, Sehnen und Nerven umgeben.",
+    "function": "Sie ermöglichen eine Vielzahl von Bewegungen und sind wichtig für Greifen, Tragen und Feinmotorik.",
+    "disease": "Zu den häufigsten Beschwerden zählen Muskelzerrungen, Knochenbrüche, Sehnenentzündungen und Nervenkompressionen wie das Karpaltunnelsyndrom."
   },
   "Beine": {
-    "anatomy": "Die Beine bestehen aus Oberschenkel, Unterschenkel und Fuß. Hauptknochen sind Femur, Tibia und Fibula.",
+    "anatomy": "Die Beine bestehen aus Oberschenkel, Unterschenkel und Fuß. Hauptknochen sind Femur, Tibia und Fibula. Sie sind über Gelenke mit Hüfte und Fuß verbunden.",
     "function": "Sie dienen der Fortbewegung, Stabilität und dem Tragen des Körpergewichts.",
-    "disease": "Erkrankungen wie Arthrose, Thrombose oder Muskelzerrungen können auftreten."
+    "disease": "Typische Erkrankungen sind Knochenbrüche, Gelenkverschleiß (Arthrose) sowie Venenerkrankungen wie Krampfadern oder Thrombosen."
   },
   "Becken": {
-    "anatomy": "Das Becken bildet die Verbindung zwischen Rumpf und Beinen. Es besteht aus Kreuzbein und Hüftbeinen.",
-    "function": "Es stabilisiert den Oberkörper, trägt die Eingeweide und spielt eine wichtige Rolle bei der Geburt.",
-    "disease": "Typische Erkrankungen sind Beckenfrakturen, Fehlstellungen oder Entzündungen der Iliosakralgelenke."
+    "anatomy": "Das Becken wird aus den Hüftbeinen, dem Kreuzbein und dem Steißbein gebildet. Es verbindet den Oberkörper mit den Beinen.",
+    "function": "Es trägt die inneren Organe des Bauchraums, stabilisiert den Rumpf und bildet die Basis für die Fortbewegung.",
+    "disease": "Zu den häufigsten Problemen gehören Beckenbrüche, Beckenbodenschwächen und Entzündungen im Beckenbereich."
   },
   "Brustkorb": {
-    "anatomy": "Der Brustkorb wird aus Rippen, Brustbein und Teilen der Wirbelsäule gebildet. Er schützt lebenswichtige Organe wie Herz und Lunge.",
-    "function": "Er schützt die inneren Organe und ermöglicht durch seine Beweglichkeit die Atmung.",
-    "disease": "Brustkorbverletzungen, Rippenbrüche oder Deformationen wie Trichterbrust können vorkommen."
+    "anatomy": "Der Brustkorb (Thorax) wird aus Rippen, Brustbein und Brustwirbelsäule gebildet. Er umschließt Herz und Lunge.",
+    "function": "Er schützt lebenswichtige Organe und spielt eine zentrale Rolle bei der Atmung durch die Bewegung der Rippen und des Zwerchfells.",
+    "disease": "Häufige Erkrankungen sind Rippenbrüche, Brustkorbdeformitäten und Verletzungen nach Unfällen."
   },
   "Schädel": {
-    "anatomy": "Der Schädel besteht aus mehreren Knochen, die Gehirn und Sinnesorgane schützen. Er gliedert sich in Hirnschädel und Gesichtsschädel.",
-    "function": "Er schützt das Gehirn und bietet Ansatzstellen für Muskeln und Sinnesorgane.",
-    "disease": "Schädelbrüche, Fehlbildungen oder Tumore können den Schädel betreffen."
+    "anatomy": "Der Schädel besteht aus 22 Knochen, die das Gehirn, die Sinnesorgane und die oberen Atem- und Verdauungswege schützen. Er gliedert sich in das Hirnschädel- und Gesichtsschädelteil.",
+    "function": "Er schützt das Gehirn vor Verletzungen, bildet die Grundlage für Gesichtszüge und ermöglicht durch Gelenke und Muskeln Kauen und Mimik.",
+    "disease": "Erkrankungen des Schädels umfassen Knochenbrüche, Schädel-Hirn-Traumata oder angeborene Fehlbildungen wie die Kraniosynostose."
   },
   "Wirbelsäule": {
-    "anatomy": "Die Wirbelsäule besteht aus 33–34 Wirbeln, die in Hals-, Brust-, Lenden-, Kreuz- und Steißbeinabschnitte gegliedert sind.",
-    "function": "Sie trägt den Körper, ermöglicht Beweglichkeit und schützt das Rückenmark.",
-    "disease": "Häufige Erkrankungen sind Bandscheibenvorfälle, Skoliose und Arthrose."
+    "anatomy": "Die Wirbelsäule besteht aus 33–34 Wirbeln, die in Hals-, Brust-, Lenden-, Kreuz- und Steißwirbel gegliedert sind. Zwischen den Wirbeln liegen Bandscheiben, die als Stoßdämpfer wirken.",
+    "function": "Sie stützt den Körper, schützt das Rückenmark und ermöglicht Beweglichkeit und Stabilität.",
+    "disease": "Zu den typischen Erkrankungen zählen Bandscheibenvorfälle, Wirbelgleiten und Fehlstellungen wie Skoliose."
   },
   "Arterien": {
     "anatomy": "Arterien sind Blutgefäße, die das sauerstoffreiche Blut vom Herzen in den Körper transportieren. Die größte Arterie ist die Aorta.",
@@ -50,9 +50,9 @@
     "disease": "Arteriosklerose, Aneurysmen oder Embolien sind häufige Erkrankungen der Arterien."
   },
   "Venen": {
-    "anatomy": "Venen sind Blutgefäße, die sauerstoffarmes Blut aus dem Körper zurück zum Herzen transportieren. Sie besitzen Venenklappen, um den Rückfluss zu verhindern.",
+    "anatomy": "Venen sind Blutgefäße, die das sauerstoffarme Blut aus dem Körper zurück zum Herzen transportieren. Sie besitzen Venenklappen, die den Rückfluss verhindern.",
     "function": "Sie sorgen für den Rücktransport des Blutes zum Herzen und unterstützen den Blutkreislauf durch Muskelpumpen.",
-    "disease": "Krampfadern, Thrombosen und Venenentzündungen gehören zu den häufigsten Venenerkrankungen."
+    "disease": "Typische Erkrankungen sind Krampfadern, Venenthrombosen und Venenentzündungen."
   },
   "Herz": {
     "anatomy": "Das Herz ist ein muskuläres Hohlorgan mit vier Kammern: zwei Vorhöfen und zwei Kammern. Es liegt im Brustkorb hinter dem Brustbein.",
@@ -60,24 +60,24 @@
     "disease": "Häufige Erkrankungen sind koronare Herzkrankheit, Herzinfarkt und Herzinsuffizienz."
   },
     "Gehirn": {
-    "anatomy": "Das Gehirn ist das Steuerzentrum des Nervensystems und befindet sich im Schädel.",
+    "anatomy": "Das Gehirn besteht aus Großhirn, Kleinhirn und Hirnstamm. Es wird von den Schädelknochen und den Hirnhäuten umgeben und ist über das Rückenmark mit dem Körper verbunden.",
     "function": "Es verarbeitet Informationen, steuert Bewegungen und ermöglicht Denken, Fühlen und Erinnern.",
-    "disease": "Schlaganfall, Demenz und Epilepsie sind häufige Erkrankungen des Gehirns."
+    "disease": "Zu den wichtigsten Erkrankungen gehören Schlaganfälle, Demenz, Epilepsie und Gehirntumore."
   },
   "Zwerchfell": {
     "anatomy": "Das Zwerchfell ist eine flache Muskelplatte zwischen Brust- und Bauchraum.",
-    "function": "Es spielt eine zentrale Rolle bei der Atmung, indem es den Druck zwischen Brust- und Bauchraum reguliert.",
-    "disease": "Zwerchfellbruch oder Lähmung können die Atmung beeinträchtigen."
+    "function": "Es spielt eine zentrale Rolle bei der Atmung: Beim Einatmen zieht es sich zusammen und ermöglicht das Füllen der Lungen.",
+    "disease": "Erkrankungen des Zwerchfells umfassen Zwerchfellbrüche, Lähmungen oder Krämpfe, die sich oft als Schluckauf äußern."
   },
   "Verdauungssystem": {
-    "anatomy": "Das Verdauungssystem umfasst Mund, Speiseröhre, Magen, Darm, Leber, Gallenblase und Bauchspeicheldrüse.",
-    "function": "Es dient der Aufnahme, Verdauung und Aufnahme von Nährstoffen.",
-    "disease": "Gastritis, Reizdarmsyndrom und Lebererkrankungen sind häufige Störungen."
+    "anatomy": "Das Verdauungssystem umfasst Mund, Speiseröhre, Magen, Dünn- und Dickdarm sowie Leber, Gallenblase und Bauchspeicheldrüse.",
+    "function": "Es zerkleinert und verarbeitet Nahrung, nimmt Nährstoffe auf und scheidet Abfallstoffe aus.",
+    "disease": "Zu den typischen Erkrankungen gehören Magengeschwüre, Reizdarmsyndrom und entzündliche Darmerkrankungen wie Gastritis oder Colitis."
   },
   "Augen": {
-    "anatomy": "Die Augen sind die Sinnesorgane des Sehens.",
+    "anatomy": "Das Auge besteht aus Hornhaut, Linse, Netzhaut, Iris und Glaskörper. Es liegt geschützt in der Augenhöhle und ist über Muskeln beweglich.",
     "function": "Sie nehmen Lichtreize auf und wandeln sie in Nervenimpulse um.",
-    "disease": "Kurzsichtigkeit, Grauer Star und Bindehautentzündungen sind häufig."
+    "disease": "Häufige Augenerkrankungen sind Kurz- und Weitsichtigkeit, Grauer Star, Grüner Star und Bindehautentzündungen."
   },
   "Gallenblase": {
     "anatomy": "Die Gallenblase liegt unterhalb der Leber und speichert Gallenflüssigkeit.",
@@ -85,18 +85,18 @@
     "disease": "Gallensteine oder Entzündungen (Cholezystitis) können Beschwerden verursachen."
   },
   "Lunge": {
-    "anatomy": "Die Lunge besteht aus zwei Flügeln und ist für den Gasaustausch zuständig.",
+    "anatomy": "Die Lunge besteht aus zwei Flügeln mit zahlreichen Lungenbläschen (Alveolen) und liegt im Brustkorb. Sie ist durch Bronchien mit der Luftröhre verbunden.",
     "function": "Sie versorgt das Blut mit Sauerstoff und entfernt Kohlendioxid.",
     "disease": "Asthma, COPD und Lungenentzündungen gehören zu den häufigsten Erkrankungen."
   },
   "Leber": {
-    "anatomy": "Die Leber ist das größte innere Organ und liegt im rechten Oberbauch.",
+    "anatomy": "Die Leber liegt im rechten Oberbauch und ist das größte innere Organ. Sie besteht aus zwei großen Lappen und wird stark durchblutet.",
     "function": "Sie entgiftet den Körper, speichert Nährstoffe und produziert Galle.",
     "disease": "Leberzirrhose, Hepatitis und Fettleber sind verbreitete Erkrankungen."
   },
   "Harnsystem": {
-    "anatomy": "Das Harnsystem umfasst Nieren, Harnleiter, Blase und Harnröhre.",
+    "anatomy": "Zum Harnsystem gehören Nieren, Harnleiter, Harnblase und Harnröhre. Es liegt größtenteils im Unterbauch.",
     "function": "Es filtert Abfallstoffe aus dem Blut und scheidet sie als Urin aus.",
-    "disease": "Harnwegsinfekte, Nierensteine und Niereninsuffizienz sind häufige Erkrankungen."
+    "disease": "Erkrankungen des Harnsystems umfassen Harnwegsinfekte, Nierensteine und Nierenfunktionsstörungen."
   }
 }
