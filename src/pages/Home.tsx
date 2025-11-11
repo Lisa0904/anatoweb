@@ -61,7 +61,7 @@ export default function Home() {
         margin: "0 auto 3rem",
         textAlign: "center"  // zentriert wirkt eleganter
       }}>
-        <h1 className="title">Anatomie interaktiv erleben</h1>
+        <h1 className="title gradient">Anatomie interaktiv erleben</h1>
         <p className="lead" style={{ fontSize: "17px", lineHeight: 1.7 }}>
           Entdecke den menschlichen Körper in 3D. Interaktive Modelle, Karteikarten und Quizfragen – alles an einem Ort.
         </p>
