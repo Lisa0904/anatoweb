@@ -35,7 +35,7 @@ export default function Flashcards() {
     // 🔊 Flip-Sound abspielen
     const audio = new Audio("/sounds/swoosh.mp3");  // Pfad zur Datei im public-Ordner
     audio.play();
-    audio.volume = 0.03;
+    audio.volume = 0.05;
 
     setFlipped((prev) => !prev);
   }
