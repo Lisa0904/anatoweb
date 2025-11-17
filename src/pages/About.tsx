@@ -1,5 +1,3 @@
-
-
 export default function About() {
   return (
     <div className="page-container">
@@ -7,16 +5,15 @@ export default function About() {
 
       <p className="lead">
         <strong>AnatoWeb</strong> ist ein studentisches Projekt im Rahmen des
-        Multimedia-Seminars <em>KMMB4732</em>. <br />Entwickelt von Anne Eppendorfer, Moritz Münch und Lisa Taljanovic.
+        Multimedia-Seminars <em>KMMB4732</em>. <br />
+        Entwickelt von Anne Eppendorfer, Moritz Münch und Lisa Taljanovic.
       </p>
 
       <div className="section-box">
         <h3>Ziel</h3>
-        <h4>moin</h4>
         <p className="info-text">
           Unser Ziel ist es, eine interaktive Lernplattform zu schaffen, die
-          komplexe anatomische Strukturen verständlich und anschaulich
-          visualisiert.
+          komplexe anatomische Strukturen verständlich und anschaulich visualisiert.
         </p>
       </div>
 

@@ -1,9 +1,10 @@
 // src/components/Navbar.tsx
-import React from "react";
 import { NavLink } from "react-router-dom";
-import type { JSX } from "react/jsx-runtime";
 
-export default function Navbar(): JSX.Element {
+export default function Navbar() {
+  const linkClass = ({ isActive }: { isActive: boolean }) =>
+    isActive ? "active" : "";
+
   return (
     <nav className="nav">
       <div className="brand">
@@ -11,20 +12,22 @@ export default function Navbar(): JSX.Element {
           <img src="/logo.png" alt="AnatoWeb Logo" className="logo" />
         </NavLink>
       </div>
+
       <div className="links">
-        <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : "")}>
-          Start
-        </NavLink>
-        <NavLink to="/model" className={({ isActive }) => (isActive ? "active" : "")}>
+
+        <NavLink to="/model" className={linkClass}>
           Anatomie-Viewer
         </NavLink>
-        <NavLink to="/flashcards" className={({ isActive }) => (isActive ? "active" : "")}>
+
+        <NavLink to="/flashcards" className={linkClass}>
           Karteikarten
         </NavLink>
-        <NavLink to="/quiz" className={({ isActive }) => (isActive ? "active" : "")}>
+
+        <NavLink to="/quiz" className={linkClass}>
           Quiz
         </NavLink>
-        <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>
+
+        <NavLink to="/about" className={linkClass}>
           Über uns
         </NavLink>
       </div>

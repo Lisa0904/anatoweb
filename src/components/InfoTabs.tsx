@@ -43,9 +43,9 @@ export default function InfoTabs({ selected }: InfoTabsProps) {
         ))}
       </div>
 
-      <div style={{ marginTop: 12 }}>
+      <div className="info-content">
         <div className="info-title">{cleanName}</div>
-        <div className="info-text" style={{ marginTop: 8 }}>
+        <div className="info-text info-text-spacing">
           {{
             Anatomie: anatomyText,
             Funktion: functionText,

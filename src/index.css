@@ -1,12 +1,27 @@
 :root {
   --bg: #161616;
   --panel: #1e2023;
-  --muted: #9ca3af;
-  --accent: #22c55e;
   --glass: rgba(255, 255, 255, 0.03);
-  --text: #f5f5f7;
-  --text-strong: #fafafa;
+
+  --text: #d5d5d7;
+  --text-strong: #d5d5d7;
+  --muted: #9ca3af;
+
+  --accent: #22c55e;
+
   --font-main: "Inter", "SF Pro Text", system-ui, sans-serif;
+    --page-width: 1450px;
+}
+
+/* LIGHT MODE */
+:root.light {
+  --bg: #cbcbd0;
+  --panel: #ffffff;
+  --glass: rgba(0, 0, 0, 0.05);
+
+  --text: #1a1a1a;
+  --text-strong: #000;
+  --muted: #555;
 }
 
 * {
@@ -21,13 +36,7 @@ html, body, #root {
 }
 
 body {
-  background: radial-gradient(
-      circle at top center,
-      rgba(34, 197, 94, 0.05) 0%,     /* sanftes grünliches Highlight oben */
-      rgba(22, 22, 22, 1) 100%        /* dein normales Dark-Grey unten */
-    ),
-    linear-gradient(180deg, #1a1a1b 0%, #101010 100%);
-  background-blend-mode: overlay;
+  background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -36,6 +45,7 @@ body {
   letter-spacing: 0.01em;
   position: relative;
   overflow-x: hidden;
+  transition: background 0.35s ease, color 0.35s ease;
 }
 
 
@@ -44,10 +54,14 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-width: 1370px;
-  margin: 0 auto;
+
+  /* ⭐ DIESE 3 ZEILEN SIND NEU: */
   width: 100%;
+  max-width: var(--page-width); /* = 1050px laut :root */
+  margin: 0 auto; /* zentrieren */
+  position: relative; /* nötig, damit Theme-Switch darin positioniert werden kann */
 }
+
 
 .nav {
   display: flex;
@@ -57,72 +71,108 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
   border-radius: 12px;
-  overflow: hidden;
+} 
 
-  /* Sticky Navbar 
-  position: sticky; 
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(12px);*/
-}
-
-.nav .brand {
+.brand {
   display: flex;
   align-items: center;
   gap: 12px;
   font-weight: 600;
-  font-size: 20px
+  font-size: 20px;
 }
 
-.brand .logo {
+.logo {
   width: 150px;
   height: auto;
-  background-size: contain;
-  background-position: center;
-  background: none
 }
 
-.nav .links {
+.logo-link {
   display: flex;
-  gap: 14px
+  align-items: center;
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  gap: 14px;
 }
 
 .nav a {
   color: var(--muted);
   text-decoration: none;
   padding: 8px 11px;
-  border-radius: 8px
+  border-radius: 8px;
+  transition: 0.25s ease;
 }
+
 
 .nav a.active,
 .nav a:hover {
   color: var(--text);
-  background: var(--glass)
+  background: var(--glass);
 }
 
-.nav .logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
 
-.nav .logo-link.active,
-.nav .logo-link:hover {
+.logo-link:hover,
+.logo-link.active {
   background: none !important;
   color: inherit !important;
 }
 
-.footer {
+
+.site-footer {
+  width: 100%;
   text-align: center;
   padding: 2rem 0;
-  margin-top: 3rem;
+  margin-top: 1.8rem;
   margin-bottom: 1.5rem;
   color: #666;
   font-size: 0.8rem;
-  width: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.theme-switch {
+  position: absolute; /* statt fixed */
+  top: 8px;
+  right: 8px;
+
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+
+  background: var(--panel);
+  border: 1px solid var(--glass);
+  backdrop-filter: blur(8px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 999;
+}
+
+
+.theme-switch:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.25);
+}
+
+.theme-switch .icon {
+  font-size: 20px;
+  transition: transform 0.35s ease;
+}
+
+/* Rotation */
+.theme-switch .icon.light {
+  transform: rotate(0deg);
+}
+.theme-switch .icon.dark {
+  transform: rotate(180deg);
 }
 
 .main-content {
@@ -135,6 +185,86 @@ body {
   margin: 0 auto;
 }
 
+/* ---------------------------
+   Page wrapper + Home / Hero
+   --------------------------- */
+
+/* zentrierter Content-Wrapper (ersetzt body max-width usage) */
+.page-wrapper {
+  width: 100%;
+  padding: 30px 18px; 
+  margin: 0 auto;
+}
+
+
+/* Home / hero */
+.home { /* optional hook */ }
+
+.hero-text {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.hero-lead {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* Video container (keine funktionale Änderung: nur Styles statt inline) */
+.home-video {
+  max-width: 900px;
+  margin: 0 auto 40px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255,255,255,0.02);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+}
+
+/* video element */
+.hero-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.9; /* wie vorher */
+  filter: brightness(1.08) contrast(1.05);
+  animation: videoPulse 18s ease-in-out infinite alternate;
+}
+
+/* overlay used by JS */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  pointer-events: none;
+}
+
+/* actions / buttons row below hero */
+.home-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+/* helper: make home buttons slightly wider */
+.home-action-btn {
+  min-width: 160px;
+  text-align: center;
+}
+
+/* Ensure the page background covers the whole viewport and doesn't create strips */
+html, body {
+  height: 100%;
+  background-attachment: fixed;
+}
+
 /* Grid for model page */
 .page-grid {
   display: grid;
@@ -142,6 +272,25 @@ body {
   gap: 32px;
   max-width: 1250px;
   height: 20px;
+}
+
+/* Model page cleanup */
+.model-page {
+  /* nur Hook – aktuell keine Styles nötig */
+}
+
+/* Themenauswahl Buttons */
+.topic-selector {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.viewer-canvas {
+  height: 550px; /* exakt wie vorher */
+  width: 100%;
 }
 
 /* canvas container */
@@ -175,6 +324,18 @@ body {
   pointer-events: none;
 }
 
+.loader-container {
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  background: rgba(0,0,0,0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
 /* right panel */
 .panel {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
@@ -184,6 +345,14 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.03);
   padding: 24px;
+}
+
+.info-content {
+  margin-top: 12px;
+}
+
+.info-text-spacing {
+  margin-top: 8px;
 }
 
 .panel-quiz {
@@ -376,6 +545,63 @@ circle[stroke="var(--accent)"] {
   filter: drop-shadow(0 0 2px var(--accent));
 }
 
+/* ===============================
+   QUIZ — Saubere getrennte Styles
+   =============================== */
+
+/* Fortschrittsanzeige */
+.quiz-progress-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.quiz-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #34d399);
+  transition: width 0.6s ease;
+}
+
+/* Fragebox zusätzliche Transition */
+.quiz-question-box {
+  transition: all 0.3s ease;
+}
+
+/* Antwortbutton Layout */
+.quiz-answer-btn {
+  text-align: left;
+  padding: 12px 16px;
+}
+
+/* Navigation unterhalb der Antworten */
+.quiz-nav {
+  margin-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+}
+
+/* H5P Testeinbettung */
+.quiz-h5p-wrapper {
+  margin-top: 350px;
+  padding: 25px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+.quiz-h5p-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 
 @media (max-width: 1200px) {
   .page-grid {
@@ -399,27 +625,25 @@ circle[stroke="var(--accent)"] {
   .nav {
     flex-direction: column;
     align-items: flex-start;
-    padding: 12px 20px;
+    gap: 10px;
   }
 
-  .nav .links {
-    display: flex;
+
+  .links {
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 10px;
   }
 
-  .nav .links a {
-    padding: 6px 10px;
+ .links a {
     font-size: 14px;
+    padding: 6px 10px;
   }
 
-  .brand .logo {
+  .logo {
     width: 120px;
-    /* etwas kleiner auf Handy */
   }
 
-  .footer {
+  .site-footer {
     font-size: 0.75rem;
     padding: 1rem 0;
   }

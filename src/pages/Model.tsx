@@ -22,47 +22,40 @@ export default function ModelPage() {
   const currentModelUrl = modelPaths[topic];
 
   return (
-    <div style={{ maxWidth: 1370, margin: "0 auto" }}>
-      <h1 className="title">Anatomie-Viewer</h1>
+  <div className="page-wrapper model-page">
+    <h1 className="title">Anatomie-Viewer</h1>
 
-      <p className="lead">
-        Klicke auf die verschiedenen Teile der Modelle, um mehr Informationen zu erhalten.
-      </p>
-      <div className="page-grid">
-        <div className="viewer">
-          {/* Themenauswahl */}
-          <div
-            style={{
-              display: "flex",
-              gap: 12,
-              marginBottom: 20,
-              justifyContent: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            {(["Ganzer Mensch", "Muskeln", "Skelett", "Kreislaufsystem", "Organe"] as Topic[]).map((t) => (
-              <button
-                key={t}
-                onClick={() => setTopic(t)}
-                className={`ctrl-btn ${topic === t ? "active" : ""}`}
-              >
-                {t}
-              </button>
-            ))}
-          </div>
+    <p className="lead">
+      Klicke auf die verschiedenen Teile der Modelle, um mehr Informationen zu erhalten.
+    </p>
 
-          {/* ✅ Hier wird die aktuelle modelUrl übergeben */}
-          <AnatomyViewer
-            key={currentModelUrl}
-            modelUrl={currentModelUrl}
-            onSelect={(objName, info) => setSelected({ name: objName, info })}
-          />
+    <div className="page-grid">
+      <div className="viewer">
+
+        {/* Themenauswahl */}
+        <div className="topic-selector">
+          {(["Ganzer Mensch", "Muskeln", "Skelett", "Kreislaufsystem", "Organe"] as Topic[]).map((t) => (
+            <button
+              key={t}
+              onClick={() => setTopic(t)}
+              className={`ctrl-btn ${topic === t ? "active" : ""}`}
+            >
+              {t}
+            </button>
+          ))}
         </div>
 
-        <div className="panel">
-          <InfoTabs selected={selected} />
-        </div>
+        <AnatomyViewer
+          key={currentModelUrl}
+          modelUrl={currentModelUrl}
+          onSelect={(objName, info) => setSelected({ name: objName, info })}
+        />
+      </div>
+
+      <div className="panel">
+        <InfoTabs selected={selected} />
       </div>
     </div>
-  );
+  </div>
+);
 }

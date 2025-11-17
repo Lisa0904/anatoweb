@@ -130,28 +130,12 @@ export default function QuizPage() {
       {!showResult ? (
         <>
           {/* Fortschrittsanzeige */}
-          <div
-            style={{
-              width: "100%",
-              height: "8px",
-              background: "rgba(255,255,255,0.08)",
-              borderRadius: "6px",
-              overflow: "hidden",
-              marginBottom: "18px",
-            }}
-          >
-            <div
-              style={{
-                width: `${progress}%`,
-                height: "100%",
-                background: "linear-gradient(90deg, var(--accent), #34d399)",
-                transition: "width 0.6s ease",
-              }}
-            />
-          </div>
+          <div className="quiz-progress-container">
+  <div className="quiz-progress" style={{ width: `${progress}%` }} />
+</div>
 
           {/* Frage-Box */}
-          <div className="panel-quiz" style={{ transition: "all 0.3s ease" }}>
+          <div className="panel-quiz quiz-question-box">
             <div style={{ color: "var(--muted)" }}>
               Frage {index + 1} / {questions.length} — <strong>{topic}</strong>
             </div>
@@ -167,11 +151,7 @@ export default function QuizPage() {
                     key={i}
                     onClick={() => answer(i)}
                     className={`ctrl-btn quiz-answer-btn ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
-                    style={{
-                      textAlign: "left",
-                      padding: "12px 16px",
-                      pointerEvents: locked ? "none" : "auto",
-                    }}
+  style={{ pointerEvents: locked ? "none" : "auto" }}
                     type="button"
                   >
                     {a}
@@ -181,15 +161,7 @@ export default function QuizPage() {
             </div>
 
             {/* Navigation */}
-            <div
-              style={{
-                marginTop: 28,
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                color: "var(--muted)",
-              }}
-            >
+            <div className="quiz-nav">
               <div>Punktzahl: {score} / {questions.length}</div>
               <div style={{ display: "flex", gap: 10 }}>
                 <button
@@ -230,15 +202,7 @@ export default function QuizPage() {
         </div>
       )}
       {/* --- Testbereich: H5P Quiz --- */}
-<div
-  style={{
-    marginTop: "350px", // normaler Abstand wären so 60px
-    padding: "25px",
-    background: "rgba(255,255,255,0.03)",
-    borderRadius: "14px",
-    boxShadow: "0 6px 18px rgba(0,0,0,0.6)",
-  }}
->
+<div className="quiz-h5p-wrapper">
   <h2 style={{ marginBottom: "20px", color: "var(--text-strong)" }}>
     H5P-Testeinbettung
   </h2>
@@ -254,21 +218,8 @@ export default function QuizPage() {
       background: "#111",
     }}
   >
-    <iframe
-      src="https://h5p.org/h5p/embed/1547415"
-      width="100%"
-      height="100%"
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        border: "none",
-      }}
-      title="H5P Quiz"
-      allowFullScreen
-    ></iframe>
+    <iframe className="quiz-h5p-frame"
+      src="https://h5p.org/h5p/embed/1547415"/>
   </div>
 
   <p style={{ marginTop: "16px", color: "var(--muted)", fontSize: "14px" }}>

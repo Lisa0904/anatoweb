@@ -59,15 +59,15 @@ export default function Flashcards() {
   }
 
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
+    <div className="flashcards-page">
       <h1 className="title">Karteikarten</h1>
-      <p className="lead" style={{ color: "var(--muted)", marginBottom: "2em", textAlign: "left" }}>
+      <p className="lead flashcards-lead">
         Wähle ein Themengebiet, klicke für die Antwort auf die Karte und bewerte dein Wissen.
       </p>
 
 
       {/* Themenauswahl */}
-      <div style={{ display: "flex", justifyContent: "center", gap: 12, marginBottom: 24 }}>
+      <div className="flashcards-topic-row">
         {["Alle", "Muskeln", "Skelett", "Kreislaufsystem", "Organe"].map((t) => (
           <button
             key={t}
@@ -99,7 +99,7 @@ export default function Flashcards() {
       </div>
 
       {/* Bewertungsbuttons */}
-      <div style={{ display: "flex", justifyContent: "center", gap: 18, marginTop: 28 }}>
+      <div className="rating-row">
         <button className="rating-btn repeat" onClick={() => handleRating("repeat")}>
           Wiederholen 🔁
         </button>

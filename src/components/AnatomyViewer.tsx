@@ -17,20 +17,7 @@ function LoaderFallback() {
 
 
   return (
-    <Html
-      center
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "rgba(0, 0, 0, 0.3)",
-        backdropFilter: "blur(2px)",
-        pointerEvents: "none",
-        borderRadius: "12px", // optional: passt sich der viewer-Form an
-      }}
-    >
+    <Html center className="loader-container">
       <div style={{ textAlign: "center", color: "var(--muted)" }}>
         {/* Kreis */}
         <div style={{ position: "relative", width: 64, height: 64, margin: "0 auto 8px" }}>
@@ -173,10 +160,10 @@ interface AnatomyViewerProps {
 export default function AnatomyViewer({ modelUrl, onSelect }: AnatomyViewerProps) {
   return (
     <Canvas
-  style={{ height: 550 }}
+  className="viewer-canvas"
   shadows
   gl={{ antialias: true }}
-  camera={{ position: [100, 85, 350], fov: 32 }} 
+  camera={{ position: [100, 85, 350], fov: 32 }}
 >
       <ambientLight intensity={0.5} />
       <directionalLight castShadow intensity={0.8} position={[5, 10, 5]} color="#ffffff" />
