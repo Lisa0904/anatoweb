@@ -95,20 +95,20 @@ function Model({ url, onSelect }: ModelProps) {
 
     scene.position.sub(center);
     scene.scale.setScalar(scale);
-    scene.position.y -= size.y * 0.4 * scale; scene.scale.set(1.1, 1.1, 1.1); scene.traverse((c: any) => {
-  if (c.isMesh) {
-    c.castShadow = true;
-    c.receiveShadow = true;
-    if (!c.name || c.name.trim() === "") c.name = "part";
+    scene.position.y += size.y * 1.8 * scale; scene.scale.set(1.1, 1.1, 1.1); scene.traverse((c: any) => {
+      if (c.isMesh) {
+        c.castShadow = true;
+        c.receiveShadow = true;
+        if (!c.name || c.name.trim() === "") c.name = "part";
 
-    // ✨ Glow hinzufügen: leichtes Eigenleuchten
-    if (c.material && c.material.isMeshStandardMaterial) {
-      const mat = c.material as THREE.MeshStandardMaterial;
-      mat.emissive = new THREE.Color(0x222244); // sanftes blauviolett
-      mat.emissiveIntensity = 0.12;
-    }
-  }
-});
+        // ✨ Glow hinzufügen: leichtes Eigenleuchten
+        if (c.material && c.material.isMeshStandardMaterial) {
+          const mat = c.material as THREE.MeshStandardMaterial;
+          mat.emissive = new THREE.Color(0x222244); // sanftes blauviolett
+          mat.emissiveIntensity = 0.12;
+        }
+      }
+    });
   }, [scene]);
 
   function handlePointerDown(e: ThreeEvent<PointerEvent>) {
@@ -160,11 +160,11 @@ interface AnatomyViewerProps {
 export default function AnatomyViewer({ modelUrl, onSelect }: AnatomyViewerProps) {
   return (
     <Canvas
-  className="viewer-canvas"
-  shadows
-  gl={{ antialias: true }}
-  camera={{ position: [100, 85, 350], fov: 32 }}
->
+      className="viewer-canvas"
+      shadows
+      gl={{ antialias: true }}
+      camera={{ position: [100, 90, 350], fov: 32 }}
+    >
       <ambientLight intensity={0.5} />
       <directionalLight castShadow intensity={0.8} position={[5, 10, 5]} color="#ffffff" />
       <directionalLight intensity={0.5} position={[-5, 2, -5]} color="#9ae6b4" /> {/* leicht grünlich */}
@@ -174,16 +174,16 @@ export default function AnatomyViewer({ modelUrl, onSelect }: AnatomyViewerProps
         <Model url={modelUrl} onSelect={onSelect} />
       </Suspense>
       <EffectComposer>
-  <Bloom
-    luminanceThreshold={0.1}
-    luminanceSmoothing={0.9}
-    height={300}
-    intensity={0.6}   // 🔆 Glow-Stärke
-  />
-</EffectComposer>
+        <Bloom
+          luminanceThreshold={0.1}
+          luminanceSmoothing={0.9}
+          height={300}
+          intensity={0.6}   // 🔆 Glow-Stärke
+        />
+      </EffectComposer>
 
       {/* 🧠 Zielpunkt leicht in Brusthöhe */}
-      <OrbitControls target={[0, 1.2, 0]} enablePan enableZoom enableRotate />
+      <OrbitControls target={[0, 1.5, 0]} enablePan enableZoom enableRotate />
     </Canvas>
   );
 }

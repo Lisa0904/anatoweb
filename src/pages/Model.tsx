@@ -22,40 +22,40 @@ export default function ModelPage() {
   const currentModelUrl = modelPaths[topic];
 
   return (
-  <div className="page-wrapper model-page">
-    <h1 className="title">Anatomie-Viewer</h1>
+    <div className="page-wrapper model-page">
+      <h1 className="title">Anatomie-Viewer</h1>
 
-    <p className="lead">
-      Klicke auf die verschiedenen Teile der Modelle, um mehr Informationen zu erhalten.
-    </p>
+      <p className="lead">
+        Klicke auf die verschiedenen Teile der Modelle, um mehr Informationen zu erhalten.
+      </p>
 
-    <div className="page-grid">
-      <div className="viewer">
+      <div className="page-grid">
+        <div className="viewer">
 
-        {/* Themenauswahl */}
-        <div className="topic-selector">
-          {(["Ganzer Mensch", "Muskeln", "Skelett", "Kreislaufsystem", "Organe"] as Topic[]).map((t) => (
-            <button
-              key={t}
-              onClick={() => setTopic(t)}
-              className={`ctrl-btn ${topic === t ? "active" : ""}`}
-            >
-              {t}
-            </button>
-          ))}
+          {/* Themenauswahl */}
+          <div className="topic-selector">
+            {(["Ganzer Mensch", "Muskeln", "Skelett", "Kreislaufsystem", "Organe"] as Topic[]).map((t) => (
+              <button
+                key={t}
+                onClick={() => setTopic(t)}
+                className={`ctrl-btn ${topic === t ? "active" : ""}`}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+
+          <AnatomyViewer
+            key={currentModelUrl}
+            modelUrl={currentModelUrl}
+            onSelect={(objName, info) => setSelected({ name: objName, info })}
+          />
         </div>
 
-        <AnatomyViewer
-          key={currentModelUrl}
-          modelUrl={currentModelUrl}
-          onSelect={(objName, info) => setSelected({ name: objName, info })}
-        />
-      </div>
-
-      <div className="panel">
-        <InfoTabs selected={selected} />
+        <div className="panel">
+          <InfoTabs selected={selected} />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 }

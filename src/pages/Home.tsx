@@ -53,7 +53,7 @@ export default function Home() {
     };
   }, []);
 
-    return (
+  return (
     <div className="home page-wrapper"> {/* Abstand & zentrierter Container via CSS */}
       {/* Textblock */}
       <div className="hero-text">
@@ -64,7 +64,7 @@ export default function Home() {
       </div>
 
       {/* 🎥 Videobox mit Overlay */}
-      <div className="video-container home-video">
+      <Link to="/model" className="video-container home-video" style={{ display: "block" }}>
         <video
           ref={videoRef}
           src="/anatoweb_animation.mp4"
@@ -73,9 +73,8 @@ export default function Home() {
           playsInline
           className="hero-video"
         />
-        {/* 🌙 Overlay für Fade-Effekt */}
         <div ref={overlayRef} className="hero-overlay" />
-      </div>
+      </Link>
 
       {/* Buttons */}
       <div className="home-actions">

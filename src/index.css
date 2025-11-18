@@ -10,12 +10,12 @@
   --accent: #22c55e;
 
   --font-main: "Inter", "SF Pro Text", system-ui, sans-serif;
-    --page-width: 1450px;
+  --page-width: 1450px;
 }
 
 /* LIGHT MODE */
 :root.light {
-  --bg: #cbcbd0;
+  --bg: #cbcbd0ce;
   --panel: #ffffff;
   --glass: rgba(0, 0, 0, 0.05);
 
@@ -31,12 +31,24 @@
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   min-height: 100%;
 }
 
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 50% 40%,
+      rgba(34, 197, 94, 0.03) 0%,
+      /* vorher 0.09 */
+      rgba(34, 197, 94, 0.01) 35%,
+      /* vorher 0.03 */
+      transparent 70%),
+    radial-gradient(circle at 50% 120%,
+      rgba(0, 0, 0, 0.35),
+      transparent 70%),
+    var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -57,9 +69,12 @@ body {
 
   /* ⭐ DIESE 3 ZEILEN SIND NEU: */
   width: 100%;
-  max-width: var(--page-width); /* = 1050px laut :root */
-  margin: 0 auto; /* zentrieren */
-  position: relative; /* nötig, damit Theme-Switch darin positioniert werden kann */
+  max-width: var(--page-width);
+  /* = 1050px laut :root */
+  margin: 0 auto;
+  /* zentrieren */
+  position: relative;
+  /* nötig, damit Theme-Switch darin positioniert werden kann */
 }
 
 
@@ -71,7 +86,7 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
   border-radius: 12px;
-} 
+}
 
 .brand {
   display: flex;
@@ -135,7 +150,8 @@ body {
 }
 
 .theme-switch {
-  position: absolute; /* statt fixed */
+  position: absolute;
+  /* statt fixed */
   top: 8px;
   right: 8px;
 
@@ -171,6 +187,7 @@ body {
 .theme-switch .icon.light {
   transform: rotate(0deg);
 }
+
 .theme-switch .icon.dark {
   transform: rotate(180deg);
 }
@@ -192,13 +209,15 @@ body {
 /* zentrierter Content-Wrapper (ersetzt body max-width usage) */
 .page-wrapper {
   width: 100%;
-  padding: 30px 18px; 
+  padding: 0px 18px;
   margin: 0 auto;
 }
 
 
 /* Home / hero */
-.home { /* optional hook */ }
+.home {
+  /* optional hook */
+}
 
 .hero-text {
   max-width: 800px;
@@ -219,8 +238,8 @@ body {
   border-radius: 16px;
   overflow: hidden;
   position: relative;
-  background: rgba(255,255,255,0.02);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(6px);
 }
 
@@ -229,16 +248,18 @@ body {
   width: 100%;
   height: auto;
   display: block;
-  opacity: 0.9; /* wie vorher */
+  opacity: 0.9;
+  /* wie vorher */
   filter: brightness(1.08) contrast(1.05);
   animation: videoPulse 18s ease-in-out infinite alternate;
+  mix-blend-mode: normal;
 }
 
 /* overlay used by JS */
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.4s ease-in-out;
   pointer-events: none;
@@ -260,7 +281,8 @@ body {
 }
 
 /* Ensure the page background covers the whole viewport and doesn't create strips */
-html, body {
+html,
+body {
   height: 100%;
   background-attachment: fixed;
 }
@@ -289,7 +311,8 @@ html, body {
 }
 
 .viewer-canvas {
-  height: 550px; /* exakt wie vorher */
+  height: 550px;
+  /* exakt wie vorher */
   width: 100%;
 }
 
@@ -311,24 +334,29 @@ html, body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 70%;
-  height: 85%;
+  width: 95%;
+  height: 110%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(
-    circle at center,
-    rgba(34, 197, 94, 0.08) 0%,   /* leicht grünliches Zentrum */
-    rgba(0, 0, 0, 0.95) 75%       /* dunkler Rand */
-  );
-  filter: blur(80px);
-  z-index: 0;
+
+  background: radial-gradient(circle,
+      rgba(34, 197, 94, 0.03) 0%,
+      /* vorher 0.09 */
+      rgba(34, 197, 94, 0.01) 45%,
+      /* vorher 0.03 */
+      rgba(0, 0, 0, 0.6) 100%);
+
+  filter: blur(120px);
+  opacity: 0.9;
   pointer-events: none;
+  z-index: 0;
 }
+
 
 .loader-container {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(2px);
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -338,14 +366,15 @@ html, body {
 
 /* right panel */
 .panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(18px);
   border-radius: 14px;
-  padding: 20px;
-  height: 650px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.03);
   padding: 24px;
+  height: 650px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
+
 
 .info-content {
   margin-top: 12px;
@@ -380,6 +409,13 @@ html, body {
   text-fill-color: transparent;
   letter-spacing: -0.02em;
 }
+
+:root.light .title.gradient {
+  background: linear-gradient(90deg, #15803d, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 
 h3 {
   color: var(--text-strong);
@@ -427,6 +463,44 @@ h3 {
   border-bottom: none;
 }
 
+/* LIGHTMODE: Active Tab */
+:root.light .tab.active {
+  background: rgba(34, 197, 94, 0.25);
+  /* stärkeres, aber weiches Grün */
+  color: #065f46;
+  /* dunkles Grün für perfekten Kontrast */
+  box-shadow: 0 3px 10px rgba(34, 197, 94, 0.22);
+  border-bottom: none;
+}
+
+/* LIGHTMODE: neutrale Tabs */
+:root.light .tab {
+  background: rgba(255, 255, 255, 0.55);
+  /* weiches Lichtgrau */
+  color: #1a1a1a;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+:root.light .tabs {
+  background: rgba(255, 255, 255, 0.35);
+  /* heller, matter Container */
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* beim letzten Tab die Linie entfernen */
+:root.light .tab:last-child {
+  border-right: none;
+}
+
+/* LIGHTMODE: neutrales Hover für Tabs (kein Grün!) */
+:root.light .tab:hover {
+  background: rgba(34, 197, 94, 0.18) !important;
+  color: #111 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
 /* reusable section box to visually separate content areas */
 .section-box {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.02));
@@ -444,7 +518,7 @@ h3 {
   font-size: 25px;
   color: var(--text-strong);
   margin-bottom: 12px;
-  
+
 }
 
 .info-text {
@@ -553,7 +627,7 @@ circle[stroke="var(--accent)"] {
 .quiz-progress-container {
   width: 100%;
   height: 8px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 18px;
@@ -589,9 +663,9 @@ circle[stroke="var(--accent)"] {
 .quiz-h5p-wrapper {
   margin-top: 350px;
   padding: 25px;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
 }
 
 .quiz-h5p-frame {
@@ -600,6 +674,18 @@ circle[stroke="var(--accent)"] {
   width: 100%;
   height: 100%;
   border: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("/noise.png");
+  background-repeat: repeat;
+  opacity: 0.09;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 2147483647;
 }
 
 
@@ -634,7 +720,7 @@ circle[stroke="var(--accent)"] {
     gap: 10px;
   }
 
- .links a {
+  .links a {
     font-size: 14px;
     padding: 6px 10px;
   }
@@ -649,19 +735,13 @@ circle[stroke="var(--accent)"] {
   }
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: -200px;
-  left: 50%;
-  width: 900px;
-  height: 900px;
-  background: radial-gradient(circle, rgba(34, 197, 94, 0.07) 0%, transparent 70%);
-  transform: translateX(-50%);
-  z-index: 0;
-  pointer-events: none;
-}
 
+
+/* -----------------------------
+   Viewer & Panel Styles
+   ----------------------------- */
+
+/* Standard Darkmode */
 .panel,
 .viewer {
   background: rgba(255, 255, 255, 0.02);
@@ -669,4 +749,146 @@ body::before {
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: background 0.35s ease, border 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Darkmode Glow-Overlay */
+.viewer::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 95%;
+  height: 110%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+      rgba(34, 197, 94, 0.03) 0%,
+      rgba(34, 197, 94, 0.01) 45%,
+      rgba(0, 0, 0, 0.6) 100%);
+  filter: blur(120px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.35s ease, opacity 0.35s ease;
+}
+
+/* Loader Darkmode */
+.loader-container {
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: background 0.35s ease;
+}
+
+/* -----------------------------
+   Lightmode Anpassungen
+   ----------------------------- */
+:root.light .panel,
+:root.light .viewer {
+  background: rgba(199, 199, 203, 0.95);
+  /* weiches Hellgrau */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+:root.light .viewer::before {
+  background: radial-gradient(circle,
+      rgba(34, 197, 94, 0.02) 0%,
+      rgba(34, 197, 94, 0.01) 45%,
+      rgba(255, 255, 255, 0.1) 100%);
+}
+
+:root.light .loader-container {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+:root.light .loader-container p {
+  color: var(--text);
+}
+
+/* -------------------------------------------------
+   GLOBAL BUTTON LIGHTMODE STYLING
+   Für: .ctrl-btn, .home-action-btn, .topic-selector,
+        Quiz-Antwortbuttons, Viewer-Buttons, Links
+   ------------------------------------------------- */
+
+:root.light .ctrl-btn,
+:root.light .home-action-btn,
+:root.light .topic-btn {
+  background: rgba(255, 255, 255, 0.45) !important;
+  /* sichtbar, aber weich */
+  color: #1a1a1a !important;
+  border: 1px solid rgba(0, 0, 0, 0.20) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Hover */
+:root.light .ctrl-btn:hover,
+:root.light .home-action-btn:hover,
+:root.light .topic-btn:hover {
+  background: rgba(34, 197, 94, 0.18) !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+  color: #064e3b !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.18);
+}
+
+/* Active State */
+:root.light .ctrl-btn.active {
+  background: rgba(34, 197, 94, 0.25) !important;
+  color: #065f46 !important;
+  border-color: rgba(34, 197, 94, 0.35) !important;
+}
+
+:root.light .quiz-answer-btn.correct {
+  background: rgba(34, 197, 94, 0.25) !important;
+  color: #065f46 !important;
+  border-color: rgba(34, 197, 94, 0.35) !important;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25) !important;
+  transform: none !important;
+}
+
+:root.light .quiz-answer-btn.wrong {
+  background: rgba(239, 68, 68, 0.30) !important;
+  color: #7f1d1d !important;
+  border-color: rgba(239, 68, 68, 0.40) !important;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25) !important;
+  transform: none !important;
+}
+
+:root.light .quiz-answer-btn {
+  background: rgba(255, 255, 255, 0.55);
+  color: #1a1a1a;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(6px);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+:root.light .quiz-answer-btn:hover {
+  background: rgba(155, 155, 155, 0.12) !important;
+  /* neutrales Grau */
+  color: var(--text) !important;
+  border-color: rgba(0, 0, 0, 0.18) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+}
+
+:root.light .quiz-answer-btn.correct:hover,
+:root.light .quiz-answer-btn.wrong:hover {
+  background: inherit !important;
+  color: inherit !important;
+  border-color: inherit !important;
+  transform: none !important;
+  box-shadow: inherit !important;
 }

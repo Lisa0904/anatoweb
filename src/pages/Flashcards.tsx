@@ -101,13 +101,13 @@ export default function Flashcards() {
       {/* Bewertungsbuttons */}
       <div className="rating-row">
         <button className="rating-btn repeat" onClick={() => handleRating("repeat")}>
-          Wiederholen 🔁
+          Wiederholen
         </button>
         <button className="rating-btn good" onClick={() => handleRating("good")}>
-          Gut 👍
+          Gut
         </button>
         <button className="rating-btn great" onClick={() => handleRating("great")}>
-          Sehr gut 💪
+          Sehr gut
         </button>
       </div>
     </div>
