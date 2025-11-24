@@ -19,6 +19,8 @@ export default function App() {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  
+
   return (
     <div className="app">
       {/* Theme Switch */}

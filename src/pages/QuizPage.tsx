@@ -201,31 +201,6 @@ export default function QuizPage() {
           </button>
         </div>
       )}
-      {/* --- Testbereich: H5P Quiz --- */}
-      <div className="quiz-h5p-wrapper">
-        <h2 style={{ marginBottom: "20px", color: "var(--text-strong)" }}>
-          H5P-Testeinbettung
-        </h2>
-
-        {/* H5P-Container */}
-        <div
-          style={{
-            position: "relative",
-            paddingBottom: "56.25%",
-            height: 0,
-            overflow: "hidden",
-            borderRadius: "12px",
-            background: "#111",
-          }}
-        >
-          <iframe className="quiz-h5p-frame"
-            src="https://h5p.org/h5p/embed/1547415" />
-        </div>
-
-        <p style={{ marginTop: "16px", color: "var(--muted)", fontSize: "14px" }}>
-          Dies ist ein eingebettetes H5P-Quiz
-        </p>
-      </div>
     </div>
   );
 }

@@ -151,9 +151,10 @@ body {
 
 .theme-switch {
   position: absolute;
-  /* statt fixed */
-  top: 8px;
-  right: 8px;
+  /* statt fixed top: 8px;
+  right: 8px;*/
+  bottom: 5rem;
+  left: 3rem;
 
   width: 35px;
   height: 35px;
@@ -293,7 +294,6 @@ body {
   grid-template-columns: 60% 40%;
   gap: 32px;
   max-width: 1250px;
-  height: 20px;
 }
 
 /* Model page cleanup */

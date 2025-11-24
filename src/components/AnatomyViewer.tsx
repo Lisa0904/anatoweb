@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import type { ThreeEvent } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Html, useProgress } from "@react-three/drei";
@@ -8,12 +8,15 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 interface ModelProps {
   url: string;
   onSelect?: (name: string, info: string) => void;
+  onClearSelection?: () => void;
 }
 
 function LoaderFallback() {
   const { progress } = useProgress();
   const radius = 34;
   const circumference = 2 * Math.PI * radius;
+
+  
 
 
   return (
@@ -77,7 +80,12 @@ function LoaderFallback() {
 
 
 
-function Model({ url, onSelect }: ModelProps) {
+function Model({ url, onSelect, lastSelectedRef, clearSelection }: {
+  url: string;
+  onSelect?: (name: string) => void;
+  lastSelectedRef: React.MutableRefObject<THREE.Mesh[] | null>;
+  clearSelection: () => void;
+}){
   const gltf = useGLTF(url) as any;
   const scene: THREE.Object3D = gltf.scene;
 
@@ -112,44 +120,114 @@ function Model({ url, onSelect }: ModelProps) {
   }, [scene]);
 
   function handlePointerDown(e: ThreeEvent<PointerEvent>) {
-    e.stopPropagation();
-    const obj = e.object as THREE.Object3D;
-    let node: THREE.Object3D | null = obj;
-    for (let i = 0; i < 8 && node; i++) {
-      if (node.name && node.name !== "") break;
-      node = node.parent;
-    }
-    const name = (node && node.name) || "Objekt";
+  e.stopPropagation();
 
-    const meshes: THREE.Mesh[] = [];
-    obj.traverse?.((m: any) => {
-      if (m.isMesh) meshes.push(m as THREE.Mesh);
-    });
+  const obj = e.object as THREE.Object3D;
 
-    meshes.forEach((m) => {
+  // 🔍 Name suchen
+  let node: THREE.Object3D | null = obj;
+  for (let i = 0; i < 8 && node; i++) {
+    if (node.name && node.name.trim() !== "") break;
+    node = node.parent;
+  }
+  const name = node?.name || "Objekt";
+
+  // 🎯 Alle Meshes des geklickten Objekts finden
+  const meshes: THREE.Mesh[] = [];
+  obj.traverse?.((m: any) => {
+    if (m.isMesh) meshes.push(m as THREE.Mesh);
+  });
+
+  // ------------------------------
+  // 1️⃣ Alte Auswahl weich ausblenden
+  // ------------------------------
+  if (lastSelectedRef.current) {
+    lastSelectedRef.current.forEach((m) => {
       const mat = m.material as THREE.MeshStandardMaterial;
-      if (mat) {
-        if (!m.userData.origEmissive) {
-          m.userData.origEmissive = mat.emissive ? mat.emissive.clone() : null;
-        }
-        if (mat.emissive) mat.emissive.setHex(0x2ecc71);
+      if (mat && m.userData.origEmissive) {
+        let start = mat.emissiveIntensity;
+        const end = m.userData.origEmissiveIntensity ?? 0.12;
+        const startColor = mat.emissive.clone();
+        const endColor = m.userData.origEmissive.clone();
+
+        animateEmissive(mat, startColor, endColor, start, end, 250);
       }
     });
-
-    setTimeout(() => {
-      meshes.forEach((m) => {
-        const mat = m.material as THREE.MeshStandardMaterial;
-        if (mat && m.userData.origEmissive) {
-          mat.emissive.copy(m.userData.origEmissive);
-        }
-      });
-    }, 900);
-
-    const info = 'Ausgewählt: ${name}';
-    onSelect?.(name, info);
   }
 
-  return <primitive object={scene} onPointerDown={handlePointerDown} />;
+  // ------------------------------
+  // 2️⃣ Neue Auswahl weich einblenden
+  // ------------------------------
+  meshes.forEach((m) => {
+    const mat = m.material as THREE.MeshStandardMaterial;
+
+    if (!m.userData.origEmissive) {
+      m.userData.origEmissive = mat.emissive.clone();
+      m.userData.origEmissiveIntensity = mat.emissiveIntensity;
+    }
+
+    // Theme-basiertes Grün
+    const isLight = document.documentElement.classList.contains("light");
+    const targetColor = new THREE.Color(isLight ? "#22c55e" : "#22c55e");
+    const targetIntensity = isLight ? 0.7 : 0.5;
+
+    animateEmissive(
+      mat,
+      mat.emissive.clone(),
+      targetColor,
+      mat.emissiveIntensity,
+      targetIntensity,
+      60
+    );
+  });
+
+  // Speicherung der neuen Auswahl
+  lastSelectedRef.current = meshes;
+
+  // Info an Parent
+  const info = `Ausgewählt: ${name}`;
+  onSelect?.(name, info);
+}
+
+// 🟢 Smooth Fade Animation für Emissive
+function animateEmissive(
+  material: THREE.MeshStandardMaterial,
+  startColor: THREE.Color,
+  endColor: THREE.Color,
+  startIntensity: number,
+  endIntensity: number,
+  duration: number
+) {
+  const start = performance.now();
+
+  function update(now: number) {
+    const t = Math.min((now - start) / duration, 1);
+
+    // Color interpolation
+    material.emissive.setRGB(
+      startColor.r + (endColor.r - startColor.r) * t,
+      startColor.g + (endColor.g - startColor.g) * t,
+      startColor.b + (endColor.b - startColor.b) * t
+    );
+
+    // Intensity interpolation
+    material.emissiveIntensity =
+      startIntensity + (endIntensity - startIntensity) * t;
+
+    if (t < 1) requestAnimationFrame(update);
+  }
+
+  requestAnimationFrame(update);
+}
+
+  return <primitive
+    object={scene}
+    onPointerDown={handlePointerDown}
+    onPointerMissed={(e) => {
+      e.stopPropagation();
+      clearSelection();
+    }}
+  />;
 }
 
 interface AnatomyViewerProps {
@@ -158,12 +236,45 @@ interface AnatomyViewerProps {
 }
 
 export default function AnatomyViewer({ modelUrl, onSelect }: AnatomyViewerProps) {
+  const lastSelectedRef = useRef<THREE.Mesh[] | null>(null);
+
+  
+
+
+  
+function clearSelection() {
+  if (!lastSelectedRef.current) return;
+
+  lastSelectedRef.current.forEach((m) => {
+    const mat = m.material as THREE.MeshStandardMaterial;
+    if (!mat) return;
+
+    const origColor = m.userData.origEmissive.clone();
+    const origIntensity = m.userData.origEmissiveIntensity ?? 0.12;
+
+    animateEmissive(
+      mat,
+      mat.emissive.clone(),
+      origColor,
+      mat.emissiveIntensity,
+      origIntensity,
+      150 // schnelleres ausblenden
+    );
+  });
+
+  lastSelectedRef.current = null;
+}
   return (
     <Canvas
       className="viewer-canvas"
       shadows
       gl={{ antialias: true }}
       camera={{ position: [100, 90, 350], fov: 32 }}
+      onPointerDown={(e) => {
+    if (e.intersections.length === 0) {
+      clearSelection();
+    }
+  }}
     >
       <ambientLight intensity={0.5} />
       <directionalLight castShadow intensity={0.8} position={[5, 10, 5]} color="#ffffff" />
@@ -171,7 +282,7 @@ export default function AnatomyViewer({ modelUrl, onSelect }: AnatomyViewerProps
       <hemisphereLight intensity={0.05} color="#ffffff" groundColor="#1a1a1a" />
 
       <Suspense fallback={<LoaderFallback />}>
-        <Model url={modelUrl} onSelect={onSelect} />
+        <Model url={modelUrl} onSelect={onSelect} lastSelectedRef={lastSelectedRef} clearSelection={clearSelection} />
       </Suspense>
       <EffectComposer>
         <Bloom
