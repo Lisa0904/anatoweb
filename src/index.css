@@ -5,7 +5,7 @@
 
   --text: #d5d5d7;
   --text-strong: #d5d5d7;
-  --muted: #9ca3af;
+  --muted: #cbd2df;
 
   --accent: #22c55e;
 
@@ -15,13 +15,13 @@
 
 /* LIGHT MODE */
 :root.light {
-  --bg: #cbcbd0ce;
+  --bg: #f1ece3e2;
   --panel: #ffffff;
   --glass: rgba(0, 0, 0, 0.05);
 
   --text: #1a1a1a;
   --text-strong: #000;
-  --muted: #555;
+  --muted: #252525;
 }
 
 * {
@@ -97,7 +97,7 @@ body {
 }
 
 .logo {
-  width: 150px;
+  width: 180px;
   height: auto;
 }
 
@@ -230,6 +230,7 @@ body {
   font-size: 17px;
   line-height: 1.7;
   color: var(--muted);
+  text-align: center;
 }
 
 /* Video container (keine funktionale Änderung: nur Styles statt inline) */
@@ -408,6 +409,8 @@ body {
   -webkit-text-fill-color: transparent;
   text-fill-color: transparent;
   letter-spacing: -0.02em;
+  text-align: center;
+  font-size: 55px;
 }
 
 :root.light .title.gradient {
@@ -791,10 +794,10 @@ body::after {
    ----------------------------- */
 :root.light .panel,
 :root.light .viewer {
-  background: rgba(199, 199, 203, 0.95);
+  background: #f3f2ede2;
   /* weiches Hellgrau */
   border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px #afdec0cf;
 }
 
 :root.light .viewer::before {

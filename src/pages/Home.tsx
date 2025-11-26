@@ -57,7 +57,8 @@ export default function Home() {
     <div className="home page-wrapper"> {/* Abstand & zentrierter Container via CSS */}
       {/* Textblock */}
       <div className="hero-text">
-        <h1 className="title gradient">Anatomie interaktiv erleben</h1>
+       {/*   <img src="/logo.png" alt="AnatoWeb Logo" className="logo"  style={{ width: "800px", height: "auto", textAlign: "center" }}/> */}
+        <h1 className="title gradient">Die Anatomie des Menschen</h1>
         <p className="lead hero-lead">
           Entdecke den menschlichen Körper in 3D. Interaktive Modelle, Karteikarten und Quizfragen. <br />Alles an einem Ort.
         </p>
@@ -67,7 +68,7 @@ export default function Home() {
       <Link to="/model" className="video-container home-video" style={{ display: "block" }}>
         <video
           ref={videoRef}
-          src="/anatoweb_animation.mp4"
+          src="/Animation.mp4"
           autoPlay
           muted
           playsInline

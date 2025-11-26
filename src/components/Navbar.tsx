@@ -16,7 +16,7 @@ export default function Navbar() {
       <div className="links">
 
         <NavLink to="/model" className={linkClass}>
-          Anatomie-Viewer
+          Anatomie-Explorer
         </NavLink>
 
         <NavLink to="/flashcards" className={linkClass}>

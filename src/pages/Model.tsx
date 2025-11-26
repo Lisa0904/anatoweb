@@ -23,7 +23,7 @@ export default function ModelPage() {
 
   return (
     <div className="page-wrapper model-page">
-      <h1 className="title">Anatomie-Viewer</h1>
+      <h1 className="title">Anatomie-Explorer</h1>
 
       <p className="lead">
         Klicke auf die verschiedenen Teile der Modelle, um mehr Informationen zu erhalten.
