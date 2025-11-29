@@ -15,7 +15,7 @@
 
 /* LIGHT MODE */
 :root.light {
-  --bg: #f1ece3e2;
+  --bg: #f6f3e7;
   --panel: #ffffff;
   --glass: rgba(0, 0, 0, 0.05);
 
@@ -46,7 +46,7 @@ body {
       /* vorher 0.03 */
       transparent 70%),
     radial-gradient(circle at 50% 120%,
-      rgba(0, 0, 0, 0.35),
+      rgba(128, 105, 74, 0.421),
       transparent 70%),
     var(--bg);
   color: var(--text);
@@ -241,7 +241,7 @@ body {
   overflow: hidden;
   position: relative;
   background: rgba(255, 255, 255, 0.02);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(57, 127, 90, 0.793);
   backdrop-filter: blur(6px);
 }
 
@@ -265,6 +265,7 @@ body {
   opacity: 0;
   transition: opacity 0.4s ease-in-out;
   pointer-events: none;
+  border: 1px solid green;
 }
 
 /* actions / buttons row below hero */
@@ -794,10 +795,10 @@ body::after {
    ----------------------------- */
 :root.light .panel,
 :root.light .viewer {
-  background: #f3f2ede2;
+  background: #fafaf7e2;
   /* weiches Hellgrau */
   border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 20px #afdec0cf;
+  box-shadow: 0 4px 20px #b2d5bfcf;
 }
 
 :root.light .viewer::before {
@@ -827,8 +828,8 @@ body::after {
   background: rgba(255, 255, 255, 0.45) !important;
   /* sichtbar, aber weich */
   color: #1a1a1a !important;
-  border: 1px solid rgba(0, 0, 0, 0.20) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(5, 160, 80, 0.75) !important;
+  box-shadow: 0 2px 8px rgba(5, 99, 55, 0.366);
 }
 
 /* Hover */
@@ -844,9 +845,9 @@ body::after {
 
 /* Active State */
 :root.light .ctrl-btn.active {
-  background: rgba(34, 197, 94, 0.25) !important;
+  background: rgba(4, 238, 90, 0.25) !important;
   color: #065f46 !important;
-  border-color: rgba(34, 197, 94, 0.35) !important;
+  border-color: rgba(4, 127, 49, 0.35) !important;
 }
 
 :root.light .quiz-answer-btn.correct {
