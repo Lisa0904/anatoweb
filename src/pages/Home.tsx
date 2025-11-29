@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <div className="home page-wrapper"> {/* Abstand & zentrierter Container via CSS */}
-      {/* Textblock */}
+      {/* Textblock  */}
       <div className="hero-text">
        {/*   <img src="/logo.png" alt="AnatoWeb Logo" className="logo"  style={{ width: "800px", height: "auto", textAlign: "center" }}/> */}
         <h1 className="title gradient">Die Anatomie des Menschen</h1>
