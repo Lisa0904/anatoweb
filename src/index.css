@@ -766,8 +766,8 @@ body::after {
   height: 110%;
   transform: translate(-50%, -50%);
   background: radial-gradient(circle,
-      rgba(34, 197, 94, 0.03) 0%,
-      rgba(34, 197, 94, 0.01) 45%,
+      rgba(250, 38, 0, 0.03) 0%,
+      rgba(50, 58, 53, 0.01) 45%,
       rgba(0, 0, 0, 0.6) 100%);
   filter: blur(120px);
   opacity: 0.9;
@@ -798,18 +798,18 @@ body::after {
   background: #fafaf7e2;
   /* weiches Hellgrau */
   border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 20px #b2d5bfcf;
+  box-shadow: 0 4px 20px #d5bcb2cf;
 }
 
 :root.light .viewer::before {
   background: radial-gradient(circle,
-      rgba(34, 197, 94, 0.02) 0%,
-      rgba(34, 197, 94, 0.01) 45%,
+      rgb(0, 216, 79) 0%,
+      rgba(228, 118, 21, 0.932) 45%,
       rgba(255, 255, 255, 0.1) 100%);
 }
 
 :root.light .loader-container {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgb(255, 255, 255);
 }
 
 :root.light .loader-container p {
