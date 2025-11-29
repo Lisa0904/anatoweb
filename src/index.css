@@ -1,9 +1,9 @@
 :root {
-  --bg: #161616;
-  --panel: #1e2023;
-  --glass: rgba(255, 255, 255, 0.03);
+  --bg: #131313;
+  --panel: #070707;
+  --glass: rgba(44, 78, 41, 0);
 
-  --text: #d5d5d7;
+  --text: #d1d1d2;
   --text-strong: #d5d5d7;
   --muted: #cbd2df;
 
@@ -15,13 +15,18 @@
 
 /* LIGHT MODE */
 :root.light {
-  --bg: #f6f3e7;
-  --panel: #ffffff;
+  --bg: #f5f1e2c5;
+  --panel: #fdfdfd;
   --glass: rgba(0, 0, 0, 0.05);
 
   --text: #1a1a1a;
   --text-strong: #000;
   --muted: #252525;
+  
+  --accent: #22c55e;
+
+  --font-main: "Inter", "SF Pro Text", system-ui, sans-serif;
+  --page-width: 1450px;
 }
 
 * {
@@ -46,7 +51,7 @@ body {
       /* vorher 0.03 */
       transparent 70%),
     radial-gradient(circle at 50% 120%,
-      rgba(128, 105, 74, 0.421),
+      rgba(87, 79, 68, 0.421),
       transparent 70%),
     var(--bg);
   color: var(--text);
@@ -795,7 +800,7 @@ body::after {
    ----------------------------- */
 :root.light .panel,
 :root.light .viewer {
-  background: #fafaf7e2;
+  background: #eb420ae2;
   /* weiches Hellgrau */
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 4px 20px #d5bcb2cf;
@@ -803,13 +808,13 @@ body::after {
 
 :root.light .viewer::before {
   background: radial-gradient(circle,
-      rgb(0, 216, 79) 0%,
-      rgba(228, 118, 21, 0.932) 45%,
+      rgba(72, 117, 89, 0.055) 0%,
+      rgba(49, 111, 62, 0.556) 45%,
       rgba(255, 255, 255, 0.1) 100%);
 }
 
 :root.light .loader-container {
-  background: rgb(255, 255, 255);
+  background: rgb(211, 13, 13);
 }
 
 :root.light .loader-container p {
