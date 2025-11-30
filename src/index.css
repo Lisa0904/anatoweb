@@ -441,12 +441,6 @@ h3 {
   text-align: left;
 }
 
-.info-text {
-  text-align: left;
-  color: blue;
- 
-}
-
 .lead {
   color: var(--muted);
   margin-bottom: 2em;
@@ -483,7 +477,7 @@ h3 {
 }
 
 .tab.active {
-  background: rgba(34, 197, 94, 0.15);
+  background: rgba(34, 197, 94, 0.267);
   color: var(--accent);
   border-bottom: none;
 }
@@ -492,7 +486,7 @@ h3 {
 :root.light .tab.active {
   background: rgba(34, 197, 94, 0.25);
   /* stärkeres, aber weiches Grün */
-  color: #065f46;
+  color: #036e23;
   /* dunkles Grün für perfekten Kontrast */
   box-shadow: 0 3px 10px rgba(34, 197, 94, 0.22);
   border-bottom: none;
@@ -832,7 +826,7 @@ body::after {
 :root.light .viewer::before {
   background: radial-gradient(circle,
       rgba(72, 117, 89, 0.055) 0%,
-      rgba(49, 111, 62, 0.556) 45%,
+      rgba(49, 111, 62, 0.297) 45%,
       rgba(255, 255, 255, 0.1) 100%);
 }
 
