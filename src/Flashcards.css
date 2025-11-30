@@ -1,6 +1,6 @@
 .flashcard {
-  width: 550px;
-  height: 300px;
+  width: 600px;
+  height: 350px;
   margin: 0 auto;
   margin-top: 3rem;
   perspective: 1000px;
@@ -15,17 +15,36 @@
   width: 100%;
   height: 100%;
   border-radius: 16px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.04));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.062), rgba(255, 255, 255, 0.04));
   color: var(--text);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 50px;
   backface-visibility: hidden;
-  box-shadow: 0 12px 32px rgba(42, 209, 89, 0.104);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.04);
   transition: transform 0.45s ease, box-shadow 0.3s ease;
 }
+
+:root.light .flashcard .front,
+:root.light .flashcard .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.489), rgba(230, 222, 217, 0.253));
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  backface-visibility: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.478);
+  transition: transform 0.45s ease, box-shadow 0.3s ease;
+}
+
 
 .flashcard .front {
   transform: rotateY(0deg);
@@ -55,12 +74,16 @@
 
 .answer {
   font-size: 20px;
-  color: var(--accent);
+  color: rgba(70, 212, 57, 0.947);
+}
+:root.light .answer {
+  font-size: 20px;
+  color: rgba(25, 141, 5, 0.968);
 }
 
 /* Bewertungsbuttons */
 .rating-btn {
-  padding: 12px 22px;
+  padding: 13px 25px;
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -72,17 +95,17 @@
 
 .rating-btn.repeat {
   background: rgba(255, 80, 80, 0.2);
-  color: #ff5c5c;
+  color: #eb2727;
 }
 
 .rating-btn.good {
   background: rgba(255, 180, 50, 0.2);
-  color: #ffb347;
+  color: #f39f28;
 }
 
 .rating-btn.great {
   background: rgba(50, 255, 150, 0.2);
-  color: #22c55e;
+  color: #16c757;
 }
 
 /* 🔘 Einheitliches Verhalten */
@@ -109,7 +132,7 @@
 .rating-btn.great:hover {
   background: rgba(34, 197, 94, 0.2);
   color: var(--accent);
-  border-color: rgba(34, 197, 94, 0.35);
+  border-color: rgba(23, 149, 69, 0.35);
 }
 
 .flashcards-finished {
@@ -211,7 +234,7 @@
 :root.light .rating-btn.repeat {
   background: rgba(255, 80, 80, 0.25);
   color: #7b1a1a;
-  border-color: rgba(255, 80, 80, 0.3);
+  border-color: rgba(252, 21, 21, 0.448);
 }
 
 :root.light .rating-btn.repeat:hover {
@@ -221,24 +244,25 @@
 
 /* Gut */
 :root.light .rating-btn.good {
-  background: rgba(255, 180, 50, 0.25);
-  color: #855c00;
-  border-color: rgba(255, 180, 50, 0.3);
+  background: rgba(255, 180, 50, 0.286);
+  color: #724b08;
+  border-color: rgba(186, 121, 7, 0.636);
 }
 
 :root.light .rating-btn.good:hover {
   background: rgba(255, 180, 50, 0.35);
-  color: #a37c00;
+  color: #907007;
 }
 
 /* Sehr gut */
 :root.light .rating-btn.great {
-  background: rgba(34, 197, 94, 0.25);
-  color: #166534;
-  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.2);
+  color: rgb(8, 76, 8);
+  border-color: rgba(23, 149, 69, 0.35);
 }
 
 :root.light .rating-btn.great:hover {
   background: rgba(34, 197, 94, 0.35);
   color: #1f7a3b;
 }
+

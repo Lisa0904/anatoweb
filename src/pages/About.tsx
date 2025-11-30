@@ -1,3 +1,4 @@
+import "../About.css";
 export default function About() {
   return (
     <div className="page-container">
@@ -27,7 +28,7 @@ export default function About() {
       </div>
 
       <div className="section-box">
-        <h3>Technische Umsetzung</h3>
+        <h3 >Technische Umsetzung</h3>
         <p className="info-text">
           Die Website wurde von uns eigenständig mit <strong>TypeScript</strong> und dem modernen
           Build-Tool <strong>Vite</strong> entwickelt. <br />

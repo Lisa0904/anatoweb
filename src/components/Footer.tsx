@@ -4,7 +4,7 @@ import type { JSX } from "react/jsx-runtime";
 export default function Footer(): JSX.Element {
   return (
     <footer className="site-footer">
-      <p>Copyright &copy; 2025 AnatoWeb | Multimedia WiSe 2025/26</p>
+      <p>Impressum | Kontakt | Über Uns | 2025 AnatoWeb</p>
     </footer>
   );
 }

@@ -382,6 +382,14 @@ body {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
+:root.light .panel-quiz {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.489), rgba(230, 222, 217, 0.253));
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 24px;
+}
 
 .info-content {
   margin-top: 12px;
@@ -405,7 +413,7 @@ body {
   font-weight: 700;
   margin-bottom: 0.5em;
   /* kleiner */
-  text-align: left;
+  text-align: center;
   color: var(--text-strong);
 }
 
@@ -417,6 +425,7 @@ body {
   letter-spacing: -0.02em;
   text-align: center;
   font-size: 55px;
+  text-transform: uppercase;
 }
 
 :root.light .title.gradient {
@@ -429,13 +438,14 @@ body {
 h3 {
   color: var(--text-strong);
   margin-bottom: 0.5em;
+  text-align: center;
 }
 
 .lead {
   color: var(--muted);
   margin-bottom: 2em;
   /* mehr Luft unter Lead */
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.6;
 }
 
@@ -443,7 +453,7 @@ h3 {
 .info-text {
   line-height: 1.6;
   letter-spacing: 0.01em;
-  text-align: left;
+  text-align: center;
 }
 
 /* tabs */
@@ -551,10 +561,13 @@ h3 {
   border-radius: 12px;
   color: var(--text);
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  
   text-decoration: none;
   font-weight: 500;
   transition: all 0.25s ease;
+  border: 1px solid rgba(3, 117, 58, 0.368) !important;
+  box-shadow: 0 2px 8px rgba(5, 99, 55, 0.175);
+  
 }
 
 .ctrl-btn:hover {
@@ -588,7 +601,7 @@ h3 {
 }
 
 .ctrl-btn.wrong {
-  background: #ef4444 !important;
+  background: #d53434e2 !important;
   color: #fff !important;
 }
 
@@ -644,7 +657,7 @@ circle[stroke="var(--accent)"] {
 
 .quiz-progress {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent), #34d399);
+  background: linear-gradient(90deg, var(--accent), #34d373);
   transition: width 0.6s ease;
 }
 
@@ -798,12 +811,16 @@ body::after {
 /* -----------------------------
    Lightmode Anpassungen
    ----------------------------- */
+
+
 :root.light .panel,
 :root.light .viewer {
-  background: #eb420ae2;
-  /* weiches Hellgrau */
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 20px #d5bcb2cf;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.489), rgba(230, 222, 217, 0.253));
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 24px;
 }
 
 :root.light .viewer::before {
@@ -833,7 +850,7 @@ body::after {
   background: rgba(255, 255, 255, 0.45) !important;
   /* sichtbar, aber weich */
   color: #1a1a1a !important;
-  border: 1px solid rgba(5, 160, 80, 0.75) !important;
+  border: 1px solid rgba(0, 143, 69, 0.818) !important;
   box-shadow: 0 2px 8px rgba(5, 99, 55, 0.366);
 }
 
@@ -856,19 +873,22 @@ body::after {
 }
 
 :root.light .quiz-answer-btn.correct {
-  background: rgba(34, 197, 94, 0.25) !important;
   color: #065f46 !important;
   border-color: rgba(34, 197, 94, 0.35) !important;
   box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25) !important;
-  transform: none !important;
+  background: #22c55ec5 !important;
+  color: #000 !important;
 }
 
 :root.light .quiz-answer-btn.wrong {
-  background: rgba(239, 68, 68, 0.30) !important;
+  /*background: rgba(239, 68, 68, 0.30) !important;
   color: #7f1d1d !important;
   border-color: rgba(239, 68, 68, 0.40) !important;
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25) !important;
-  transform: none !important;
+  transform: none !important;*/
+  background: #d53434cf !important;
+  color: #fff !important;
+  border-color: rgba(238, 56, 36, 0.35) !important;
 }
 
 :root.light .quiz-answer-btn {

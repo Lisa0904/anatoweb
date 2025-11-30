@@ -190,14 +190,14 @@ export default function QuizPage() {
           {/* 💬 Didaktisches Feedback */}
           <p style={{ marginTop: 16, color: "var(--muted)" }}>
             {score / questions.length > 0.8
-              ? "Fantastisch! Dein anatomisches Wissen ist beeindruckend. 🧬"
+              ? "Fantastisch! Dein anatomisches Wissen ist beeindruckend."
               : score / questions.length > 0.5
-                ? "Gute Arbeit! Mit ein wenig Übung wirst du Anatomie-Profi. 💪"
-                : "Nicht aufgeben – Lernen heißt Wiederholen. Probier’s gleich nochmal! 🔁"}
+                ? "Gute Arbeit! Mit ein wenig Übung wirst du Anatomie-Profi. "
+                : "Nicht aufgeben – Lernen heißt Wiederholen. Probier’s gleich nochmal!"}
           </p>
 
           <button className="ctrl-btn quiz-answer-btn" style={{ marginTop: 28 }} onClick={resetQuiz}>
-            Nochmal spielen 🔄
+            Nochmal spielen 
           </button>
         </div>
       )}
