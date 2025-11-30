@@ -57,7 +57,7 @@ export default function Home() {
     <div className="home page-wrapper"> {/* Abstand & zentrierter Container via CSS */}
       {/* Textblock  */}
       <div className="hero-text">
-       {/*   <img src="/logo_ganz_dunkel.png" alt="AnatoWeb Logo" className="logo"  style={{ width: "800px", height: "auto", textAlign: "center" }}/> */}
+       {/*   <img src="/public/logo_weiß.png" alt="AnatoWeb Logo" className="logo"  style={{ width: "800px", height: "auto", textAlign: "center" }}/> */}
         <h1 className="title gradient">Die Anatomie des Menschen</h1>
         <p className="lead hero-lead">
           Entdecke den menschlichen Körper in 3D. Interaktive Modelle, Karteikarten und Quizfragen. <br />Alles an einem Ort.
