@@ -438,7 +438,13 @@ body {
 h3 {
   color: var(--text-strong);
   margin-bottom: 0.5em;
-  text-align: center;
+  text-align: left;
+}
+
+.info-text {
+  text-align: left;
+  color: blue;
+ 
 }
 
 .lead {
