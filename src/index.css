@@ -1,7 +1,8 @@
 :root {
   --bg: #131313;
   --panel: #070707;
-  --glass: rgba(44, 78, 41, 0);
+  --glass: rgba(255, 255, 255, 0.03);
+  /* Änderung von Anne: --glass: rgba(44, 78, 41, 0); */
 
   --text: #d1d1d2;
   --text-strong: #d5d5d7;
@@ -87,7 +88,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 28px;
+  padding: 18px 42px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
   border-radius: 12px;
@@ -154,12 +155,28 @@ body {
   align-items: center;
 }
 
+/* Footer Links – gleiche Farbe + hübscher Hover */
+.site-footer a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: 0.25s ease;
+  color: #666;
+}
+
+.site-footer a:hover {
+  background: var(--glass);
+  color: var(--text-strong);
+
+}
+
 .theme-switch {
   position: absolute;
   /* statt fixed top: 8px;
   right: 8px;*/
-  bottom: 5rem;
-  left: 3rem;
+  top: 0.25rem;
+  right: 0.25rem;
 
   width: 35px;
   height: 35px;
@@ -391,6 +408,8 @@ body {
   padding: 24px;
 }
 
+
+
 .info-content {
   margin-top: 12px;
 }
@@ -447,13 +466,17 @@ h3 {
   /* mehr Luft unter Lead */
   font-size: 17px;
   line-height: 1.6;
+  text-align: center;
+}
+
+.info-text {
+  text-align: left;
 }
 
 .lead,
 .info-text {
   line-height: 1.6;
   letter-spacing: 0.01em;
-  text-align: center;
 }
 
 /* tabs */
@@ -583,7 +606,7 @@ h3 {
   /* leicht grau */
   color: var(--text);
   /* bleibt neutral */
-  transform: translateY(-2px);
+  transform: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -729,33 +752,7 @@ body::after {
   }
 }
 
-@media (max-width: 700px) {
-  .nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
 
-
-  .links {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .links a {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
-
-  .logo {
-    width: 120px;
-  }
-
-  .site-footer {
-    font-size: 0.75rem;
-    padding: 1rem 0;
-  }
-}
 
 
 
@@ -820,7 +817,7 @@ body::after {
   padding: 20px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.03);
-  padding: 24px;
+  
 }
 
 :root.light .viewer::before {
@@ -861,7 +858,7 @@ body::after {
   background: rgba(34, 197, 94, 0.18) !important;
   border-color: rgba(34, 197, 94, 0.3) !important;
   color: #064e3b !important;
-  transform: translateY(-2px);
+  transform: none;
   box-shadow: 0 4px 12px rgba(34, 197, 94, 0.18);
 }
 
@@ -904,14 +901,6 @@ body::after {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-:root.light .quiz-answer-btn:hover {
-  background: rgba(155, 155, 155, 0.12) !important;
-  /* neutrales Grau */
-  color: var(--text) !important;
-  border-color: rgba(0, 0, 0, 0.18) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
-}
 
 :root.light .quiz-answer-btn.correct:hover,
 :root.light .quiz-answer-btn.wrong:hover {
@@ -920,4 +909,103 @@ body::after {
   border-color: inherit !important;
   transform: none !important;
   box-shadow: inherit !important;
+}
+
+
+/* -----------------------------------
+   MOBILE NAVIGATION / HAMBURGER
+------------------------------------ */
+
+.desktop-only {
+  display: flex;
+}
+
+.mobile-only {
+  display: none;
+}
+
+/* MOBILE-MENÜ standard ausblenden auf Desktop */
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 780px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block;
+    font-size: 26px;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    padding: 6px 10px;
+  }
+
+  /* Slide-in Menü */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 260px;
+    height: 100vh;
+    background: var(--panel);
+    backdrop-filter: blur(12px);
+    box-shadow: -4px 0 18px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    padding: 70px 20px 20px;
+    gap: 20px;
+    transition: right 0.35s ease;
+    z-index: 2000;
+  }
+
+  .mobile-menu.open {
+    right: 0;
+  }
+
+  .mobile-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 4px;
+    border-radius: 8px;
+    transition: 0.25s ease;
+  }
+
+  .mobile-menu a:hover {
+    background: var(--glass);
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 32px;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+  }
+}
+
+.quiz-answer-btn.correct:hover,
+.quiz-answer-btn.wrong:hover {
+  background: inherit !important;
+  color: inherit !important;
+  border-color: inherit !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+
+:root.light .quiz-answer-btn.correct:hover,
+:root.light .quiz-answer-btn.wrong:hover {
+  background: inherit !important;
+  color: inherit !important;
+  border-color: inherit !important;
+  transform: none !important;
+  box-shadow: none !important;
 }

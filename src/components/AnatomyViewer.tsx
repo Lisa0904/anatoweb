@@ -114,6 +114,8 @@ function Model({ url, onSelect, lastSelectedRef, clearSelection }: {
           const mat = c.material as THREE.MeshStandardMaterial;
           mat.emissive = new THREE.Color(0x222244); // sanftes blauviolett
           mat.emissiveIntensity = 0.12;
+          mat.roughness = 0.75;
+mat.metalness = 0.05;
         }
       }
     });
@@ -276,10 +278,10 @@ function clearSelection() {
     }
   }}
     >
-      <ambientLight intensity={0.5} />
-      <directionalLight castShadow intensity={0.8} position={[5, 10, 5]} color="#ffffff" />
-      <directionalLight intensity={0.5} position={[-5, 2, -5]} color="#9ae6b4" /> {/* leicht grünlich */}
-      <hemisphereLight intensity={0.05} color="#ffffff" groundColor="#1a1a1a" />
+      <ambientLight intensity={1} />
+      <directionalLight castShadow intensity={1.2} position={[5, 10, 5]} color="#ffffff" />
+      <directionalLight intensity={0.8} position={[-5, 2, -5]} color="#9ae6b4" /> {/* leicht grünlich */}
+     <hemisphereLight intensity={0.4} color="#ffffff" groundColor="#aaaaaa" />
 
       <Suspense fallback={<LoaderFallback />}>
         <Model url={modelUrl} onSelect={onSelect} lastSelectedRef={lastSelectedRef} clearSelection={clearSelection} />

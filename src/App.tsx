@@ -7,6 +7,8 @@ import ModelPage from "./pages/Model";
 import Flashcards from "./pages/Flashcards";
 import QuizPage from "./pages/QuizPage";
 import About from "./pages/About";
+import Impressum from "./pages/Impressum";
+import Kontakt from "./pages/Kontakt";
 
 export default function App() {
   // 🌗 Global Theme State
@@ -22,7 +24,7 @@ export default function App() {
   
 
   return (
-    <div className="app">
+    <div className="app" style={{ position: "relative" }}>
       {/* Theme Switch */}
       <button
         className="theme-switch"
@@ -43,6 +45,8 @@ export default function App() {
           <Route path="/flashcards" element={<Flashcards />} />
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/impressum" element={<Impressum />} />
+          <Route path="/kontakt" element={<Kontakt />} />
         </Routes>
       </main>
 

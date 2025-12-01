@@ -1,10 +1,13 @@
-// src/components/Footer.tsx
-import type { JSX } from "react/jsx-runtime";
+import { Link } from "react-router-dom";
 
-export default function Footer(): JSX.Element {
+export default function Footer() {
   return (
     <footer className="site-footer">
-      <p>Impressum | Kontakt | Über Uns | 2025 AnatoWeb</p>
+      <p>
+        <Link to="/impressum">Impressum</Link> |{" "}
+        <Link to="/kontakt">Kontakt</Link> |{" "}
+        <Link to="/about">Über Uns</Link> | 2025 AnatoWeb
+      </p>
     </footer>
   );
 }

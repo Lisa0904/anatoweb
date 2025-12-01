@@ -27,6 +27,8 @@ export default function QuizPage() {
   const [revealCorrect, setRevealCorrect] = useState<boolean>(false);
   const [autoNextTimer, setAutoNextTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [resetKey, setResetKey] = useState(0);
+  const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean[]>([]);
+
 
   // 💾 Quizdaten filtern & mischen
   const questions = useMemo(() => {
@@ -49,7 +51,17 @@ export default function QuizPage() {
     setLocked(true);
 
     const isCorrect = i === q.correct;
-    if (isCorrect) setScore((s) => s + 1);
+    if (isCorrect) {
+  if (!answeredCorrectly[index]) {
+    setScore((s) => s + 1);
+    setAnsweredCorrectly((prev) => {
+      const copy = [...prev];
+      copy[index] = true;
+      return copy;
+    });
+  }
+}
+
 
     // Optional: Soundeffekt (Datei z. B. public/sounds/correct.mp3)
     // const sound = new Audio(isCorrect ? "/sounds/correct.mp3" : "/sounds/wrong.mp3");
@@ -90,6 +102,7 @@ export default function QuizPage() {
     setIndex(0);
     setScore(0);
     setShowResult(false);
+    setAnsweredCorrectly([]);
     resetState();
     setResetKey((k) => k + 1);
   }
@@ -181,7 +194,7 @@ export default function QuizPage() {
         </>
       ) : (
         <div className="panel-quiz" style={{ textAlign: "center", padding: "40px 20px" }}>
-          <h2>Quiz beendet 🎉</h2>
+          <h2>Quiz beendet!</h2>
           <p style={{ marginTop: 12, color: "var(--muted)" }}>
             Du hast <strong>{score}</strong> von{" "}
             <strong>{questions.length}</strong> Fragen richtig beantwortet.
