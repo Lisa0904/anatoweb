@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="site-footer">
       <p>
         <Link to="/impressum">Impressum</Link> |{" "}
-        <Link to="/kontakt">Kontakt</Link> |{" "}
+        {/* <Link to="/kontakt">Kontakt</Link> |{" "} */}
         <Link to="/about">Über Uns</Link> | 2025 AnatoWeb
       </p>
     </footer>

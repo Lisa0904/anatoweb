@@ -23,6 +23,7 @@ export default function Kontakt() {
           ● Moritz Münch<br />
           ● Lisa Taljanovic
         </p>
+        
       </div>
 
       <div className="section-box">
