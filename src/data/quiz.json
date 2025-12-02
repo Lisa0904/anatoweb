@@ -104,6 +104,61 @@
       "topic": "Muskeln"
     },
     {
+    "question": "Welcher Muskel ermöglicht das Heben des Arms zur Seite?",
+    "answers": [
+      "Deltoideus",
+      "Trapezius",
+      "Latissimus dorsi",
+      "Pectoralis minor"
+    ],
+    "correct": 0,
+    "topic": "Muskeln"
+  },
+  {
+    "question": "Welcher Muskel ist hauptsächlich für die Bauchpresse und das Beugen des Rumpfes verantwortlich?",
+    "answers": [
+      "Rectus abdominis",
+      "Gastrocnemius",
+      "Serratus anterior",
+      "Brachialis"
+    ],
+    "correct": 0,
+    "topic": "Muskeln"
+  },
+  {
+    "question": "Welcher Muskel streckt das Bein im Hüftgelenk und sorgt für aufrechtes Stehen?",
+    "answers": [
+      "Gluteus maximus",
+      "Bizeps femoris",
+      "Tibialis anterior",
+      "Soleus"
+    ],
+    "correct": 0,
+    "topic": "Muskeln"
+  },
+  {
+    "question": "Wie heißt der große Brustmuskel, der für das Heranführen des Arms zuständig ist?",
+    "answers": [
+      "Pectoralis major",
+      "Deltoideus",
+      "Trapezius",
+      "Latissimus dorsi"
+    ],
+    "correct": 0,
+    "topic": "Muskeln"
+  },
+  {
+    "question": "Welcher Muskel befindet sich an der Rückseite des Unterschenkels und unterstützt das Gehen und Springen?",
+    "answers": [
+      "Gastrocnemius",
+      "Sartorius",
+      "Brachioradialis",
+      "Psoas major"
+    ],
+    "correct": 0,
+    "topic": "Muskeln"
+  },
+  {
       "question": "Welcher Knochen gehört zum Bein?",
       "answers": ["Femur", "Radius", "Humerus", "Clavicula"],
       "correct": 0,
@@ -149,6 +204,50 @@
       "correct": 0,
       "topic": "Skelett"
     },
+    {
+    "question": "Welcher Knochen bildet den oberen Teil des Arms?",
+    "answers": [
+      "Humerus",
+      "Tibia",
+      "Fibula",
+      "Sternum"
+    ],
+    "correct": 0,
+    "topic": "Skelett"
+  },
+  {
+    "question": "Wie heißt der Knochen, der das Schlüsselbein bildet?",
+    "answers": [
+      "Clavicula",
+      "Scapula",
+      "Patella",
+      "Mandibula"
+    ],
+    "correct": 0,
+    "topic": "Skelett"
+  },
+  {
+    "question": "Welcher Knochen schützt das Herz und die Lunge zentral von vorne?",
+    "answers": [
+      "Brustbein (Sternum)",
+      "Schambein",
+      "Schulterblatt",
+      "Wadenbein"
+    ],
+    "correct": 0,
+    "topic": "Skelett"
+  },
+  {
+    "question": "Wie heißt der Knie­scheiben­knochen?",
+    "answers": [
+      "Patella",
+      "Ulna",
+      "Radius",
+      "Os sacrum"
+    ],
+    "correct": 0,
+    "topic": "Skelett"
+  },
     {
       "question": "Was ist die Funktion der Venen?",
       "answers": [
@@ -209,6 +308,68 @@
       "answers": ["Lunge", "Nieren", "Blase", "Harnleiter"],
       "correct": 0,
       "topic": "Organe"
-    }
+    },
+    {
+      "question": "Welches Organ produziert das Hormon Insulin?",
+      "answers": ["Leber", "Bauchspeicheldrüse", "Niere", "Gallenblase"],
+      "correct": 1,
+      "topic": "Organe"
+    },
+     {
+    "question": "Wie nennt man die kleinsten Blutgefäße, in denen der Austausch von Sauerstoff und Nährstoffen stattfindet?",
+    "answers": [
+      "Kapillaren",
+      "Arterien",
+      "Venen",
+      "Arteriolen"
+    ],
+    "correct": 0,
+    "topic": "Kreislaufsystem"
+  },
+  {
+    "question": "Welcher Bestandteil des Blutes ist hauptsächlich für den Sauerstofftransport verantwortlich?",
+    "answers": [
+      "Hämoglobin",
+      "Insulin",
+      "Keratin",
+      "Gallensäuren"
+    ],
+    "correct": 0,
+    "topic": "Kreislaufsystem"
+  },
+  {
+    "question": "Wie nennt man den Druck, der entsteht, wenn das Herz Blut in die Arterien presst?",
+    "answers": [
+      "Blutdruck",
+      "Atemdruck",
+      "Zellspannung",
+      "Lymphpuls"
+    ],
+    "correct": 0,
+    "topic": "Kreislaufsystem"
+  },
+  {
+    "question": "Welche Struktur trennt das Herz in eine linke und rechte Hälfte?",
+    "answers": [
+      "Herzscheidewand",
+      "Luftröhre",
+      "Zwerchfell",
+      "Herzbeutel"
+    ],
+    "correct": 0,
+    "topic": "Kreislaufsystem"
+  },
+  {
+    "question": "Welcher Teil des Blutes ist für die Blutgerinnung zuständig?",
+    "answers": [
+      "Blutplättchen (Thrombozyten)",
+      "Weiße Blutkörperchen",
+      "Rote Blutkörperchen",
+      "Plasmaeiweiße"
+    ],
+    "correct": 0,
+    "topic": "Kreislaufsystem"
+  }
+  
   ]
 }
