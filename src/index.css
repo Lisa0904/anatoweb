@@ -43,6 +43,7 @@ body,
   min-height: 100%;
 }
 
+
 body {
   background:
     radial-gradient(circle at 50% 40%,
@@ -554,6 +555,16 @@ h3 {
 
 }
 
+:root.light .section-box {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.489), rgba(230, 222, 217, 0.253));
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.478);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  margin-bottom: 1.5rem;
+}
+
+
 
 /* organ info */
 .info-title {
@@ -1008,4 +1019,40 @@ body::after {
   border-color: inherit !important;
   transform: none !important;
   box-shadow: none !important;
+}
+
+
+/*About seite*/
+.team-section {
+  text-align: center;
+  
+}
+
+.team-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.team-member {
+  max-width: 220px;
+  text-align: center;
+}
+
+.team-image {
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  box-shadow: 0 4px 14px rgba(56, 57, 56, 0.516);
+  
+}
+
+.team-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

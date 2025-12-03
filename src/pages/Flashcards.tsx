@@ -30,7 +30,7 @@ export default function Flashcards() {
   useEffect(() => {
   setDeck(questions);
   setIndex(0);
-  setFlipped(false);
+  setFlipped(false); 
 }, [questions]);
 
 

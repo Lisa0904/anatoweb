@@ -34,7 +34,46 @@ export default function About() {
           Durch den Einsatz aktueller Webtechnologien können wir eine schnelle,
           interaktive und performante Benutzererfahrung gewährleisten.
         </p>
+      </div> 
+
+
+    <div className="section-box">
+      {/* Team-Sektion */}
+      
+      <div className="team-section">
+        <h3>Team</h3>
+
+        <div className="team-container">
+          {/* Person 1 */}
+          <div className="team-member">
+            <div className="team-image">
+              <img src="/public/Bitmoji_Anne.jpg" alt="Anne" />
+            </div>
+            <h4>Anne Eppendorfer</h4>
+            <p>Gestaltung, UI/UX & technische Umsetzung</p>
+          </div>
+ 
+          {/* Person 2 */}
+          <div className="team-member">
+            <div className="team-image">
+              <img src="/public/Bitmoji_Moritz.jpg" alt="Moritz" />
+            </div>
+            <h4>Moritz Münch</h4>
+            <p>Interaktive Features & technische Umsetzung</p>
+          </div>
+
+          {/* Person 3 */}
+          <div className="team-member">
+            <div className="team-image">
+              <img src="/public/Bitmoji_Lisa.jpg" alt="Lisa" />
+            </div>
+            <h4>Lisa Taljanovic</h4>
+            <p>Content Creation, visuelle Konzepte & technische Umsetzung</p>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
-  );
+ );
 }
+        
