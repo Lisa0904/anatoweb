@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import HeroModel from "../components/HeroModel";
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -58,13 +59,14 @@ export default function Home() {
       {/* Textblock  */}
       <div className="hero-text">
        {/*   <img src="/public/logo_weiß.png" alt="AnatoWeb Logo" className="logo"  style={{ width: "800px", height: "auto", textAlign: "center" }}/> */}
+        <div className="hero-eyebrow">Interaktiv · Wissenschaftlich · Modern</div>
         <h1 className="title gradient">Die Anatomie des Menschen</h1>
         <p className="lead hero-lead">
-          Entdecke den menschlichen Körper in 3D. Interaktive Modelle, Karteikarten und Quizfragen. <br />Alles an einem Ort.
-        </p>
+  Entdecke den menschlichen Körper in 3D — intuitiv, interaktiv und modern.
+</p>
       </div>
 
-      {/* 🎥 Videobox mit Overlay */}
+      {/* 🎥 Videobox mit Overlay
       <Link to="/model" className="video-container home-video" style={{ display: "block" }}>
         <video
           ref={videoRef}
@@ -75,12 +77,14 @@ export default function Home() {
           className="hero-video"
         />
         <div ref={overlayRef} className="hero-overlay" />
-      </Link>
+      </Link>*/}
+
+      
 
       {/* Buttons */}
       <div className="home-actions">
         <Link to="/model" className="ctrl-btn home-action-btn">
-          Anatomie-Viewer
+          Anatomie-Explorer
         </Link>
         <Link to="/flashcards" className="ctrl-btn home-action-btn">
           Karteikarten
