@@ -62,7 +62,7 @@ export default function Home() {
         <div className="hero-eyebrow">Interaktiv · Wissenschaftlich · Modern</div>
         <h1 className="title gradient">Die Anatomie des Menschen</h1>
         <p className="lead hero-lead">
-  Entdecke den menschlichen Körper in 3D — intuitiv, interaktiv und modern.
+  Entdecke den menschlichen Körper in 3D
 </p>
       </div>
 

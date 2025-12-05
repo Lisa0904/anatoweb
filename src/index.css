@@ -95,6 +95,15 @@ body {
   border-radius: 12px;
 }
 
+:root.light .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 42px;
+  border-bottom: 1px solid rgba(224, 223, 221, 0.31);
+  background: linear-gradient(180deg, rgba(226, 215, 208, 0.303), transparent);
+  border-radius: 12px;
+}
 .brand {
   display: flex;
   align-items: center;
