@@ -6,7 +6,7 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const video = videoRef.current;
     const overlay = overlayRef.current;
     if (!video || !overlay) return;
@@ -52,7 +52,7 @@ export default function Home() {
       video.removeEventListener("ended", handleEnded);
       cancelAnimationFrame(animationFrame);
     };
-  }, []);
+  }, []);*/
 
   return (
     <div className="home page-wrapper"> {/* Abstand & zentrierter Container via CSS */}
@@ -66,7 +66,7 @@ export default function Home() {
 </p>
       </div>
 
-      {/* 🎥 Videobox mit Overlay
+     {/* 🎥 Videobox mit Overlay (auskommentiert)
       <Link to="/model" className="video-container home-video" style={{ display: "block" }}>
         <video
           ref={videoRef}
@@ -78,6 +78,12 @@ export default function Home() {
         />
         <div ref={overlayRef} className="hero-overlay" />
       </Link>*/}
+
+      {/* 🧠 3D Hero Model (Wireframe) aktivieren */}
+      {/* ✅ NEU: Link-Wrapper um das Modell für die Navigation */}
+<Link to="/model" style={{ display: 'block', pointerEvents: 'auto' }}>
+  <HeroModel />
+</Link>
 
       
 

@@ -2,9 +2,8 @@ import React, { useState, useMemo } from "react";
 import quizData from "../data/quiz.json";
 import "../Flashcards.css";
 import { useEffect } from "react";
+import { type AnatomyTopic as Topic, TOPIC_OPTIONS_ALL } from "../utils/constants";
 
-
-type Topic = "Alle" | "Muskeln" | "Skelett" | "Kreislaufsystem" | "Organe";
 
 export default function Flashcards() {
   const [topic, setTopic] = useState<Topic>("Alle");
@@ -13,6 +12,8 @@ export default function Flashcards() {
   const [fading, setFading] = useState(false);
   
   const [showFinished, setShowFinished] = useState(false);
+
+  const [isMuted, setIsMuted] = useState(false);
 
 
   // 🧠 Filtere Fragen nach gewähltem Themengebiet
@@ -42,10 +43,12 @@ export default function Flashcards() {
   function handleFlip() {
     if (fading) return;
 
-    // 🔊 Flip-Sound abspielen
-    const audio = new Audio("/sounds/swoosh.mp3");  // Pfad zur Datei im public-Ordner
-    audio.play();
-    audio.volume = 0.05;
+   // 🔊 Flip-Sound abspielen (nur wenn nicht gemutet)
+if (!isMuted) {
+  const audio = new Audio("/sounds/swoosh.mp3"); // Pfad zur Datei im public-Ordner
+  audio.volume = 0.05;
+  audio.play();
+}
 
     setFlipped((prev) => !prev);
   }
@@ -74,12 +77,16 @@ export default function Flashcards() {
     return;
   }
 
-  // === Good: Karte bleibt, einfach nächste ===
-  if (rating === "good") {
-    setFlipped(false);
-    nextCard();
-    return;
-  }
+// === Good: Karte ans Ende verschieben (Spaced Repetition) ===
+if (rating === "good") {
+  setDeck((d) => {
+    const newDeck = d.filter((_, i) => i !== index);
+    return [...newDeck, card]; // Karte kommt ans Ende
+  });
+  // Index bleibt gleich, da die nächste Karte automatisch an die Position rückt
+  setFlipped(false);
+  return;
+}
 
   // === Great: Karte wird gelöscht ===
   if (rating === "great") {
@@ -113,11 +120,18 @@ export default function Flashcards() {
       <p className="lead flashcards-lead">
         Wähle ein Themengebiet, klicke für die Antwort auf die Karte und bewerte dein Wissen.
       </p>
+      <button 
+  onClick={() => setIsMuted((prev) => !prev)} 
+  className={`ctrl-btn mute-btn`} 
+  aria-label="Toggle Sound"
+>
+  {isMuted ? '🔇 Sound aus' : '🔊 Sound an'}
+</button>
 
 
       {/* Themenauswahl */}
       <div className="flashcards-topic-row">
-        {["Alle", "Muskeln", "Skelett", "Kreislaufsystem", "Organe"].map((t) => (
+       {TOPIC_OPTIONS_ALL.map((t) => (
           <button
             key={t}
             onClick={() => {

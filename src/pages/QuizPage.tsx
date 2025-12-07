@@ -1,21 +1,17 @@
 // src/pages/QuizPage.tsx
 import React, { useState, useMemo } from "react";
 import quizJson from "../data/quiz.json";
+import { type AnatomyTopic as Topic, TOPIC_OPTIONS_ALL } from "../utils/constants";
 
-type Topic = "Alle" | "Muskeln" | "Skelett" | "Kreislaufsystem" | "Organe";
 
 interface Question {
   question: string;
   answers: string[];
   correct: number;
-  topic: Topic;
+  topic: Topic; // ✅ Jetzt den Alias 'Topic' verwenden
 }
 
-interface QuizData {
-  questions: Question[];
-}
 
-const quizData: QuizData = quizJson as unknown as QuizData;
 
 export default function QuizPage() {
   const [topic, setTopic] = useState<Topic>("Alle");
@@ -32,9 +28,12 @@ export default function QuizPage() {
 
   // 💾 Quizdaten filtern & mischen
   const questions = useMemo(() => {
-    const filtered = quizData.questions.filter((q) =>
-      topic === "Alle" ? true : q.topic === topic
-    );
+  // Wir stellen sicher, dass quizJson als das erwartete Array typisiert ist.
+  const allQuestions: Question[] = (quizJson as any).questions; 
+
+  const filtered = allQuestions.filter((q) =>
+    topic === "Alle" ? true : q.topic === topic
+  );
     const limit =
       topic === "Alle" ? 10 : ["Muskeln", "Skelett", "Kreislaufsystem", "Organe"].includes(topic)
         ? 6
@@ -126,18 +125,18 @@ export default function QuizPage() {
           flexWrap: "wrap",
         }}
       >
-        {["Alle", "Muskeln", "Skelett", "Kreislaufsystem", "Organe"].map((t) => (
-          <button
-            key={t}
-            onClick={() => {
-              setTopic(t as Topic);
-              resetQuiz();
-            }}
-            className={`ctrl-btn ${topic === t ? "active" : ""}`}
-          >
-            {t}
-          </button>
-        ))}
+        {TOPIC_OPTIONS_ALL.map((t) => (
+  <button
+    key={t}
+    onClick={() => {
+      setTopic(t as Topic); // Hinzufügen des Type Casts, da setTopic den Typ erwartet
+      resetQuiz();
+    }}
+    className={`ctrl-btn ${topic === t ? "active" : ""}`}
+  >
+    {t}
+  </button>
+))}
       </div>
 
       {!showResult ? (
@@ -156,7 +155,7 @@ export default function QuizPage() {
             <h2 style={{ marginTop: 12, lineHeight: 1.5 }}>{q.question}</h2>
 
             <div style={{ display: "grid", gap: 12, marginTop: 20 }}>
-              {q.answers.map((a, i) => {
+              {q.answers.map((a: string, i: number) => {
                 const isCorrect = revealCorrect && i === q.correct;
                 const isWrong = selected === i && selected !== q.correct;
                 return (

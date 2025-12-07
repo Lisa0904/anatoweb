@@ -1,9 +1,8 @@
 import React, { useState, useMemo } from "react";
 import AnatomyViewer from "../components/AnatomyViewer";
 import InfoTabs from "../components/InfoTabs";
+import { type AnatomyTopic as Topic, TOPIC_OPTIONS_MODEL } from "../utils/constants";
 
-
-type Topic = "Ganzer Mensch" | "Muskeln" | "Skelett" | "Kreislaufsystem" | "Organe";
 
 
 export default function ModelPage() {
@@ -42,10 +41,10 @@ export default function ModelPage() {
 
           {/* Themenauswahl */}
           <div className="topic-selector">
-            {(["Ganzer Mensch", "Muskeln", "Skelett", "Kreislaufsystem", "Organe"] as Topic[]).map((t) => (
+            {TOPIC_OPTIONS_MODEL.map((t) => (
               <button
                 key={t}
-                onClick={() => setTopic(t)}
+                onClick={() => setTopic(t as Topic)}
                 className={`ctrl-btn ${topic === t ? "active" : ""}`}
               >
                 {t}
