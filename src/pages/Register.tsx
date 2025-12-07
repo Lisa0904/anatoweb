@@ -15,35 +15,26 @@ export default function Register() {
     setLoading(true);
     setError(null);
 
-    // 1. Registrierung bei Supabase Auth
-    const { data, error: authError } = await supabase.auth.signUp({
+    // 1. Speichere den gewünschten Namen lokal, um ihn nach der E-Mail-Bestätigung zu setzen
+    localStorage.setItem('pendingUsername', username.trim()); // ✅ NEU
+
+    // 2. Registrierung bei Supabase Auth (OHNE Metadaten)
+    const { error: authError } = await supabase.auth.signUp({
       email,
       password,
+      // Optionen wurden entfernt, da Spalte 'username' in auth.users nicht existiert
     });
 
     if (authError) {
       setError(authError.message);
       setLoading(false);
+      localStorage.removeItem('pendingUsername'); // Löschen bei Fehler
       return;
     }
+    
+    // 3. Datenbank-Insert wird vom TRIGGER erledigt (setzt 'PENDING_UPDATE')
 
-    // 2. Erstellen des Profiles mit dem Benutzernamen (für die Rangliste)
-    if (data?.user) {
-      const { error: profileError } = await supabase.from('profiles').insert([
-        { id: data.user.id, username: username.trim() }
-      ]);
-
-      if (profileError) {
-        // Wenn das Profil fehlschlägt, ist das kritisch, da die Rangliste nicht funktioniert.
-        // Wir setzen den Fehler und loggen den Benutzer ggf. wieder aus.
-        setError("Registrierung erfolgreich, aber Benutzername konnte nicht gespeichert werden: " + profileError.message);
-        await supabase.auth.signOut(); // Sicherheitshalber ausloggen
-        setLoading(false);
-        return;
-      }
-    }
-
-    // 3. Erfolg: Navigation (Supabase sendet standardmäßig eine Bestätigungs-E-Mail)
+    // 4. Erfolg: Navigation
     alert("Fast geschafft! Bitte bestätige deine Registrierung über die E-Mail, die wir dir gesendet haben.");
     navigate("/login"); 
   };

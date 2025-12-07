@@ -11,6 +11,7 @@ import Impressum from "./pages/Impressum";
 import Kontakt from "./pages/Kontakt";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 
 export default function App() {
   // 🌗 Global Theme State
@@ -51,6 +52,7 @@ export default function App() {
           <Route path="/kontakt" element={<Kontakt />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
 

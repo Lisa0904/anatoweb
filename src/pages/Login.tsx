@@ -9,20 +9,41 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+ const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { error: authError } = await supabase.auth.signInWithPassword({
+    // 1. Login durchführen
+    const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (authError) {
       setError(authError.message);
-    } else {
-      // Erfolg: Navigation zurück zur Startseite oder zum Modell
+    } else if (authData.user) {
+      const user = authData.user;
+      
+      // ✅ NEUE LOGIK: Update des Namens mit dem lokal gespeicherten Namen
+      const pendingUsername = localStorage.getItem('pendingUsername');
+      
+      if (pendingUsername) {
+         // Führt den UPDATE aus, da das Token jetzt gültig ist
+         const { error: updateError } = await supabase
+            .from('profiles')
+            .update({ username: pendingUsername })
+            .eq('id', user.id);
+            
+        if (updateError) {
+            console.error("Fehler beim finalen Namen-Update:", updateError);
+        } else {
+            // Löschen des lokalen Speichers nach erfolgreichem Update
+            localStorage.removeItem('pendingUsername');
+        }
+      }
+      
+      // 2. Erfolg: Navigation
       navigate("/model"); 
     }
     
