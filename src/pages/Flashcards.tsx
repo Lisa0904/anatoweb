@@ -120,13 +120,15 @@ if (rating === "good") {
       <p className="lead flashcards-lead">
         Wähle ein Themengebiet, klicke für die Antwort auf die Karte und bewerte dein Wissen.
       </p>
+      
       <button 
-  onClick={() => setIsMuted((prev) => !prev)} 
-  className={`ctrl-btn mute-btn`} 
-  aria-label="Toggle Sound"
->
-  {isMuted ? '🔇 Sound aus' : '🔊 Sound an'}
-</button>
+          onClick={() => setIsMuted((prev) => !prev)} 
+          className="sound-toggle-btn" 
+          aria-label="Toggle Sound"
+          title={isMuted ? 'Ton anschalten' : 'Ton ausschalten'}
+        >
+          {isMuted ? '🔇 Ton aus' : '🔊 Ton an'}
+        </button>
 
 
       {/* Themenauswahl */}
@@ -154,6 +156,8 @@ if (rating === "good") {
   onClick={!finished ? handleFlip : undefined}
   style={{ cursor: finished ? "default" : "pointer" }}
 >
+
+
   {!finished ? (
     <>
       <div className="front">
