@@ -50,7 +50,7 @@ export default function Ranking({ refreshTrigger }: { refreshTrigger: number }) 
     <div style={{ marginTop: '60px' }}>
       <h3 style={{ textAlign: 'center', marginBottom: '20px' }}>Top 10 Bestenliste</h3>
       
-      <div className="section-box panel" style={{ padding: 0, overflow: 'hidden' }}>
+      <div className="section-box panel" style={{ padding: 0, overflow: 'hidden', height: 'auto' }}>
         {loading ? (
           <p style={{ padding: 20, textAlign: 'center', color: 'var(--muted)' }}>Lade Rangliste...</p>
         ) : (

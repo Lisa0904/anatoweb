@@ -80,14 +80,14 @@ export default function Profile() {
           
           {/* Header Bereich mit etwas mehr Abstand nach unten */}
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-              <h1 className="title" style={{ fontSize: '3rem', marginBottom: '10px' }}>Dein Profil</h1>
+              <h1 className="title" style={{ fontSize: '3rem', marginBottom: '10px' }}>Hi, <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{username || "Gast"}</span>!</h1>
               <p className="lead" style={{ fontSize: '1.1rem', maxWidth: '500px', margin: '0 auto' }}>
-                  Hi, <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{username || "Gast"}</span>!
+                  Dein Profil
               </p>
           </div>
 
           {/* --- Account Details Box --- */}
-          <div className="section-box panel" style={{ padding: '35px', marginBottom: '30px' }}>
+          <div className="section-box panel" style={{ padding: '35px', marginBottom: '30px', height: 'auto' }}>
               <div style={{ 
                   display: 'flex', 
                   justifyContent: 'space-between', 
@@ -142,7 +142,7 @@ export default function Profile() {
           </div>
           
           {/* --- Deine Erfolge / Historie --- */}
-          <div className="section-box panel" style={{ padding: '30px', textAlign: 'center' }}>
+          <div className="section-box panel" style={{ padding: '30px', textAlign: 'center', height: 'auto'  }}>
               <h3 style={{ marginBottom: '20px', fontSize: '1.2rem' }}>Deine letzten Quiz-Ergebnisse</h3>
               
               {myScores.length === 0 ? (
