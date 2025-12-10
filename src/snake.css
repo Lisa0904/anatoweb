@@ -1,0 +1,121 @@
+/* src/Snake.css (DESIGN OPTIMIZED) */
+
+.snake-page-wrapper {
+  text-align: center;
+  max-width: 900px; 
+}
+
+/* Hauptinhaltsbereich zentrieren */
+.game-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Panel für Score */
+.snake-status-panel {
+  width: 500px; /* Breite festlegen */
+  margin: 0 auto 20px; 
+  padding: 15px 25px;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  /* Verbesserung: Glas-Effekt für das Panel nutzen */
+  background: var(--glass);
+  border: 1px solid rgba(255, 255, 255, 0.08); 
+  height: auto;
+}
+
+/* Spielfeld Container */
+.snake-game-area {
+  position: relative; 
+  margin: 0 auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  border-radius: 10px;
+  overflow: hidden;
+  /* Hintergrund: Dunkle, neuronale Umgebung */
+  background: rgba(0, 0, 0, 0.3); 
+  outline: none; /* Fokus-Outline entfernen */
+}
+
+/* Schlange (Axon / Nervenbahn) */
+.snake-segment {
+  position: absolute; 
+  background: var(--accent); 
+  border: 1px solid rgba(0, 0, 0, 0.1); 
+  box-sizing: border-box;
+  opacity: 0.9;
+  transition: all 0.05s linear; 
+  border-radius: 1px; /* Für klaren, digitalen Look */
+}
+
+/* Kopf der Schlange (Synaptische Endigung) */
+.snake-segment.head {
+  background: #34d373; 
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.8); /* Starker Glow am Kopf */
+}
+
+/* Futter (Synapsen / Neurotransmitter) */
+.food {
+  position: absolute;
+  background: #ffc107; 
+  border-radius: 50%;
+  box-shadow: 0 0 5px #ffc107;
+  transition: all 0.1s ease-out;
+  animation: pulse 1s infinite alternate;
+}
+
+/* Overlay für Start/Game Over */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Halbtransparente Glas-Box über dem Spielfeld */
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(4px);
+  color: var(--text);
+  z-index: 20;
+  border-radius: 10px;
+}
+
+.game-overlay h2 {
+    color: var(--text-strong);
+    margin-bottom: 10px;
+}
+
+.game-overlay button {
+    margin-top: 30px; /* Mehr Abstand für bessere UX */
+    min-width: 200px;
+}
+
+@keyframes pulse {
+    from { transform: scale(0.9); opacity: 0.8; }
+    to { transform: scale(1.1); opacity: 1; }
+}
+
+/* Light Mode Anpassung */
+:root.light .snake-game-area {
+  background: rgba(230, 230, 230, 0.9);
+  box-shadow: 0 4px 18px rgba(34, 197, 94, 0.35); 
+  border-color: #036e23;
+}
+
+:root.light .snake-status-panel {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+:root.light .game-overlay {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--text-strong);
+}
+
+:root.light .game-overlay h2 {
+    color: var(--text-strong);
+}

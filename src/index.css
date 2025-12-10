@@ -1284,3 +1284,24 @@ body::after {
 }
 
 
+/* Ranking Table Styles */
+.ranking-table th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.ranking-table tr:last-child {
+    border-bottom: none !important;
+}
+
+/* Light Mode Anpassung für Tabelle */
+:root.light .ranking-table th {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: var(--text-strong);
+}
+:root.light .ranking-table tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+}

@@ -12,6 +12,8 @@ import Kontakt from "./pages/Kontakt";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+import SnakePage from "./pages/SnakePage";
+import MemoryPage from "./pages/MemoryPage";
 
 export default function App() {
   // 🌗 Global Theme State
@@ -58,6 +60,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/snake" element={<SnakePage />} />
+          <Route path="/memory" element={<MemoryPage />} />
         </Routes>
       </main>
 

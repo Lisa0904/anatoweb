@@ -284,31 +284,36 @@
    ========================================= */
 .sound-toggle-btn {
   background: transparent;
-  border: none;
-  color: var(--muted); /* Grau, nicht Weiß */
-  font-size: 0.9rem;
+  /* Ganz zarter Rand, fast unsichtbar */
+  border: 1px solid rgba(255, 255, 255, 0.08); 
+  color: var(--muted);
+  font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 6px; /* Abstand zwischen Icon und Text */
+  gap: 8px;
+  opacity: 0.7; /* Standardmäßig etwas transparenter */
+  margin: 2rem;
 }
 
-/* Hover: Leicht aufhellen */
 .sound-toggle-btn:hover {
-  color: var(--text); /* Wird heller/weißer */
-  background: rgba(255, 255, 255, 0.05); /* Ganz zarter Hintergrund */
+  border-color: var(--text);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 1;
 }
 
-/* Light Mode Anpassung */
+/* Light Mode */
 :root.light .sound-toggle-btn {
-  color: var(--muted); /* Dunkles Grau */
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--muted);
 }
-
 :root.light .sound-toggle-btn:hover {
-  color: var(--text-strong); /* Schwarz */
+  border-color: var(--text-strong);
+  color: var(--text-strong);
   background: rgba(0, 0, 0, 0.05);
 }

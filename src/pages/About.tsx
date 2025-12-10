@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export default function About() {
+  const navigate = useNavigate();
   return (
     <div className="page-container">
       <h1 className="title">Über uns</h1>
@@ -44,8 +47,8 @@ export default function About() {
         <h3>Team</h3>
 
         <div className="team-container">
-          {/* Person 1 */}
-          <div className="team-member">
+          {/* Person 1 - Klickbar machen */}
+          <div className="team-member" onClick={() => navigate('/snake')} style={{ cursor: 'pointer' }}>
             <div className="team-image">
               <img src="/public/Bitmoji_Anne.jpg" alt="Anne" />
             </div>
@@ -53,8 +56,8 @@ export default function About() {
             <p>Gestaltung, UI/UX & technische Umsetzung</p>
           </div>
  
-          {/* Person 2 */}
-          <div className="team-member">
+          {/* Person 2 - Klickbar machen */}
+          <div className="team-member" onClick={() => navigate('/snake')} style={{ cursor: 'pointer' }}>
             <div className="team-image">
               <img src="/public/Bitmoji_Moritz.jpg" alt="Moritz" />
             </div>
@@ -62,8 +65,8 @@ export default function About() {
             <p>Interaktive Features & technische Umsetzung</p>
           </div>
 
-          {/* Person 3 */}
-          <div className="team-member">
+          {/* Person 3 - Klickbar machen */}
+          <div className="team-member" onClick={() => navigate('/snake')} style={{ cursor: 'pointer' }}>
             <div className="team-image">
               <img src="/public/Bitmoji_Lisa.jpg" alt="Lisa" />
             </div>
@@ -76,4 +79,3 @@ export default function About() {
     </div>
  );
 }
-        

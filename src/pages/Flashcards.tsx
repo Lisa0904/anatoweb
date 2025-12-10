@@ -3,6 +3,7 @@ import quizData from "../data/quiz.json";
 import "../Flashcards.css";
 import { useEffect } from "react";
 import { type AnatomyTopic as Topic, TOPIC_OPTIONS_ALL } from "../utils/constants";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Flashcards() {
@@ -14,6 +15,7 @@ export default function Flashcards() {
   const [showFinished, setShowFinished] = useState(false);
 
   const [isMuted, setIsMuted] = useState(false);
+  const navigate = useNavigate();
 
 
   // 🧠 Filtere Fragen nach gewähltem Themengebiet
@@ -120,15 +122,6 @@ if (rating === "good") {
       <p className="lead flashcards-lead">
         Wähle ein Themengebiet, klicke für die Antwort auf die Karte und bewerte dein Wissen.
       </p>
-      
-      <button 
-          onClick={() => setIsMuted((prev) => !prev)} 
-          className="sound-toggle-btn" 
-          aria-label="Toggle Sound"
-          title={isMuted ? 'Ton anschalten' : 'Ton ausschalten'}
-        >
-          {isMuted ? '🔇 Ton aus' : '🔊 Ton an'}
-        </button>
 
 
       {/* Themenauswahl */}
@@ -200,6 +193,28 @@ if (rating === "good") {
     </button>
   </div>
 )}
+
+<div className="utility-buttons-row" style={{ marginTop: '30px', display: 'flex', justifyContent: 'center', gap: '15px' }}>
+    {/* Sound Button */}
+    <button 
+      onClick={() => setIsMuted((prev) => !prev)} 
+      className="sound-toggle-btn" 
+      aria-label="Toggle Sound"
+      title={isMuted ? 'Ton anschalten' : 'Ton ausschalten'}
+    >
+      {isMuted ? '🔇 Ton ist aus' : '🔊 Ton ist an'}
+    </button>
+
+    {/* ✅ NEU: Memory Button */}
+    <button 
+      onClick={() => navigate('/memory')} 
+      className="ctrl-btn"
+      // Style angepasst an die Mute-Taste, aber als normale ctrl-btn
+      style={{ fontSize: '0.9rem', padding: '6px 14px', borderRadius: '20px', fontWeight: 500 }}
+    >
+      Anatomie Memory
+    </button>
+</div>
 
     </div>
   );

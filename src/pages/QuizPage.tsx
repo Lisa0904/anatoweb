@@ -2,6 +2,8 @@
 import React, { useState, useMemo } from "react";
 import quizJson from "../data/quiz.json";
 import { type AnatomyTopic as Topic, TOPIC_OPTIONS_ALL } from "../utils/constants";
+import { supabase } from "../utils/supabase";
+import Ranking from "../components/Ranking";
 
 
 interface Question {
@@ -11,6 +13,14 @@ interface Question {
   topic: Topic; // ✅ Jetzt den Alias 'Topic' verwenden
 }
 
+interface RankEntry {
+  id: string; 
+  username: string;
+  score: number;
+  max_questions: number;
+  topic: string;
+  created_at: string;
+}
 
 
 export default function QuizPage() {
@@ -25,7 +35,16 @@ export default function QuizPage() {
   const [resetKey, setResetKey] = useState(0);
   const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean[]>([]);
   const [questionStates, setQuestionStates] = useState<Record<number, { selected: number | null, locked: boolean, reveal: boolean }>>({});
+  const [userId, setUserId] = useState<string | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+  
 
+  // Prüfe beim Start, ob Nutzer eingeloggt ist
+  React.useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setUserId(data.user?.id || null);
+    });
+  }, []);
 
   // 💾 Quizdaten filtern & mischen
   const questions = useMemo(() => {
@@ -132,6 +151,35 @@ function loadQuestionState(newIndex: number) {
 
   const progress = ((index + (showResult ? 1 : 0)) / questions.length) * 100;
 
+  // Speichert den Score in der Datenbank
+  async function saveScoreToDatabase(finalScore: number) {
+    if (!userId) return; // Nicht speichern, wenn Gast
+
+    // Wir speichern nur, wenn das Quiz beendet ist.
+    const { error } = await supabase.from('quiz_scores').insert([
+      {
+        user_id: userId,
+        topic: topic,
+        score: finalScore,
+        max_questions: questions.length,
+      }
+    ]);
+
+    if (error) {
+        console.error("Fehler beim Speichern des Scores:", error);
+    } else {
+        console.log("Score erfolgreich gespeichert!");
+        setRefreshKey(prev => prev + 1); // ✅ NEU: Aktualisiert die Rangliste
+    }
+  }
+
+  // Automatische Speicherung bei Quiz-Ende
+  React.useEffect(() => {
+    if (showResult && userId) {
+        saveScoreToDatabase(score);
+    }
+  }, [showResult]); // Führt dies aus, sobald showResult auf true springt
+
   return (
     <div style={{ maxWidth: 900, margin: "0 auto" }}>
       <h1 className="title">Anatomie-Quiz</h1>
@@ -237,6 +285,7 @@ function loadQuestionState(newIndex: number) {
           </button>
         </div>
       )}
+      <Ranking refreshTrigger={refreshKey} />
     </div>
   );
 }
