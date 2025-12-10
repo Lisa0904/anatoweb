@@ -81,10 +81,13 @@ export default function HeroModel() {
     <div
       style={{
         width: "100%",
-        // 50vh ist ein guter Wert für den Hero-Bereich (nicht zu groß)
         height: "50vh", 
         position: "relative",
-        // Wichtig: Pointer Events deaktivieren, damit der Klick an den Link in Home.tsx geht
+        
+        // ✅ NEU: Begrenze die Breite des Containers
+        maxWidth: "500px", 
+        margin: "0 auto", // Zentrieren des Containers
+        
         pointerEvents: 'none', 
       }}
     >

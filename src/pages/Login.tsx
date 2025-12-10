@@ -14,7 +14,6 @@ export default function Login() {
     setLoading(true);
     setError(null);
 
-    // 1. Login durchführen
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -25,11 +24,12 @@ export default function Login() {
     } else if (authData.user) {
       const user = authData.user;
       
-      // ✅ NEUE LOGIK: Update des Namens mit dem lokal gespeicherten Namen
+      // Holt den temporär gespeicherten Namen
       const pendingUsername = localStorage.getItem('pendingUsername');
       
+      // ✅ FINALE UPDATE LOGIK:
       if (pendingUsername) {
-         // Führt den UPDATE aus, da das Token jetzt gültig ist
+         // Wir führen das UPDATE einfach aus, da die RLS-Policy dies erlaubt
          const { error: updateError } = await supabase
             .from('profiles')
             .update({ username: pendingUsername })
@@ -38,7 +38,7 @@ export default function Login() {
         if (updateError) {
             console.error("Fehler beim finalen Namen-Update:", updateError);
         } else {
-            // Löschen des lokalen Speichers nach erfolgreichem Update
+            // Nach erfolgreichem Update den lokalen Speicher löschen
             localStorage.removeItem('pendingUsername');
         }
       }

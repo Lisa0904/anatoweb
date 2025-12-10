@@ -72,33 +72,38 @@ useEffect(() => {
       </div>
 
       {/* Desktop Links */}
-<div className="links desktop-only">
-  <NavLink to="/model" className={linkClass}>Anatomie-Explorer</NavLink>
-  <NavLink to="/flashcards" className={linkClass}>Karteikarten</NavLink>
-  <NavLink to="/quiz" className={linkClass}>Quiz</NavLink>
-  <NavLink to="/about" className={linkClass}>Über uns</NavLink>
+      <div className="links desktop-only">
+        <NavLink to="/model" className={linkClass}>Anatomie-Explorer</NavLink>
+        <NavLink to="/flashcards" className={linkClass}>Karteikarten</NavLink>
+        <NavLink to="/quiz" className={linkClass}>Quiz</NavLink>
+        {/* ✅ NEU: Link zur Rangliste (wird später implementiert) */}
+        <NavLink to="/ranking" className={linkClass}>Rangliste</NavLink>
+        <NavLink to="/about" className={linkClass}>Über uns</NavLink>
 
-  {session ? (
-    // ✅ Wenn eingeloggt: Zeige Profil/Logout
-    <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginLeft: 10 }}>
-      <NavLink to="/profile" className={linkClass} style={{ fontWeight: 600 }}>
-         {username}
-      </NavLink>
-      <button 
-        onClick={handleLogout} 
-        className="ctrl-btn" 
-        style={{ padding: '8px 15px', background: 'rgba(255, 255, 255, 0.08)' }}
-      >
-        Logout
-      </button>
-    </div>
-  ) : (
-    // Wenn nicht eingeloggt: Zeige Login/Register
-    <NavLink to="/login" className="ctrl-btn primary-cta" style={{ marginLeft: 10, padding: '8px 15px' }}>
-      Login
-    </NavLink>
-  )}
-</div>
+        {/* ---------------------------------------------------- */}
+        {/* ✅ DYNAMISCHER PROFIL / LOGIN BUTTON */}
+        {/* ---------------------------------------------------- */}
+        {session ? (
+          // Wenn eingeloggt: Nur den Profil-Button anzeigen
+          <NavLink
+            to="/profile"
+            className="ctrl-btn primary-cta"
+            // Verwende den Profilnamen als Text, hebt sich farblich ab
+            style={{ marginLeft: 10, padding: '8px 15px', fontWeight: 600 }}
+          >
+             {username}
+          </NavLink>
+        ) : (
+          // Wenn nicht eingeloggt: Nur den Login-Button anzeigen
+          <NavLink 
+            to="/login" 
+            className="ctrl-btn primary-cta" 
+            style={{ marginLeft: 10, padding: '8px 15px' }}
+          >
+            Login
+          </NavLink>
+        )}
+      </div>
 
       {/* Hamburger Icon (only mobile) */}
       <button className="hamburger mobile-only" onClick={() => setOpen(true)}>

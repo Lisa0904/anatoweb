@@ -55,7 +55,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="page-container form-page">
+    <div className="page-container" style={{ maxWidth: '800px' }}> 
         <h1 className="title gradient">Dein Anatomie-Profil</h1>
         <p className="lead">
             Hallo {username || "Gast"}! Hier siehst du deine Account-Informationen und bald deine besten Quiz-Ergebnisse.
@@ -69,7 +69,7 @@ export default function Profile() {
             
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px 30px', textAlign: 'left' }}>
                 <div className="input-group">
-                    <label style={{ color: 'var(--muted)' }}>Benutzername (Ranglisten-Name)</label>
+                    <label style={{ color: 'var(--muted)' }}>Benutzername</label>
                     <p style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--text-strong)' }}>
                        {username}
                     </p>
@@ -89,7 +89,7 @@ export default function Profile() {
                 color: '#fff', 
                 boxShadow: '0 4px 10px rgba(213, 52, 52, 0.4)'
             }}>
-                Logout durchführen
+                Logout
             </button>
         </div>
         

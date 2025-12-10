@@ -89,7 +89,8 @@ export default function Home() {
 
       {/* Buttons */}
       <div className="home-actions">
-        <Link to="/model" className="ctrl-btn home-action-btn">
+        {/* ✅ FIX 1: Der Explorer Button wird zum Primary CTA */}
+        <Link to="/model" className="ctrl-btn home-action-btn primary-cta">
           Anatomie-Explorer
         </Link>
         <Link to="/flashcards" className="ctrl-btn home-action-btn">
