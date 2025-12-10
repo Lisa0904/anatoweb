@@ -24,6 +24,7 @@ export default function QuizPage() {
   const [autoNextTimer, setAutoNextTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [resetKey, setResetKey] = useState(0);
   const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean[]>([]);
+  const [questionStates, setQuestionStates] = useState<Record<number, { selected: number | null, locked: boolean, reveal: boolean }>>({});
 
 
   // 💾 Quizdaten filtern & mischen
@@ -44,57 +45,80 @@ export default function QuizPage() {
 
   const q = questions[index];
 
-  function answer(i: number) {
+ function answer(i: number) {
     if (locked) return;
+    
+    const isCorrect = i === q.correct;
+    
+    // Status der aktuellen Frage aktualisieren (bevor sie gespeichert wird)
     setSelected(i);
     setLocked(true);
+    setRevealCorrect(true); // Korrektur anzeigen
+    
+    // ✅ NEU: Status für die aktuelle Fragen-ID speichern
+    setQuestionStates(prev => ({
+        ...prev,
+        [index]: { selected: i, locked: true, reveal: true }
+    }));
 
-    const isCorrect = i === q.correct;
+
     if (isCorrect) {
-  if (!answeredCorrectly[index]) {
-    setScore((s) => s + 1);
-    setAnsweredCorrectly((prev) => {
-      const copy = [...prev];
-      copy[index] = true;
-      return copy;
-    });
-  }
-}
+        if (!answeredCorrectly[index]) {
+            setScore((s) => s + 1);
+            setAnsweredCorrectly((prev) => {
+                const copy = [...prev];
+                copy[index] = true;
+                return copy;
+            });
+        }
+    }
 
 
-    // Optional: Soundeffekt (Datei z. B. public/sounds/correct.mp3)
-    // const sound = new Audio(isCorrect ? "/sounds/correct.mp3" : "/sounds/wrong.mp3");
-    // sound.volume = 0.3;
-    // sound.play();
+    // Optional: Soundeffekt ...
 
-    setRevealCorrect(true);
     const timer = setTimeout(nextQuestion, 8000);
     setAutoNextTimer(timer);
   }
 
-  function nextQuestion() {
-    if (autoNextTimer) clearTimeout(autoNextTimer);
-    if (index < questions.length - 1) {
-      setIndex((i) => i + 1);
-      resetState();
-    } else {
-      setShowResult(true);
-    }
+ function nextQuestion() {
+  if (autoNextTimer) clearTimeout(autoNextTimer);
+  if (index < questions.length - 1) {
+    const newIndex = index + 1;
+    setIndex(newIndex);
+    loadQuestionState(newIndex); // Zustand der nächsten Frage laden
+  } else {
+    setShowResult(true);
   }
+}
 
-  function prevQuestion() {
-    if (autoNextTimer) clearTimeout(autoNextTimer);
-    if (index > 0) {
-      setIndex((i) => i - 1);
-      resetState();
-    }
+ function prevQuestion() {
+  if (autoNextTimer) clearTimeout(autoNextTimer);
+  if (index > 0) {
+    const newIndex = index - 1;
+    setIndex(newIndex);
+    loadQuestionState(newIndex); // Zustand der vorherigen Frage laden
   }
+}
 
-  function resetState() {
+ function resetState() {
+  // Löscht nur den automatischen Timer, sonst nichts
+  if (autoNextTimer) clearTimeout(autoNextTimer);
+}
+
+function loadQuestionState(newIndex: number) {
+  const state = questionStates[newIndex];
+  // Wenn Zustand existiert, lade ihn
+  if (state) {
+    setSelected(state.selected);
+    setLocked(state.locked);
+    setRevealCorrect(state.reveal);
+  } else {
+    // Sonst initialisiere für neue Frage
     setSelected(null);
     setLocked(false);
     setRevealCorrect(false);
   }
+}
 
   function resetQuiz() {
     if (autoNextTimer) clearTimeout(autoNextTimer);

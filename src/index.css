@@ -225,6 +225,26 @@ body {
   transform: rotate(180deg);
 }
 
+.theme-icon {
+  width: 100%; /* Füllt den 35x35px Bereich des Buttons */
+  height: auto;
+  
+  /* 🎨 FÄRBE SVG/PNG-ICON GRÜN UM (Filter ist nötig, da es ein Bild ist) */
+  /* Da die Icons grün sind, nutzen wir Filter, um sie neutral zu färben */
+  filter: saturate(0) brightness(0.6); /* De-saturiert und verdunkelt für Dark Mode */
+  transition: all 0.3s ease;
+}
+
+/* Light Mode: Schwarzes Icon auf weißem Hintergrund */
+:root.light .theme-icon {
+    filter: saturate(0) brightness(0.2); /* Noch dunkler, fast schwarz */
+}
+
+/* Hover Effekt für das Icon */
+.theme-switch:hover .theme-icon {
+    filter: saturate(1) brightness(1.1) drop-shadow(0 0 4px var(--accent)); /* Grüner Glow beim Hover */
+}
+
 .main-content {
   flex: 1;
   padding: 28px;
@@ -685,8 +705,8 @@ h3 {
 }
 
 /* Nur Quiz-Antwortbuttons: neutrales Hover */
-.quiz-answer-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+.quiz-answer-btn:not(.correct):not(.wrong):hover {
+  background: rgba(255, 255, 255, 0.2); /* ✅ Helleres Grau (20% Weiß) */
   /* leicht grau */
   color: var(--text);
   /* bleibt neutral */
@@ -710,6 +730,8 @@ h3 {
 .ctrl-btn.wrong {
   background: #d53434e2 !important;
   color: #fff !important;
+  /* Füge eine noch höhere Spezifität hinzu, um sicherzustellen, dass die Farbe NICHT überschrieben wird */
+  background-color: #d53434e2 !important; 
 }
 
 
@@ -939,11 +961,15 @@ body::after {
 :root.light .ctrl-btn:hover,
 :root.light .home-action-btn:hover,
 :root.light .topic-btn:hover {
-  background: rgba(34, 197, 94, 0.18) !important;
-  border-color: rgba(34, 197, 94, 0.3) !important;
-  color: #064e3b !important;
+  /* ✅ Grauer, dunklerer Hintergrund (z.B. 10% Schwarz) */
+  background: rgba(0, 0, 0, 0.1) !important; 
+  /* ✅ Schwarzer/sehr dunkler Text */
+  color: var(--text) !important; 
+  /* Neutraler, leicht sichtbarer Rand */
+  border-color: rgba(0, 0, 0, 0.25) !important; 
+  
   transform: none;
-  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.18);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
 }
 
 /* Active State */
@@ -968,6 +994,7 @@ body::after {
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25) !important;
   transform: none !important;*/
   background: #d53434cf !important;
+  background-color: #d53434cf !important;
   color: #fff !important;
   border-color: rgba(238, 56, 36, 0.35) !important;
 }
@@ -986,13 +1013,25 @@ body::after {
 }
 
 
-:root.light .quiz-answer-btn.correct:hover,
-:root.light .quiz-answer-btn.wrong:hover {
-  background: inherit !important;
-  color: inherit !important;
-  border-color: inherit !important;
-  transform: none !important;
-  box-shadow: inherit !important;
+:root.light .quiz-answer-btn:not(.correct):not(.wrong):hover {
+  background: rgba(0, 0, 0, 0.1) !important; /* 10% Schwarz */
+  color: var(--text-strong) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Light Mode: Hover auf roten/grünen Buttons deaktivieren */
+:root.light .quiz-answer-btn.wrong {
+  background: #d53434cf !important;
+  background-color: #d53434cf !important; /* Wichtig für sofortiges Feedback */
+  color: #fff !important;
+  border-color: rgba(238, 56, 36, 0.35) !important;
+}
+
+:root.light .quiz-answer-btn.correct:hover {
+    background-color: #22c55ec5 !important; /* Das Grün beibehalten */
+    color: #000 !important;
+    box-shadow: none !important;
 }
 
 /* ===============================
@@ -1179,11 +1218,16 @@ body::after {
 
 .quiz-answer-btn.correct:hover,
 .quiz-answer-btn.wrong:hover {
-  background: inherit !important;
-  color: inherit !important;
-  border-color: inherit !important;
-  transform: none !important;
+  background: inherit !important; /* Oder die explizite Farbe */
+  background-color: inherit !important;
+  color: #fff !important;
   box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Spezifisch für .wrong, um sicherzugehen */
+.quiz-answer-btn.wrong:hover {
+    background-color: #d53434e2 !important;
 }
 
 
@@ -1196,6 +1240,13 @@ body::after {
   box-shadow: none !important;
 }
 
+:root.light .quiz-answer-btn.wrong:hover,
+:root.light .quiz-answer-btn.wrong:active {
+  background: #d53434cf !important;
+  background-color: #d53434cf !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
 
 /*About seite*/
 .team-section {

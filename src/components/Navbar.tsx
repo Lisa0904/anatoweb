@@ -76,8 +76,6 @@ useEffect(() => {
         <NavLink to="/model" className={linkClass}>Anatomie-Explorer</NavLink>
         <NavLink to="/flashcards" className={linkClass}>Karteikarten</NavLink>
         <NavLink to="/quiz" className={linkClass}>Quiz</NavLink>
-        {/* ✅ NEU: Link zur Rangliste (wird später implementiert) */}
-        <NavLink to="/ranking" className={linkClass}>Rangliste</NavLink>
         <NavLink to="/about" className={linkClass}>Über uns</NavLink>
 
         {/* ---------------------------------------------------- */}

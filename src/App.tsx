@@ -28,14 +28,19 @@ export default function App() {
 
   return (
     <div className="app" style={{ position: "relative" }}>
-      {/* Theme Switch */}
+     {/* Theme Switch */}
       <button
         className="theme-switch"
         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         aria-label="Theme Switch"
       >
         <div className={`icon ${theme}`}>
-          {theme === "light" ? "🌙" : "☀️"}
+          {/* ✅ NEU: Verwende IMG Tags für die Icons aus dem Public Ordner */}
+          {theme === "light" ? (
+            <img src="/moon.png" alt="Dark Mode Icon" className="theme-icon" />
+          ) : (
+            <img src="/sun.png" alt="Light Mode Icon" className="theme-icon" />
+          )}
         </div>
       </button>
 

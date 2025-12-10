@@ -61,9 +61,9 @@ export default function Home() {
        {/*   <img src="/public/logo_weiß.png" alt="AnatoWeb Logo" className="logo"  style={{ width: "800px", height: "auto", textAlign: "center" }}/> */}
         <div className="hero-eyebrow">Interaktiv · Wissenschaftlich · Modern</div>
         <h1 className="title gradient">Die Anatomie des Menschen</h1>
-        <p className="lead hero-lead">
+       {/* <p className="lead hero-lead">
   Entdecke den menschlichen Körper in 3D
-</p>
+</p>*/}
       </div>
 
      {/* 🎥 Videobox mit Overlay (auskommentiert)
