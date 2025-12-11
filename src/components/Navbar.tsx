@@ -73,10 +73,10 @@ useEffect(() => {
 
       {/* Desktop Links */}
       <div className="links desktop-only">
-        <NavLink to="/model" className={linkClass}>Anatomie-Explorer</NavLink>
-        <NavLink to="/flashcards" className={linkClass}>Karteikarten</NavLink>
-        <NavLink to="/quiz" className={linkClass}>Quiz</NavLink>
-        <NavLink to="/about" className={linkClass}>Über uns</NavLink>
+        <NavLink to="/model" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> Anatomie-Explorer </NavLink>
+        <NavLink to="/flashcards" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Karteikarten</NavLink>
+        <NavLink to="/quiz" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Quiz</NavLink>
+        <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Über Uns</NavLink>
 
         {/* ---------------------------------------------------- */}
         {/* ✅ DYNAMISCHER PROFIL / LOGIN BUTTON */}

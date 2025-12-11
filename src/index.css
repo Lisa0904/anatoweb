@@ -104,6 +104,9 @@ body {
   background: linear-gradient(180deg, rgba(226, 215, 208, 0.303), transparent);
   border-radius: 12px;
 }
+
+
+
 .brand {
   display: flex;
   align-items: center;
@@ -128,20 +131,47 @@ body {
   gap: 14px;
 }
 
-.nav a {
-  color: var(--muted);
-  text-decoration: none;
-  padding: 8px 11px;
-  border-radius: 8px;
-  transition: 0.25s ease;
+
+/* Ziel: Nur normale Links (nicht .ctrl-btn) anders darstellen und vertikal bündig zur Login-Button-Zeile bringen */
+.nav .links a:not(.ctrl-btn) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;        /* zentriert den Text vertikal innerhalb der Nav-Zeile */
+  padding: 10px 0 6px 0;      /* Feinjustierung: oben/unten */
+  margin: 0 12px;
+  color: var(--muted) !important;
+  text-decoration: none !important;
+  background: none !important;     /* verhindert Button-Hintergrund */
+  border-radius: 0 !important;
+  line-height: 1;                  /* verhindert unerwartete Vertikalverschiebungen */
+  transition: color 0.2s ease;
 }
 
-
-.nav a.active,
-.nav a:hover {
-  color: var(--text);
-  background: var(--glass);
+/* Pseudo-Unterstreichung mit Abstand */
+.nav .links a:not(.ctrl-btn)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0px;            /* Abstand zwischen Text und Linie (anpassen) */
+  height: 2px;
+  width: 0;
+  background: var(--text);
+  transition: width 0.22s ease;
 }
+
+/* Hover / Aktiv */
+.nav .links a:not(.ctrl-btn):hover::after,
+.nav .links a:not(.ctrl-btn).active::after {
+  width: 100%;
+}
+
+.nav .links a:not(.ctrl-btn):hover,
+.nav .links a:not(.ctrl-btn).active {
+  color: var(--text) !important;
+  font-weight: 600;
+}
+
 
 
 .logo-link:hover,
@@ -361,8 +391,14 @@ body {
 }
 
 .primary-cta {
-  background: var(--accent) !important;
+  background: #34d573 !important;
   color: #000 !important;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35) !important;
+  font-weight: 600;
+}
+
+.primary-cta-two {
+  color: #d2d1d1 !important;
   box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35) !important;
   font-weight: 600;
 }
@@ -375,19 +411,10 @@ body {
 
 /* LIGHT MODE: Primary CTA Button (FINALE KORREKTUR FÜR KONTRAST und TIEFE) */
 :root.light .primary-cta {
-  /* 1. Hintergrund: Volles Akzentgrün */
-  background: var(--accent) !important; 
-  
-  /* 2. Text: Dunkles Grün für maximalen Kontrast */
-  color: #064e3b !important; /* ✅ Dunkelgrün statt Schwarz */
-  
-  /* 3. Kontur: Klare, dunkle Begrenzung */
-  border: 1px solid #036e23 !important; /* ✅ Dunkelgrüne Kontur */
-  
-  /* 4. Schatten: Stärkerer Schatten nach unten */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25) !important; /* ✅ Dunklerer Schatten */
-  
-  font-weight: 700;
+ background: #34d573 !important;
+  color: #000 !important;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35) !important;
+  font-weight: 600;
 }
 
 /* LIGHT MODE: Primary CTA Hover */
@@ -950,7 +977,7 @@ body::after {
 :root.light .ctrl-btn,
 :root.light .home-action-btn,
 :root.light .topic-btn {
-  background: rgba(255, 255, 255, 0.45) !important;
+  background: rgba(247, 243, 243, 0.986) !important;
   /* sichtbar, aber weich */
   color: #1a1a1a !important;
   border: 1px solid rgba(0, 143, 69, 0.818) !important;
