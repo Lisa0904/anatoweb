@@ -212,7 +212,7 @@ if (rating === "good") {
       // Style angepasst an die Mute-Taste, aber als normale ctrl-btn
       style={{ fontSize: '0.9rem', padding: '6px 14px', borderRadius: '20px', fontWeight: 500 }}
     >
-      Anatomie Memory
+      Anatomemory
     </button>
 </div>
 

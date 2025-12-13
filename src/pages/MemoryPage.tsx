@@ -48,7 +48,7 @@ const generateMemoryCards = (): CardData[] => {
     // Karte 2: Funktion
     allCards.push({
       id: index * 2 + 1,
-      content: data.function.split('. ')[0] + '.', // Nur den ersten Satz der Funktion
+      content: data.function.split('. ')[0], // Nur den ersten Satz der Funktion
       type: "function",
       matchId: matchCounter,
     });
@@ -134,7 +134,7 @@ export default function MemoryPage() {
   
   return (
     <div className="page-container memory-page">
-      <h1 className="title gradient" style={{letterSpacing: '-0.02em'}}>Anatomie Memory</h1>
+      <h1 className="title gradient" style={{letterSpacing: '-0.02em'}}>Anatomemory</h1>
       <p className="lead">Finde {cards.length / 2} Paare aus Körperteil und der entsprechenden Funktion. Paare gefunden: {matchedIds.length}.</p>
       
       {gameFinished && (
