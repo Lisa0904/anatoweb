@@ -50,7 +50,7 @@ export default function About() {
           {/* Person 1 - Klickbar machen */}
           <div className="team-member" onClick={() => navigate('/snake')} style={{ cursor: 'pointer' }}>
             <div className="team-image">
-              <img src="/public/Bitmoji_Anne.jpg" alt="Anne" />
+              <img src="/public/Anne.jpg" alt="Anne" />
             </div>
             <h4>Anne Eppendorfer</h4>
             <p>Gestaltung, UI/UX & technische Umsetzung</p>
@@ -59,7 +59,7 @@ export default function About() {
           {/* Person 2 - Klickbar machen */}
           <div className="team-member" onClick={() => navigate('/snake')} style={{ cursor: 'pointer' }}>
             <div className="team-image">
-              <img src="/public/Bitmoji_Moritz.jpg" alt="Moritz" />
+              <img src="/public/Moritz.jpg" alt="Moritz" />
             </div>
             <h4>Moritz Münch</h4>
             <p>Interaktive Features & technische Umsetzung</p>
@@ -68,7 +68,7 @@ export default function About() {
           {/* Person 3 - Klickbar machen */}
           <div className="team-member" onClick={() => navigate('/snake')} style={{ cursor: 'pointer' }}>
             <div className="team-image">
-              <img src="/public/Bitmoji_Lisa.jpg" alt="Lisa" />
+              <img src="/public/Lisa.jpg" alt="Lisa" />
             </div>
             <h4>Lisa Taljanovic</h4>
             <p>Content Creation, visuelle Konzepte & technische Umsetzung</p>

@@ -93,7 +93,7 @@ export default function Profile() {
                   justifyContent: 'space-between', 
                   alignItems: 'center', 
                   marginBottom: '25px',
-                  borderBottom: '1px solid rgba(255,255,255,0.05)',
+                  borderBottom: '1px solid rgba(181, 178, 166, 0.2)',
                   paddingBottom: '15px'
               }}>
                   <h3 style={{ margin: 0, fontSize: '1.4rem' }}>Account</h3>
@@ -170,7 +170,7 @@ export default function Profile() {
                               padding: '12px 15px',
                               background: 'rgba(255,255,255,0.03)',
                               borderRadius: '8px',
-                              border: '1px solid rgba(255,255,255,0.05)'
+                              border: '1px solid rgba(162, 160, 154, 0.23)'
                           }}>
                               <div style={{ textAlign: 'left' }}>
                                   <div style={{ fontWeight: 600, fontSize: '0.95rem' }}>{score.topic}</div>
