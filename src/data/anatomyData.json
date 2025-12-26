@@ -14,6 +14,73 @@
     "function": "Dient hygienischen Zwecken, keine anatomische Relevanz.",
     "disease": "Keine medizinischen Erkrankungen direkt zugeordnet."
   },
+
+  "Bizeps": {
+    "anatomy": "Der Bizeps brachii liegt an der Vorderseite des Oberarms und hat zwei Köpfe, die vom Schulterblatt zum Radius verlaufen.",
+    "function": "Er beugt den Ellenbogen und dreht den Unterarm nach außen (Supination).",
+    "disease": "Verletzungen wie Sehnenrisse oder Überlastung können Schmerzen und Kraftverlust verursachen."
+},
+"Trizeps": {
+    "anatomy": "Der Trizeps brachii befindet sich an der Rückseite des Oberarms und hat drei Köpfe, die am Schulterblatt und Oberarmknochen entspringen.",
+    "function": "Er streckt den Ellenbogen und stabilisiert den Arm bei Druckbewegungen.",
+    "disease": "Überlastung oder Sehnenverletzungen können Schmerzen und Bewegungseinschränkungen verursachen."
+},
+"Unterarmmuskeln": {
+    "anatomy": "Die Unterarmmuskeln verlaufen vom Ellenbogen bis zum Handgelenk und umfassen Beuger und Strecker der Hand und Finger.",
+    "function": "Sie ermöglichen Hand- und Fingerbewegungen sowie das Beugen und Strecken des Handgelenks.",
+    "disease": "Typische Beschwerden sind Sehnenscheidenentzündungen, Überlastung und Karpaltunnelsyndrom."
+},
+"Bauchmuskeln": {
+    "anatomy": "Die Bauchmuskeln bestehen aus geradem, schrägem und querem Bauchmuskel und umschließen den Rumpf vorne und seitlich.",
+    "function": "Sie stabilisieren den Rumpf, beugen den Oberkörper und unterstützen Atmung und Haltung.",
+    "disease": "Schwache oder verletzte Bauchmuskeln können zu Rückenschmerzen oder Hernien führen."
+},
+"Brustmuskeln": {
+    "anatomy": "Die Brustmuskeln (Pectoralis major und minor) liegen vorne am Brustkorb und verbinden Brustbein, Schlüsselbein und Oberarmknochen.",
+    "function": "Sie bewegen den Arm nach vorne, innen und rotieren ihn nach innen.",
+    "disease": "Überlastung, Muskelfaserrisse oder Entzündungen können Schmerzen und Bewegungseinschränkungen verursachen."
+},
+"Deltamuskeln": {
+    "anatomy": "Die Deltamuskeln (Deltoideus) umhüllen die Schulter und bestehen aus vorderem, mittlerem und hinterem Anteil.",
+    "function": "Sie heben, rotieren und bewegen den Arm seitlich sowie nach vorne und hinten.",
+    "disease": "Verletzungen wie Sehnenentzündungen, Schultereckgelenkschmerzen oder Risse treten häufig auf."
+},
+"Gesäßmuskeln": {
+    "anatomy": "Die Gesäßmuskeln (Gluteus maximus, medius, minimus) bedecken das Gesäß und verbinden Becken und Oberschenkelknochen.",
+    "function": "Sie strecken und rotieren die Hüfte sowie stabilisieren das Becken beim Gehen und Stehen.",
+    "disease": "Schwäche oder Verletzungen können zu Hüftschmerzen oder Gangstörungen führen."
+},
+"Großer Rückenmuskel": {
+    "anatomy": "Der Latissimus dorsi liegt seitlich am Rücken und zieht vom unteren Rücken zum Oberarmknochen.",
+    "function": "Er zieht den Arm nach hinten, innen und rotiert ihn nach innen sowie unterstützt die Körperhaltung.",
+    "disease": "Verspannungen, Muskelzerrungen oder Überlastung führen zu Rückenschmerzen und Bewegungseinschränkungen."
+},
+"Hintere Oberschenkelmuskeln": {
+    "anatomy": "Die hinteren Oberschenkelmuskeln (Ischiocrurale Muskulatur) verlaufen vom Becken bis zum Schienbein.",
+    "function": "Sie beugen das Knie und strecken die Hüfte.",
+    "disease": "Muskelzerrungen, Überlastung oder Sehnenverletzungen sind häufig beim Sport."
+},
+"Oberschenkelstrecker": {
+    "anatomy": "Die Oberschenkelstrecker (Quadrizeps) liegen vorne am Oberschenkel und setzen am Schienbein an.",
+    "function": "Sie strecken das Knie und helfen bei Aufstehen, Laufen und Springen.",
+    "disease": "Überlastung, Muskelfaserrisse oder Sehnenentzündungen können Schmerzen verursachen."
+},
+"Trapezmuskel": {
+    "anatomy": "Der Trapezmuskel liegt oberhalb des Rückens und zieht vom Nacken bis zur Schulter und Wirbelsäule.",
+    "function": "Er hebt und senkt die Schulterblätter, zieht sie zusammen und unterstützt Kopfbewegungen.",
+    "disease": "Verspannungen, Zerrungen oder Fehlhaltungen führen zu Nacken- und Schulterschmerzen."
+},
+"Vordere Schienbeinmuskeln": {
+    "anatomy": "Die vorderen Schienbeinmuskeln (Tibialis anterior) verlaufen vorne am Unterschenkel entlang der Schienbeinkante.",
+    "function": "Sie ziehen den Fuß nach oben (Dorsalflexion) und stabilisieren beim Gehen.",
+    "disease": "Überlastung führt zu Schmerzen wie Schienbeinkantensyndrom oder Zerrungen."
+},
+"Wadenmuskeln": {
+    "anatomy": "Die Wadenmuskeln (Gastrocnemius und Soleus) liegen hinten am Unterschenkel und setzen an der Ferse an.",
+    "function": "Sie strecken den Fuß nach unten (Plantarflexion) und unterstützen Laufen und Springen.",
+    "disease": "Krämpfe, Zerrungen oder Achillessehnenprobleme treten häufig auf."
+},
+
   "Arme": {
     "anatomy": "Die Arme bestehen aus Oberarm, Unterarm und Hand. Die Knochen – Humerus, Radius und Ulna – sind über Gelenke miteinander verbunden und von Muskeln, Sehnen und Nerven umgeben.",
     "function": "Sie ermöglichen eine Vielzahl von Bewegungen und sind wichtig für Greifen, Tragen und Feinmotorik.",

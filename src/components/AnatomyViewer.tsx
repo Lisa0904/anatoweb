@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import type { ThreeEvent } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Html, useProgress } from "@react-three/drei";
@@ -80,11 +80,12 @@ function LoaderFallback() {
 
 
 
-function Model({ url, onSelect, lastSelectedRef, clearSelection }: {
+function Model({ url, onSelect, lastSelectedRef, clearSelection, setHovered }: {
   url: string;
   onSelect?: (name: string) => void;
   lastSelectedRef: React.MutableRefObject<THREE.Mesh[] | null>;
   clearSelection: () => void;
+  setHovered: (name: string | null) => void; // Neuer Prop
 }){
   const gltf = useGLTF(url) as any;
   const scene: THREE.Object3D = gltf.scene;
@@ -222,11 +223,34 @@ function animateEmissive(
   requestAnimationFrame(update);
 }
 
+// --- NEU: Hover Handler ---
+  function handlePointerOver(e: ThreeEvent<PointerEvent>) {
+    e.stopPropagation();
+    document.body.style.cursor = "pointer"; // Mauszeiger ändern
+    
+    // Name ermitteln (gleiche Logik wie beim Klick)
+    let node: THREE.Object3D | null = e.object;
+    for (let i = 0; i < 8 && node; i++) {
+      if (node.name && node.name.trim() !== "") break;
+      node = node.parent;
+    }
+    const name = node?.name || "Objekt";
+    setHovered(name);
+  }
+
+  function handlePointerOut(e: ThreeEvent<PointerEvent>) {
+    e.stopPropagation();
+    document.body.style.cursor = "auto"; // Mauszeiger zurücksetzen
+    setHovered(null);
+  }
+
   return <primitive
     object={scene}
     onPointerDown={handlePointerDown}
+    onPointerOver={handlePointerOver} // Neu
+    onPointerOut={handlePointerOut}   // Neu
     onPointerMissed={(e) => {
-      e.stopPropagation();
+      // e.stopPropagation(); <-- Das hier entfernen, sonst funktionieren OrbitControls manchmal nicht richtig
       clearSelection();
     }}
   />;
@@ -237,9 +261,60 @@ interface AnatomyViewerProps {
   onSelect?: (name: string, info: string) => void;
 }
 
+// --- NEU: Tooltip Komponente ---
+function Tooltip({ name }: { name: string | null }) {
+  // Wir verwenden useState für die Position, um Re-Renders auszulösen
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Wir setzen die Position direkt aus dem Event
+      // Ein kleiner Offset von 15px verhindert, dass der Cursor den Text verdeckt
+     setPos({ x: e.clientX + 5, y: e.clientY - 20 });
+    };
+
+    if (name) {
+      window.addEventListener("mousemove", handleMouseMove);
+    }
+    
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [name]); // Der Listener wird nur aktiv, wenn ein Name vorhanden ist
+
+  if (!name) return null;
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        // Wir nutzen transform für performante Bewegung
+        transform: `translate(${pos.x}px, ${pos.y}px)`,
+        zIndex: 9999, // Sehr hoch, damit es über allem liegt
+        pointerEvents: "none", // Klicks gehen durch
+        backgroundColor: "rgba(0, 0, 0, 0.85)", // Etwas dunkler für besseren Kontrast
+        color: "white",
+        padding: "4px 8px",
+        borderRadius: "4px",
+        fontSize: "0.85rem",
+        fontFamily: "sans-serif",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+        whiteSpace: "nowrap",
+        border: "1px solid rgba(255, 255, 255, 0.15)",
+        backdropFilter: "blur(4px)",
+        transition: "opacity 0.1s ease", // Sanftes Einblenden
+      }}
+    >
+      {name}
+    </div>
+  );
+}
+
 export default function AnatomyViewer({ modelUrl, onSelect }: AnatomyViewerProps) {
   const lastSelectedRef = useRef<THREE.Mesh[] | null>(null);
-
+const [hoveredName, setHoveredName] = useState<string | null>(null); // State für Tooltip
   
 
 
@@ -267,6 +342,7 @@ function clearSelection() {
   lastSelectedRef.current = null;
 }
   return (
+    <>
     <Canvas
       className="viewer-canvas"
       shadows
@@ -284,7 +360,7 @@ function clearSelection() {
      <hemisphereLight intensity={0.4} color="#ffffff" groundColor="#aaaaaa" />
 
       <Suspense fallback={<LoaderFallback />}>
-        <Model url={modelUrl} onSelect={onSelect} lastSelectedRef={lastSelectedRef} clearSelection={clearSelection} />
+        <Model url={modelUrl} onSelect={onSelect} lastSelectedRef={lastSelectedRef} clearSelection={clearSelection} setHovered={setHoveredName}/>
       </Suspense>
       <EffectComposer>
         <Bloom
@@ -298,5 +374,8 @@ function clearSelection() {
       {/* 🧠 Zielpunkt leicht in Brusthöhe */}
       <OrbitControls target={[0, 1.5, 0]} enablePan enableZoom enableRotate />
     </Canvas>
+    {/* Das Tooltip Overlay */}
+      <Tooltip name={hoveredName} />
+    </>
   );
 }

@@ -87,7 +87,7 @@ useEffect(() => {
             to="/profile"
             className="ctrl-btn primary-cta"
             // Verwende den Profilnamen als Text, hebt sich farblich ab
-            style={{ marginLeft: 10, padding: '8px 15px', fontWeight: 600 }}
+            style={{ marginLeft: 10, padding: '8px 15px' }}
           >
              {username}
           </NavLink>
