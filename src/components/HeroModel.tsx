@@ -14,32 +14,139 @@ function ParticleHuman() {
   const particles = useMemo(() => {
     const count = 1500; // Anzahl der Partikel
     const positions = new Float32Array(count * 3);
-    
-    // Einfache Silhouette: Torso, Kopf, Arme/Beine angedeutet
-    for (let i = 0; i < count; i++) {
-      let x, y, z;
-      
-      // Hauptbereich: Torso (Mitte)
-      if (Math.random() < 0.6) { 
-        x = (Math.random() - 0.5) * 1; // Schmaler Körper
-        y = (Math.random() * 2) - 0.5; // Hauptbereich
-        z = (Math.random() - 0.5) * 0.4;
-      // Kopf
-      } else if (Math.random() < 0.8) { 
-        x = (Math.random() - 0.5) * 0.4;
-        y = (Math.random() * 0.4) + 1.5;
-        z = (Math.random() - 0.5) * 0.3;
-      // Extremitäten (Andeutung)
-      } else {
-        x = (Math.random() - 0.5) * 2; // Breiter streuen
-        y = (Math.random() * 2) - 1.5;
-        z = (Math.random() - 0.5) * 0.5;
-      }
 
-      positions[i * 3 + 0] = x;
-      positions[i * 3 + 1] = y;
-      positions[i * 3 + 2] = z;
-    }
+
+
+
+    // Schleife über alle Partikel
+for (let i = 0; i < count; i++) {
+
+  // x, y, z = Position eines einzelnen Partikels im Raum
+  let x: number, y: number, z: number;
+
+  // Zufallswert zur Entscheidung, welches Körperteil erzeugt wird
+  const r = Math.random();
+
+  // =========================================================
+  // KOPF
+  // =========================================================
+  if (r < 0.22) {
+
+    // Zufälliger Winkel um die Y-Achse (links/rechts)
+    const theta = Math.random() * Math.PI * 2;
+
+    // Zufälliger Winkel von oben nach unten (für Kugelverteilung)
+    const phi = Math.acos(2 * Math.random() - 1);
+
+    // Halbachsen für einen ovalen Kopf (keine perfekte Kugel)
+    const rx = 0.23; // Breite des Kopfes
+    const ry = 0.26; // Höhe des Kopfes
+    const rz = 0.21; // Tiefe des Kopfes
+
+    // X-Position auf der Ovaloberfläche
+    x = Math.sin(phi) * Math.cos(theta) * rx;
+
+    // Y-Position + vertikaler Offset (Kopf sitzt oben auf dem Körper)
+    y = Math.cos(phi) * ry + 1.45;
+
+    // Z-Position auf der Ovaloberfläche
+    z = Math.sin(phi) * Math.sin(theta) * rz;
+
+  // =========================================================
+  // TORSO (Brust + Bauch)
+  // =========================================================
+  } else if (r < 0.55) {
+
+    // Zufallswert entlang der Körperhöhe (oben → unten)
+    const t = Math.random();
+
+    // Breite des Körpers nimmt nach unten leicht ab (konisch)
+    const width = 0.67 * (1 - t * 0.2);
+
+    // X: seitliche Ausdehnung des Oberkörpers
+    x = (Math.random() - 0.5) * width;
+
+    // Y: vertikale Position des Torsos
+    y = t * 1.4 - 0.2;
+
+    // Z: Tiefe des Körpers (Brust → Rücken)
+    z = (Math.random() - 0.5) * 0.38;
+
+  // =========================================================
+  // ARME
+  // =========================================================
+} else if (r < 0.78) {
+
+  const side = Math.random() < 0.5 ? -1 : 1; // links/rechts Arm
+  const armT = Math.random(); // Position entlang Arm (0=Schulter,1=Hand)
+
+  // Radius für volle Dicke → konstant, nicht nur oben oder unten
+  const radius = 0.18; // dick genug
+
+  // Kreisförmig in X/Z für Rundheit
+  const angle = Math.random() * Math.PI * 2;
+
+  // X: horizontal ausgestreckter Arm + Kreis-Rundheit
+  x = side * (0.32 + armT * 0.45 + Math.cos(angle) * radius);
+
+  // Y: Position entlang Arm (leicht nach unten geneigt)
+  y = 1.05 - armT * 0.35;
+
+  // Z: Kreisförmig für Dicke
+  z = Math.sin(angle) * radius;
+
+  // Hand-Andeutung
+  if (armT > 0.85) {
+    x += side * 0.08;
+    y -= 0.03;
+    z += (Math.random() - 0.5) * 0.08;
+  }
+}
+
+
+
+
+
+  // =========================================================
+  // BEINE
+  // =========================================================
+  else {
+
+  const side = Math.random() < 0.5 ? -1 : 1;
+  const legT = Math.random();
+
+  const radius = 0.12; // dicke Beine
+
+  const angle = Math.random() * Math.PI * 2;
+
+  // X: Beine gerade, Rundheit
+  x = side * (0.24 + Math.cos(angle) * radius);
+
+  // Y: vertikal entlang Bein
+  y = -0.2 - legT * 1.7;
+
+  // Z: Rundheit
+  z = Math.sin(angle) * radius;
+
+  // Fuß-Andeutung
+  if (legT > 0.88) {
+    z += 0.14;
+    y -= 0.05;
+  }
+}
+
+
+  // =========================================================
+  // Position des Partikels im Positions-Array speichern
+  // =========================================================
+  positions[i * 3 + 0] = x; // X-Koordinate
+  positions[i * 3 + 1] = y; // Y-Koordinate
+  positions[i * 3 + 2] = z; // Z-Koordinate
+}
+
+
+
+
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
