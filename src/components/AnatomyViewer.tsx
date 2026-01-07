@@ -270,7 +270,7 @@ function Tooltip({ name }: { name: string | null }) {
     const handleMouseMove = (e: MouseEvent) => {
       // Wir setzen die Position direkt aus dem Event
       // Ein kleiner Offset von 15px verhindert, dass der Cursor den Text verdeckt
-     setPos({ x: e.clientX + 5, y: e.clientY - 20 });
+     setPos({ x: e.clientX + 8, y: e.clientY + 8 });
     };
 
     if (name) {
@@ -286,29 +286,29 @@ function Tooltip({ name }: { name: string | null }) {
 
   return (
     <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        // Wir nutzen transform für performante Bewegung
-        transform: `translate(${pos.x}px, ${pos.y}px)`,
-        zIndex: 9999, // Sehr hoch, damit es über allem liegt
-        pointerEvents: "none", // Klicks gehen durch
-        backgroundColor: "rgba(0, 0, 0, 0.85)", // Etwas dunkler für besseren Kontrast
-        color: "white",
-        padding: "4px 8px",
-        borderRadius: "4px",
-        fontSize: "0.85rem",
-        fontFamily: "sans-serif",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-        whiteSpace: "nowrap",
-        border: "1px solid rgba(255, 255, 255, 0.15)",
-        backdropFilter: "blur(4px)",
-        transition: "opacity 0.1s ease", // Sanftes Einblenden
-      }}
-    >
-      {name}
-    </div>
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      transform: `translate(${pos.x}px, ${pos.y}px)`,
+      zIndex: 9999,
+      pointerEvents: "none",
+      backgroundColor: "rgba(0, 0, 0, 0.85)",
+      color: "white",
+      padding: "2px 6px", // Kleineres Padding macht ihn kompakter
+      borderRadius: "4px",
+      fontSize: "0.75rem", // Etwas kleiner wirkt oft "näher"
+      fontFamily: "sans-serif",
+      boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
+      whiteSpace: "nowrap",
+      border: "1px solid rgba(255, 255, 255, 0.2)",
+      backdropFilter: "blur(4px)",
+      // WICHTIG: Entferne oder verkürze die Transition für die Position!
+      transition: "opacity 0.1s ease", 
+    }}
+  >
+    {name}
+  </div>
   );
 }
 

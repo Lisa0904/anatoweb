@@ -210,7 +210,7 @@ if (rating === "good") {
       onClick={() => navigate('/memory')} 
       className="ctrl-btn"
       // Style angepasst an die Mute-Taste, aber als normale ctrl-btn
-      style={{ fontSize: '0.9rem', padding: '6px 14px', borderRadius: '20px', fontWeight: 500 }}
+      style={{ fontSize: '0.9rem', padding: '6px 14px', borderRadius: '20px', fontWeight: 500}}
     >
       Anatomemory
     </button>
