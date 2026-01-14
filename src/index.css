@@ -977,7 +977,7 @@ body::after {
 :root.light .ctrl-btn,
 :root.light .home-action-btn,
 :root.light .topic-btn {
-  background: rgba(247, 243, 243, 0.986) !important;
+  background: rgba(247, 243, 243, 0.862) !important;
   /* sichtbar, aber weich */
   color: #1a1a1a !important;
   border: 1px solid rgba(0, 143, 69, 0.818) !important;
