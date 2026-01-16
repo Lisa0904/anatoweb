@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Canvas } from "@react-three/fiber";
 import type { ThreeEvent } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Html, useProgress } from "@react-three/drei";
@@ -261,16 +262,14 @@ interface AnatomyViewerProps {
   onSelect?: (name: string, info: string) => void;
 }
 
-// --- NEU: Tooltip Komponente ---
+
+// --- Tooltip Komponente (Mit Portal fixiert) ---
 function Tooltip({ name }: { name: string | null }) {
-  // Wir verwenden useState für die Position, um Re-Renders auszulösen
   const [pos, setPos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // Wir setzen die Position direkt aus dem Event
-      // Ein kleiner Offset von 15px verhindert, dass der Cursor den Text verdeckt
-     setPos({ x: e.clientX + 8, y: e.clientY + 8 });
+      setPos({ x: e.clientX, y: e.clientY });
     };
 
     if (name) {
@@ -280,35 +279,35 @@ function Tooltip({ name }: { name: string | null }) {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [name]); // Der Listener wird nur aktiv, wenn ein Name vorhanden ist
+  }, [name]);
 
   if (!name) return null;
 
-  return (
+  // createPortal "beamt" das Div aus dem .viewer Container direkt in den Body
+  return createPortal(
     <div
-    style={{
-      position: "fixed",
-      top: 0,
-      left: 0,
-      transform: `translate(${pos.x}px, ${pos.y}px)`,
-      zIndex: 9999,
-      pointerEvents: "none",
-      backgroundColor: "rgba(0, 0, 0, 0.85)",
-      color: "white",
-      padding: "2px 6px", // Kleineres Padding macht ihn kompakter
-      borderRadius: "4px",
-      fontSize: "0.75rem", // Etwas kleiner wirkt oft "näher"
-      fontFamily: "sans-serif",
-      boxShadow: "0 2px 5px rgba(0,0,0,0.3)",
-      whiteSpace: "nowrap",
-      border: "1px solid rgba(255, 255, 255, 0.2)",
-      backdropFilter: "blur(4px)",
-      // WICHTIG: Entferne oder verkürze die Transition für die Position!
-      transition: "opacity 0.1s ease", 
-    }}
-  >
-    {name}
-  </div>
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        // +10px Offset, damit der Mauszeiger den Text nicht verdeckt
+        transform: `translate3d(${pos.x + 10}px, ${pos.y + 10}px, 0)`,
+        zIndex: 99999, 
+        pointerEvents: "none", // Klicks gehen durch
+        backgroundColor: "rgba(0, 0, 0, 0.9)", 
+        color: "#fff",
+        padding: "4px 8px",
+        borderRadius: "4px",
+        fontSize: "0.8rem",
+        fontWeight: "600",
+        whiteSpace: "nowrap",
+        border: "1px solid var(--accent)", 
+        boxShadow: "0 2px 10px rgba(0,0,0,0.5)",
+      }}
+    >
+      {name}
+    </div>,
+    document.body // Ziel des Portals
   );
 }
 

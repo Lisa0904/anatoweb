@@ -1,12 +1,14 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload } from "@react-three/drei";
 import * as THREE from "three";
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect, useState } from "react";
+
 
 // =======================================================
 // NEUE KOMPONENTE: Partikel-Mensch-Darstellung
 // =======================================================
-function ParticleHuman() {
+function ParticleHuman({ color }: { color: number }) {
+
   const mesh = useRef<THREE.Points>(null);
   
   // 1. Partikel-Geometrie und Positionen erzeugen (statisch)
@@ -167,13 +169,14 @@ for (let i = 0; i < count; i++) {
     }
   });
 
-  const mat = new THREE.PointsMaterial({
-    color: 0x32e36a, 
-    size: 0.05,        // Größe der einzelnen Partikel
-    transparent: true,
-    opacity: 0.9,
-    sizeAttenuation: true // Partikel werden in der Entfernung kleiner
-  });
+ const mat = new THREE.PointsMaterial({
+  color: color,
+  size: 0.05,
+  transparent: true,
+  opacity: 0.9,
+  sizeAttenuation: true
+});
+
 
   return (
     <points ref={mesh} geometry={particles} material={mat} scale={1.2} />
@@ -184,6 +187,18 @@ for (let i = 0; i < count; i++) {
 // HAUPTKOMPONENTE
 // =======================================================
 export default function HeroModel() {
+  const [isLightMode, setIsLightMode] = useState(false);
+
+useEffect(() => {
+  const media = window.matchMedia("(prefers-color-scheme: light)");
+  setIsLightMode(media.matches);
+
+  const listener = (e: MediaQueryListEvent) => setIsLightMode(e.matches);
+  media.addEventListener("change", listener);
+
+  return () => media.removeEventListener("change", listener);
+}, []);
+
   return (
     <div
       style={{
@@ -204,7 +219,8 @@ export default function HeroModel() {
       >
         <ambientLight intensity={2} /> 
 
-        <ParticleHuman />
+        <ParticleHuman color={isLightMode ? "#1f7a45" : "#00ff55"} />
+
 
         {/* OrbitControls für Maus-Steuerung und Eigenrotation */}
         <OrbitControls
@@ -219,4 +235,5 @@ export default function HeroModel() {
       </Canvas>
     </div>
   );
+
 }

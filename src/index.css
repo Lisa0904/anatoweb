@@ -296,6 +296,10 @@ body {
   margin: 0 auto;
 }
 
+/* Verhindert, dass Layout-Animationen den Tooltip verzögern */
+#root + div, .viewer + div {
+  transition: none !important;
+}
 
 /* Home / hero */
 .home {
