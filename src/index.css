@@ -244,7 +244,15 @@ body {
 .theme-switch .icon {
   font-size: 20px;
   transition: transform 0.35s ease;
+
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+
 
 /* Rotation */
 .theme-switch .icon.light {
@@ -255,15 +263,15 @@ body {
   transform: rotate(180deg);
 }
 
+
 .theme-icon {
-  width: 100%; /* Füllt den 35x35px Bereich des Buttons */
-  height: auto;
-  
-  /* 🎨 FÄRBE SVG/PNG-ICON GRÜN UM (Filter ist nötig, da es ein Bild ist) */
-  /* Da die Icons grün sind, nutzen wir Filter, um sie neutral zu färben */
-  filter: saturate(0) brightness(0.6); /* De-saturiert und verdunkelt für Dark Mode */
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: saturate(0) brightness(0.6);
   transition: all 0.3s ease;
 }
+
 
 /* Light Mode: Schwarzes Icon auf weißem Hintergrund */
 :root.light .theme-icon {
@@ -272,7 +280,7 @@ body {
 
 /* Hover Effekt für das Icon */
 .theme-switch:hover .theme-icon {
-    filter: saturate(1) brightness(1.1) drop-shadow(0 0 4px var(--accent)); /* Grüner Glow beim Hover */
+    filter: saturate(1) brightness(1.4) drop-shadow(0 0 4px var(--accent)); /* Grüner Glow beim Hover */
 }
 
 .main-content {
@@ -296,10 +304,6 @@ body {
   margin: 0 auto;
 }
 
-/* Verhindert, dass Layout-Animationen den Tooltip verzögern */
-#root + div, .viewer + div {
-  transition: none !important;
-}
 
 /* Home / hero */
 .home {
@@ -361,7 +365,7 @@ body {
   opacity: 0;
   transition: opacity 0.4s ease-in-out;
   pointer-events: none;
-  border: 1px solid green;
+  border: 1px solid #008000;
 }
 
 .hero-text {
