@@ -189,28 +189,25 @@ if (rating === "good") {
       Gut
     </button>
     <button className="rating-btn great" onClick={() => handleRating("great")}>
-      Sehr gut
+      Gelernt
     </button>
   </div>
 )}
 
-<div className="utility-buttons-row" style={{ marginTop: '30px', display: 'flex', justifyContent: 'center', gap: '15px' }}>
+<div className="utility-buttons-row">
     {/* Sound Button */}
     <button 
       onClick={() => setIsMuted((prev) => !prev)} 
       className="sound-toggle-btn" 
       aria-label="Toggle Sound"
-      title={isMuted ? 'Ton anschalten' : 'Ton ausschalten'}
     >
-      {isMuted ? '🔇 Ton ist aus' : '🔊 Ton ist an'}
+      {isMuted ? '🔇 Ton aus' : '🔊 Ton an'}
     </button>
 
-    {/* ✅ NEU: Memory Button */}
+    {/* Anatomemory Button */}
     <button 
       onClick={() => navigate('/memory')} 
-      className="ctrl-btn"
-      // Style angepasst an die Mute-Taste, aber als normale ctrl-btn
-      style={{ fontSize: '0.9rem', padding: '6px 14px', borderRadius: '20px', fontWeight: 500}}
+      className="memory-link-btn"
     >
       Anatomemory
     </button>

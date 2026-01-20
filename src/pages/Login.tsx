@@ -44,7 +44,7 @@ export default function Login() {
       }
       
       // 2. Erfolg: Navigation
-      navigate("/model"); 
+      navigate("/"); 
     }
     
     setLoading(false);

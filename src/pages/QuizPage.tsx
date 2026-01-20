@@ -67,44 +67,53 @@ export default function QuizPage() {
  function answer(i: number) {
     if (locked) return;
     
-    const isCorrect = i === q.correct;
-    
-    // Status der aktuellen Frage aktualisieren (bevor sie gespeichert wird)
+    // Wir speichern nur die Auswahl und sperren die Frage,
+    // setzen aber revealCorrect noch NICHT auf true.
     setSelected(i);
     setLocked(true);
-    setRevealCorrect(true); // Korrektur anzeigen
     
-    // ✅ NEU: Status für die aktuelle Fragen-ID speichern
+    // Den Timer für das automatische Umblättern löschen wir, 
+    // da der User jetzt manuell auf "Weiter" klicken soll, um die Auflösung zu sehen.
+    if (autoNextTimer) clearTimeout(autoNextTimer);
+
+    // Status speichern (ohne Reveal)
     setQuestionStates(prev => ({
         ...prev,
-        [index]: { selected: i, locked: true, reveal: true }
+        [index]: { selected: i, locked: true, reveal: false } // reveal bleibt false
     }));
-
-
-    if (isCorrect) {
-        if (!answeredCorrectly[index]) {
-            setScore((s) => s + 1);
-            setAnsweredCorrectly((prev) => {
-                const copy = [...prev];
-                copy[index] = true;
-                return copy;
-            });
-        }
-    }
-
-
-    // Optional: Soundeffekt ...
-
-    const timer = setTimeout(nextQuestion, 8000);
-    setAutoNextTimer(timer);
   }
 
- function nextQuestion() {
+function nextQuestion() {
   if (autoNextTimer) clearTimeout(autoNextTimer);
+
+  // FALL A: Nutzer hat gewählt, aber die Auflösung ist noch nicht zu sehen
+  if (selected !== null && !revealCorrect) {
+    setRevealCorrect(true);
+    
+    // Score erst hier berechnen, wenn die Auflösung gezeigt wird
+    const isCorrect = selected === q.correct;
+    if (isCorrect && !answeredCorrectly[index]) {
+      setScore((s) => s + 1);
+      setAnsweredCorrectly((prev) => {
+        const copy = [...prev];
+        copy[index] = true;
+        return copy;
+      });
+    }
+
+    // Zustand im Cache aktualisieren
+    setQuestionStates(prev => ({
+      ...prev,
+      [index]: { ...prev[index], reveal: true }
+    }));
+    return; // Funktion hier abbrechen, damit wir nicht sofort zur nächsten Frage springen
+  }
+
+  // FALL B: Auflösung ist schon da oder noch nichts gewählt -> Weiter zur nächsten Frage
   if (index < questions.length - 1) {
     const newIndex = index + 1;
     setIndex(newIndex);
-    loadQuestionState(newIndex); // Zustand der nächsten Frage laden
+    loadQuestionState(newIndex);
   } else {
     setShowResult(true);
   }
@@ -228,20 +237,28 @@ function loadQuestionState(newIndex: number) {
 
             <div style={{ display: "grid", gap: 12, marginTop: 20 }}>
               {q.answers.map((a: string, i: number) => {
-                const isCorrect = revealCorrect && i === q.correct;
-                const isWrong = selected === i && selected !== q.correct;
-                return (
-                  <button
-                    key={i}
-                    onClick={() => answer(i)}
-                    className={`ctrl-btn quiz-answer-btn ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}`}
-                    style={{ pointerEvents: locked ? "none" : "auto" }}
-                    type="button"
-                  >
-                    {a}
-                  </button>
-                );
-              })}
+  // Richtig/Falsch Farben nur anzeigen, wenn revealCorrect true ist
+  const isCorrect = revealCorrect && i === q.correct;
+  const isWrong = revealCorrect && selected === i && selected !== q.correct;
+  
+  // Grau markieren, wenn ausgewählt, aber noch nicht aufgelöst
+  const isSelectedNeutral = !revealCorrect && selected === i;
+
+  return (
+    <button
+      key={i}
+      onClick={() => answer(i)}
+      className={`ctrl-btn quiz-answer-btn 
+        ${isCorrect ? "correct" : ""} 
+        ${isWrong ? "wrong" : ""} 
+        ${isSelectedNeutral ? "selected-neutral" : ""}`} // Neue Klasse
+      style={{ pointerEvents: locked ? "none" : "auto" }}
+      type="button"
+    >
+      {a}
+    </button>
+  );
+})}
             </div>
 
             {/* Navigation */}
@@ -256,9 +273,19 @@ function loadQuestionState(newIndex: number) {
                 >
                   ← Zurück
                 </button>
-                <button className="ctrl-btn quiz-answer-btn" onClick={nextQuestion}>
-                  Weiter →
-                </button>
+                <button 
+  className="ctrl-btn quiz-answer-btn" 
+  onClick={nextQuestion}
+  disabled={selected === null}
+  style={{ 
+    opacity: selected === null ? 0.5 : 1,
+    // Wenn ausgewählt aber noch nicht aufgelöst -> Auffälliges Grün
+    background: (selected !== null && !revealCorrect) ? 'var(--accent)' : '',
+    color: (selected !== null && !revealCorrect) ? '#000' : ''
+  }}
+>
+  {selected !== null && !revealCorrect ? "Auflösung zeigen" : "Weiter →"}
+</button>
               </div>
             </div>
           </div>

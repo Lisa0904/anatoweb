@@ -196,19 +196,48 @@ body {
 }
 
 /* Footer Links – gleiche Farbe + hübscher Hover */
+/* Footer Links Basis-Style */
 .site-footer a {
-  color: var(--text);
-  text-decoration: none;
+  color: #666; /* oder var(--muted) je nach Geschmack */
+  text-decoration: none; /* Wichtig: Standard-Unterstreichung entfernen */
   padding: 2px 4px;
-  border-radius: 6px;
+  border-radius: 6px; /* Falls du den Hintergrund-Hover behalten willst */
   transition: 0.25s ease;
-  color: #666;
+  position: relative; /* WICHTIG für die Linie */
 }
 
-.site-footer a:hover {
-  background: var(--glass);
-  color: var(--text-strong);
+/* Die Linie (wird initial ausgeblendet/klein) */
+.site-footer a::after {
+  content: '';
+  position: absolute;
+  width: 0; /* Startet bei 0 Breite */
+  height: 2px; /* Dicke der Linie */
+  bottom: 0px; /* Position am unteren Rand */
+  left: 0;
+  background-color: var(--accent); /* Deine grüne Akzentfarbe */
+  transition: width 0.3s ease-in-out; /* Die Animation */
+}
 
+/* Hover-Effekt: Linie wächst auf 100% */
+.site-footer a:hover::after {
+  width: 100%;
+}
+
+/* Optional: Textfarbe beim Hover ändern */
+.site-footer a:hover {
+  background: transparent !important; /* Hintergrund-Hover entfernen, damit nur Linie wirkt */
+  color: var(--text-strong);
+}
+
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
 }
 
 .theme-switch {
@@ -750,6 +779,7 @@ h3 {
 }
 
 
+
 .ctrl-btn.active {
   background: rgba(34, 197, 94, 0.2);
   color: var(--accent);
@@ -769,6 +799,34 @@ h3 {
   background-color: #d53434e2 !important; 
 }
 
+/* 1. Zustand: Antwort wurde ausgewählt, aber noch nicht aufgelöst (Grau/Neutral) */
+.quiz-answer-btn.selected-neutral {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: var(--muted) !important;
+  color: var(--text-strong) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Light Mode für den neutralen Auswahlzustand */
+:root.light .quiz-answer-btn.selected-neutral {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-color: #666 !important;
+  color: #000 !important;
+}
+
+/* 2. Sicherstellen, dass die Farben erst bei 'correct' oder 'wrong' greifen */
+.ctrl-btn.correct {
+  background: #22c55e !important;
+  color: #000 !important;
+  border-color: #16a34a !important;
+}
+
+.ctrl-btn.wrong {
+  background: #d53434 !important;
+  color: #fff !important;
+  border-color: #b91c1c !important;
+}
 
 /* 🎥 Home Video Animation */
 @keyframes videoPulse {

@@ -50,7 +50,7 @@ export default function Register() {
         <form onSubmit={handleRegister}>
           
           <div className="input-group">
-            <label htmlFor="username">Dein Benutzername (für die Rangliste)</label>
+            <label htmlFor="username">Dein Benutzername</label>
             <input
               type="text"
               id="username"
@@ -58,7 +58,7 @@ export default function Register() {
               onChange={(e) => setUsername(e.target.value)}
               required
               minLength={3}
-              placeholder="Jonas_Anatomie_Profi"
+              placeholder="Tom_Anatomie_Profi"
             />
           </div>
 
