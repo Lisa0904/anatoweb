@@ -1,7 +1,6 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import quizData from "../data/quiz.json";
 import "../Flashcards.css";
-import { useEffect } from "react";
 import { type AnatomyTopic as Topic, TOPIC_OPTIONS_ALL } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +19,7 @@ export default function Flashcards() {
 
   // 🧠 Filtere Fragen nach gewähltem Themengebiet
   const questions = useMemo(() => {
-    const filtered = quizData.questions.filter((q: any) =>
+     const filtered = quizData.questions.filter((q) =>
       topic === "Alle" ? true : q.topic === topic
     );
     return filtered.length > 0 ? filtered : quizData.questions;
@@ -42,77 +41,77 @@ export default function Flashcards() {
 
  
 
-  function handleFlip() {
+    const handleFlip = useCallback(() => {
     if (fading) return;
 
-   // 🔊 Flip-Sound abspielen (nur wenn nicht gemutet)
-if (!isMuted) {
-  const audio = new Audio("/sounds/swoosh.mp3"); // Pfad zur Datei im public-Ordner
-  audio.volume = 0.05;
-  audio.play();
-}
+    // 🔊 Flip-Sound abspielen (nur wenn nicht gemutet)
+    if (!isMuted) {
+      const audio = new Audio("/sounds/swoosh.mp3");
+      audio.volume = 0.05;
+      audio.play();
+    }
 
     setFlipped((prev) => !prev);
-  }
+  }, [fading, isMuted]);
+
 
 
   // ✨ Wechsel zur nächsten Karte (sofort neuer Inhalt)
-  function nextCard() {
-  setFading(true);
-  setFlipped(false);
-
-  setTimeout(() => {
-    setIndex((i) => (i + 1 >= deck.length ? 0 : i + 1));
-    setFading(false);
-  }, 150);
-}
-
-
-  function handleRating(rating: "repeat" | "good" | "great") {
-  const card = deck[index];
-
-  // === Repeat: Karte wieder hinten anhängen ===
-  if (rating === "repeat") {
-    setDeck((d) => [...d, card]);
-    setIndex((i) => (i + 1 >= deck.length ? 0 : i + 1));
+  const nextCard = useCallback(() => {
+    setFading(true);
     setFlipped(false);
-    return;
-  }
 
-// === Good: Karte ans Ende verschieben (Spaced Repetition) ===
-if (rating === "good") {
-  setDeck((d) => {
-    const newDeck = d.filter((_, i) => i !== index);
-    return [...newDeck, card]; // Karte kommt ans Ende
-  });
-  // Index bleibt gleich, da die nächste Karte automatisch an die Position rückt
-  setFlipped(false);
-  return;
-}
+    setTimeout(() => {
+      setIndex((i) => (i + 1 >= deck.length ? 0 : i + 1));
+      setFading(false);
+    }, 150);
+  }, [deck.length]);
 
-  // === Great: Karte wird gelöscht ===
-  if (rating === "great") {
-    setDeck((d) => {
-      const newDeck = d.filter((_, i) => i !== index);
 
-      // Wenn jetzt 0 Karten übrig → fertig
-      if (newDeck.length === 0) {
-        setShowFinished(true);
-        return [];
-      }
 
-      // Wenn wir auf der letzten waren → Index korrigieren
-      setIndex((i) =>
-        i >= newDeck.length ? newDeck.length - 1 : i
-      );
+  const handleRating = useCallback((rating: "repeat" | "good" | "great") => {
+    const card = deck[index];
 
-      return newDeck;
-    });
+    // === Repeat: Karte wieder hinten anhängen ===
+    if (rating === "repeat") {
+      setDeck((d) => [...d, card]);
+      setIndex((i) => (i + 1 >= deck.length ? 0 : i + 1));
+      setFlipped(false);
+      return;
+    }
 
-    setFlipped(false);
-    return;
-  }
-}
+    // === Good: Karte ans Ende verschieben (Spaced Repetition) ===
+    if (rating === "good") {
+      setDeck((d) => {
+        const newDeck = d.filter((_, i) => i !== index);
+        return [...newDeck, card];
+      });
+      setFlipped(false);
+      return;
+    }
+
+    // === Great: Karte wird gelöscht ===
+    if (rating === "great") {
+      setDeck((d) => {
+        const newDeck = d.filter((_, i) => i !== index);
+
+        if (newDeck.length === 0) {
+          setShowFinished(true);
+          return [];
+        }
+
+        setIndex((i) =>
+          i >= newDeck.length ? newDeck.length - 1 : i
+        );
+
+        return newDeck;
+      });
+
+      setFlipped(false);
+      return;
+    }
+  }, [deck, index]);
+
 
 
 
@@ -131,7 +130,7 @@ if (rating === "good") {
             key={t}
             onClick={() => {
               setShowFinished(false);
-              setTopic(t as Topic);
+              setTopic(t);
               setIndex(0);
               setFlipped(false);
             }}
@@ -173,6 +172,18 @@ if (rating === "good") {
   <p className="finished-sub">
     Wähle oben ein anderes Themengebiet, um weiterzulernen.
   </p>
+
+  <button 
+    className="ctrl-btn primary-cta" 
+    style={{ marginTop: '1.5rem' }}
+    onClick={() => {
+      setShowFinished(false);
+      setDeck(questions);
+      setIndex(0);
+    }}
+  >
+    Erneut üben
+  </button>
 </div>
   )}
 </div>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import AnatomyViewer from "../components/AnatomyViewer";
 import InfoTabs from "../components/InfoTabs";
 import { type AnatomyTopic as Topic, TOPIC_OPTIONS_MODEL } from "../utils/constants";
@@ -23,6 +23,10 @@ export default function ModelPage() {
 
 
   const currentModelUrl = modelPaths[topic];
+
+  const handleSelect = useCallback((objName: string, info: string) => {
+    setSelected({ name: objName, info });
+  }, []);
 
 
   return (
@@ -56,7 +60,7 @@ export default function ModelPage() {
           <AnatomyViewer
             key={currentModelUrl}
             modelUrl={currentModelUrl}
-            onSelect={(objName, info) => setSelected({ name: objName, info })}
+            onSelect={handleSelect}
           />
         </div>
 

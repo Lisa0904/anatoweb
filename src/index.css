@@ -1,34 +1,85 @@
 :root {
-  --bg: #131313;
-  --panel: #070707;
-  --glass: rgba(255, 255, 255, 0.03);
-  /* Änderung von Anne: --glass: rgba(44, 78, 41, 0); */
+/* === COLORS === */
+--bg: #0a0a0a;
+--panel: #141414;
+--glass: rgba(255, 255, 255, 0.04);
 
-  --text: #d1d1d2;
-  --text-strong: #d5d5d7;
-  --muted: #cbd2df;
+--text: #e5e5e5;
+--text-strong: #ffffff;
+--muted: #a1a1a1;
 
-  --accent: #22c55e;
+/* Accent Color Palette */
+--accent: #22c55e;
+--accent-dark: #16a34a;
+--accent-light: #34d399;
+--accent-glow: rgba(34, 197, 94, 0.3);
 
-  --font-main: "Inter", "SF Pro Text", system-ui, sans-serif;
-  --page-width: 1450px;
+/* Semantic Colors */
+--success: #22c55e;
+--error: #ef4444;
+--warning: #f59e0b;
+--info: #3b82f6;
+
+/* === TYPOGRAPHY === */
+--font-main: "Inter", "SF Pro Text", system-ui, sans-serif;
+
+/* Font Sizes */
+--text-xs: 0.75rem;
+--text-sm: 0.875rem;
+--text-base: 1rem;
+--text-lg: 1.125rem;
+--text-xl: 1.25rem;
+--text-2xl: 1.5rem;
+--text-3xl: 1.875rem;
+--text-4xl: 2.25rem;
+--text-5xl: 3rem;
+
+/* Line Heights */
+--leading-tight: 1.25;
+--leading-normal: 1.5;
+--leading-relaxed: 1.75;
+
+/* === SPACING === */
+--space-1: 0.25rem;
+--space-2: 0.5rem;
+--space-3: 0.75rem;
+--space-4: 1rem;
+--space-5: 1.25rem;
+--space-6: 1.5rem;
+--space-8: 2rem;
+--space-10: 2.5rem;
+--space-12: 3rem;
+--space-16: 4rem;
+
+/* === LAYOUT === */
+--page-width: 1450px;
 }
+
 
 /* LIGHT MODE */
 :root.light {
-  --bg: #f5f1e2c5;
-  --panel: #fdfdfd;
-  --glass: rgba(0, 0, 0, 0.05);
+/* === COLORS === */
+--bg: #fafaf9;
+--panel: #fdfdfd;
+--glass: rgba(0, 0, 0, 0.05);
 
-  --text: #1a1a1a;
-  --text-strong: #000;
-  --muted: #252525;
-  
-  --accent: #22c55e;
+--text: #1a1a1a;
+--text-strong: #000;
+--muted: #252525;
 
-  --font-main: "Inter", "SF Pro Text", system-ui, sans-serif;
-  --page-width: 1450px;
+/* Accent im Light Mode dunkler für Kontrast */
+--accent: #16a34a;
+--accent-dark: #15803d;
+--accent-light: #22c55e;
+--accent-glow: rgba(22, 163, 74, 0.2);
+
+/* Semantic Colors bleiben gleich */
+--success: #16a34a;
+--error: #dc2626;
+--warning: #ea580c;
+--info: #2563eb;
 }
+
 
 * {
   box-sizing: border-box;
@@ -89,21 +140,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 42px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 18px 32px; /* war 42px - zu viel Platz */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* stärker */
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
   border-radius: 12px;
 }
 
 :root.light .nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 42px;
-  border-bottom: 1px solid rgba(224, 223, 221, 0.31);
-  background: linear-gradient(180deg, rgba(226, 215, 208, 0.303), transparent);
+  padding: 18px 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* klarer */
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
   border-radius: 12px;
 }
+
 
 
 
@@ -128,7 +177,8 @@ body {
 
 .links {
   display: flex;
-  gap: 14px;
+  gap: 8px;
+  align-items: center;
 }
 
 
@@ -229,16 +279,6 @@ body {
   color: var(--text-strong);
 }
 
-.footer-links a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 1px;
-  bottom: -2px;
-  left: 0;
-  background-color: var(--accent);
-  transition: width 0.3s ease;
-}
 
 .theme-switch {
   position: absolute;
@@ -362,6 +402,11 @@ body {
   opacity: 0.9;
 }
 
+:root.light .hero-eyebrow {
+  color: #15803d;
+  opacity: 1;
+}
+
 /* Video container (keine funktionale Änderung: nur Styles statt inline) */
 .home-video {
   max-width: 900px;
@@ -414,12 +459,13 @@ body {
 .home-actions {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-top: 32px;
+  gap: var(--space-5);      /* 20px */
+  margin-top: var(--space-10); /* 40px */
   flex-wrap: wrap;
   position: relative; 
   z-index: 10;
 }
+
 
 /* helper: make home buttons slightly wider */
 .home-action-btn {
@@ -428,39 +474,52 @@ body {
 }
 
 .primary-cta {
-  background: #34d573 !important;
-  color: #000 !important;
-  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35) !important;
-  font-weight: 600;
-}
-
-.primary-cta-two {
-  color: #d2d1d1 !important;
-  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35) !important;
-  font-weight: 600;
+background: var(--accent) !important;
+color: #000 !important;
+border-color: var(--accent-dark) !important;
+font-weight: 600;
+box-shadow: 0 4px 14px var(--accent-glow) !important;
 }
 
 .primary-cta:hover {
-  background: #34d573 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.45) !important;
+background: var(--accent-light) !important;
+color: #000 !important;
+transform: translateY(-2px);
+box-shadow: 0 6px 20px var(--accent-glow) !important;
 }
 
-/* LIGHT MODE: Primary CTA Button (FINALE KORREKTUR FÜR KONTRAST und TIEFE) */
-:root.light .primary-cta {
- background: #34d573 !important;
-  color: #000 !important;
+
+/* In index.css nach Zeile 563 ERSETZE: */
+.primary-cta-two {
+  background: rgba(34, 197, 94, 0.15) !important; /* Stärker */
+  color: var(--text-strong) !important; /* Weißer Text */
+  border: 1px solid rgba(34, 197, 94, 0.4) !important; /* Stärkerer Rand */
   box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35) !important;
   font-weight: 600;
 }
 
-/* LIGHT MODE: Primary CTA Hover */
-:root.light .primary-cta:hover {
-  background: #34d573 !important; /* Etwas helleres Grün beim Hover */
+.primary-cta-two:hover {
+  background: rgba(34, 197, 94, 0.25) !important;
   transform: translateY(-2px);
-  /* Starker, aber dezenterer Schatten */
-  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.4) !important; 
+  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.45) !important;
 }
+
+
+/* Light Mode: Primary CTA Two (Anatomie-Explorer Button auf Home) */
+:root.light .primary-cta-two {
+  background: rgba(22, 163, 74, 0.12) !important; /* Leichter grüner Hintergrund */
+  color: var(--text-strong) !important; /* Schwarzer Text statt grau */
+  border: 1px solid rgba(22, 163, 74, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.15) !important;
+}
+
+:root.light .primary-cta-two:hover {
+  background: rgba(22, 163, 74, 0.18) !important;
+  color: var(--text-strong) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25) !important;
+}
+
 
 
 /* Ensure the page background covers the whole viewport and doesn't create strips */
@@ -486,11 +545,18 @@ body {
 /* Themenauswahl Buttons */
 .topic-selector {
   display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: var(--space-2); /* 8px - kompakter */
+  margin-bottom: var(--space-5); /* 20px */
   justify-content: center;
   flex-wrap: wrap;
 }
+
+/* Kleinere Buttons im Topic Selector */
+.topic-selector .ctrl-btn {
+  padding: var(--space-2) var(--space-4); /* 8px 16px */
+  font-size: 0.875rem; /* Kleinere Schrift */
+}
+
 
 .viewer-canvas {
   height: 550px;
@@ -586,29 +652,32 @@ body {
 }
 
 .title {
-  font-size: 46px;
-  font-weight: 700;
-  margin-bottom: 0.5em;
-  /* kleiner */
-  text-align: center;
-  color: var(--text-strong);
+font-size: var(--text-4xl);
+font-weight: 700;
+line-height: var(--leading-tight);
+margin-bottom: 0.75rem;
+text-align: center;
+color: var(--text-strong);
+letter-spacing: -0.02em;
 }
 
 .title.gradient {
-  background: linear-gradient(90deg, var(--accent), #b7ffc9);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
-  letter-spacing: -0.02em;
-  text-align: center;
-  font-size: 55px;
-  text-transform: uppercase;
+background: linear-gradient(90deg, var(--accent), var(--accent-light));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+text-fill-color: transparent;
+letter-spacing: -0.03em;
+text-align: center;
+font-size: var(--text-5xl);
+line-height: 1.1;
+text-transform: uppercase;
 }
 
+
 :root.light .title.gradient {
-  background: linear-gradient(90deg, #15803d, #22c55e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+background: linear-gradient(90deg, #15803d, #16a34a);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
 
 
@@ -693,12 +762,17 @@ h3 {
   border-right: none;
 }
 
-/* LIGHTMODE: neutrales Hover für Tabs (kein Grün!) */
-:root.light .tab:hover {
-  background: rgba(34, 197, 94, 0.18) !important;
-  color: #111 !important;
+/* LIGHTMODE: neutrales Hover für Tabs (kein Grün beim Hover auf inaktive Tabs!) */
+:root.light .tab:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.06) !important; /* Neutrales Grau */
+  color: var(--text-strong) !important;
   transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+
+:root.light .lead {
+  color: #525252; /* Dunkler als --muted für bessere Lesbarkeit */
 }
 
 /* reusable section box to visually separate content areas */
@@ -725,16 +799,23 @@ h3 {
 
 /* organ info */
 .info-title {
-  font-size: 25px;
+  font-size: 1.5rem; /* Konsistent mit anderen Überschriften */
   color: var(--text-strong);
-  margin-bottom: 12px;
-
+  margin-bottom: var(--space-3);
+  font-weight: 700;
 }
 
 .info-text {
-  color: var(--muted);
-  line-height: 1.6
+  color: var(--text); /* Statt --muted - besserer Kontrast */
+  line-height: var(--leading-relaxed);
+  font-size: var(--text-base);
 }
+
+/* Light Mode: Info Text noch dunkler */
+:root.light .info-text {
+  color: #3f3f46; /* Dunkleres Grau für besseren Kontrast */
+}
+
 
 /* small controls */
 .viewer-controls {
@@ -747,86 +828,233 @@ h3 {
 }
 
 .ctrl-btn {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 12px 20px;
-  border-radius: 12px;
-  color: var(--text);
-  cursor: pointer;
-  
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.25s ease;
-  border: 1px solid rgba(3, 117, 58, 0.368) !important;
-  box-shadow: 0 2px 8px rgba(5, 99, 55, 0.175);
-  
+/* Layout */
+padding: var(--space-3) var(--space-5);
+border-radius: 10px;
+
+/* Style */
+background: rgba(255, 255, 255, 0.06);
+border: 1px solid rgba(34, 197, 94, 0.2);
+color: var(--text);
+
+/* Typography */
+font-size: 0.95rem;
+font-weight: 500;
+letter-spacing: 0.01em;
+text-decoration: none;
+
+/* Transitions */
+transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+/* Interaction */
+cursor: pointer;
+user-select: none;
 }
+
 
 .ctrl-btn:hover {
-  background: rgba(34, 197, 94, 0.15);
-  color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.15);
+background: rgba(34, 197, 94, 0.12);
+border-color: var(--accent);
+color: var(--accent);
+transform: translateY(-1px);
+box-shadow: 0 4px 12px var(--accent-glow);
 }
+
 
 /* Nur Quiz-Antwortbuttons: neutrales Hover */
-.quiz-answer-btn:not(.correct):not(.wrong):hover {
-  background: rgba(255, 255, 255, 0.2); /* ✅ Helleres Grau (20% Weiß) */
-  /* leicht grau */
-  color: var(--text);
-  /* bleibt neutral */
-  transform: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.quiz-answer-btn:not(.correct):not(.wrong):not(.selected-neutral):hover {
+background: rgba(255, 255, 255, 0.12);
+border-color: rgba(255, 255, 255, 0.2);
+color: var(--text);
+transform: translateX(4px);
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* Selected but not revealed */
+.quiz-answer-btn.selected-neutral {
+background: rgba(255, 255, 255, 0.18) !important;
+border-color: var(--text) !important;
+color: var(--text-strong) !important;
+box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+transform: translateX(4px);
+}
+
+:root.light .quiz-answer-btn.selected-neutral {
+background: rgba(0, 0, 0, 0.1) !important;
+border-color: var(--text-strong) !important;
+color: var(--text-strong) !important;
+box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Light Mode: Quiz Buttons */
+:root.light .quiz-answer-btn {
+background: rgba(255, 255, 255, 0.8);
+border: 2px solid rgba(0, 0, 0, 0.12);
+color: var(--text-strong);
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+:root.light .quiz-answer-btn:not(.correct):not(.wrong):not(.selected-neutral):hover {
+background: rgba(0, 0, 0, 0.06);
+border-color: rgba(0, 0, 0, 0.2);
+color: var(--text-strong);
+}
+
+:root.light .quiz-answer-btn.correct {
+background: #22c55e !important;
+color: #ffffff !important;
+border-color: #16a34a !important;
+}
+
+:root.light .quiz-answer-btn.wrong {
+background: #dc2626 !important;
+color: #ffffff !important;
+border-color: #991b1b !important;
+}
+
+/* Kein Hover auf finale States */
+:root.light .quiz-answer-btn.correct:hover,
+:root.light .quiz-answer-btn.wrong:hover {
+transform: none !important;
+box-shadow: inherit !important;
+}
+
+
+/* ===============================
+   QUIZ PAGE: MOBILE OPTIMIERUNGEN
+   =============================== */
+
+@media (max-width: 768px) {
+  /* Topic Buttons kompakter auf Tablets */
+  .quiz-topic-row .ctrl-btn {
+    font-size: 0.813rem;
+    padding: var(--space-2) var(--space-3);
+  }
+  
+  /* Quiz Panel padding reduzieren */
+  .panel-quiz {
+    padding: var(--space-5);
+  }
+  
+  /* Quiz Navigation vertikal stapeln */
+  .quiz-nav {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  
+  .quiz-nav > div:last-child {
+    width: 100%;
+  }
+  
+  .quiz-nav button {
+    flex: 1; /* Buttons gleich breit */
+  }
+}
+
+@media (max-width: 600px) {
+  /* Topic Buttons: 2 pro Zeile */
+  .quiz-topic-row .ctrl-btn {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 0;
+    font-size: 0.75rem;
+  }
+  
+  /* Quiz Panel noch kleiner */
+  .panel-quiz {
+    padding: var(--space-4);
+  }
+  
+  /* Answer Buttons volle Breite für Touch */
+  .quiz-answer-btn {
+    padding: var(--space-4) var(--space-4);
+    font-size: 0.938rem;
+  }
+  
+  /* Progress Bar dünner */
+  .quiz-progress-container {
+    height: 6px;
+  }
+  
+  /* Frage-Text kleiner */
+  .quiz-question-box h2 {
+    font-size: var(--text-xl);
+    line-height: var(--leading-normal);
+  }
+}
 
 
 .ctrl-btn.active {
-  background: rgba(34, 197, 94, 0.2);
-  color: var(--accent);
-  border-color: rgba(34, 197, 94, 0.3);
-  transform: translateY(-1px);
+background: rgba(34, 197, 94, 0.18);
+border-color: var(--accent);
+color: var(--accent);
+transform: translateY(0);
 }
 
+/* NEU: Disabled State */
+.ctrl-btn:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+transform: none;
+pointer-events: none;
+}
+
+/* NEU: Focus State für Accessibility */
+.ctrl-btn:focus-visible {
+outline: 2px solid var(--accent);
+outline-offset: 2px;
+}
+
+/* NEU: Press Effect */
+.ctrl-btn:active {
+transform: scale(0.98);
+}
+
+/* Quiz Topic Selector - konsistent mit anderen Seiten */
+.quiz-topic-row {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2); /* 8px - kompakter */
+  margin-bottom: var(--space-8); /* 32px */
+  flex-wrap: wrap;
+}
+
+.quiz-topic-row .ctrl-btn {
+  padding: var(--space-2) var(--space-4); /* 8px 16px */
+  font-size: 0.875rem;
+}
+
+
+/* Correct Answer */
+.quiz-answer-btn.correct,
 .ctrl-btn.correct {
-  background: #22c55e !important;
-  color: #000 !important;
+background: var(--success) !important;
+color: #000 !important;
+border-color: var(--accent-dark) !important;
+box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+pointer-events: none;
 }
 
+/* Wrong Answer */
+.quiz-answer-btn.wrong,
 .ctrl-btn.wrong {
-  background: #d53434e2 !important;
-  color: #fff !important;
-  /* Füge eine noch höhere Spezifität hinzu, um sicherzustellen, dass die Farbe NICHT überschrieben wird */
-  background-color: #d53434e2 !important; 
+background: var(--error) !important;
+color: #fff !important;
+border-color: #dc2626 !important;
+box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+pointer-events: none;
 }
 
-/* 1. Zustand: Antwort wurde ausgewählt, aber noch nicht aufgelöst (Grau/Neutral) */
-.quiz-answer-btn.selected-neutral {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: var(--muted) !important;
-  color: var(--text-strong) !important;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
+/* WICHTIG: Hover auf Correct/Wrong deaktivieren */
+.quiz-answer-btn.correct:hover,
+.quiz-answer-btn.wrong:hover,
+.ctrl-btn.correct:hover,
+.ctrl-btn.wrong:hover {
+transform: none !important;
+box-shadow: inherit !important;
+background: inherit !important;
 }
 
-/* Light Mode für den neutralen Auswahlzustand */
-:root.light .quiz-answer-btn.selected-neutral {
-  background: rgba(0, 0, 0, 0.08) !important;
-  border-color: #666 !important;
-  color: #000 !important;
-}
 
-/* 2. Sicherstellen, dass die Farben erst bei 'correct' oder 'wrong' greifen */
-.ctrl-btn.correct {
-  background: #22c55e !important;
-  color: #000 !important;
-  border-color: #16a34a !important;
-}
-
-.ctrl-btn.wrong {
-  background: #d53434 !important;
-  color: #fff !important;
-  border-color: #b91c1c !important;
-}
 
 /* 🎥 Home Video Animation */
 @keyframes videoPulse {
@@ -940,16 +1168,26 @@ body::after {
 }
 
 /* responsive */
-@media (max-width:900px) {
-  .page-grid {
-    grid-template-columns: 1fr;
-    padding-bottom: 36px
-  }
-
-  .title {
-    font-size: 28px
-  }
+@media (max-width: 900px) {
+.page-grid {
+grid-template-columns: 1fr;
+gap: var(--space-6);
+padding-bottom: var(--space-10);
 }
+
+.title {
+font-size: var(--text-3xl);
+}
+
+.title.gradient {
+font-size: var(--text-4xl);
+}
+
+.lead {
+font-size: var(--text-base);
+}
+}
+
 
 
 
@@ -1011,13 +1249,13 @@ body::after {
 
 :root.light .panel,
 :root.light .viewer {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.489), rgba(230, 222, 217, 0.253));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(250, 250, 249, 0.9));
   border-radius: 14px;
   padding: 20px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* Viel sanfter! */
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 
 :root.light .viewer::before {
   background: radial-gradient(circle,
@@ -1040,107 +1278,45 @@ body::after {
         Quiz-Antwortbuttons, Viewer-Buttons, Links
    ------------------------------------------------- */
 
-:root.light .ctrl-btn,
-:root.light .home-action-btn,
-:root.light .topic-btn {
-  background: rgba(247, 243, 243, 0.862) !important;
-  /* sichtbar, aber weich */
-  color: #1a1a1a !important;
-  border: 1px solid rgba(0, 143, 69, 0.818) !important;
-  box-shadow: 0 2px 8px rgba(5, 99, 55, 0.366);
+/* Light Mode: Button Base */
+:root.light .ctrl-btn {
+background: rgba(0, 0, 0, 0.04);
+border-color: rgba(22, 163, 74, 0.3);
+color: var(--text-strong);
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ SPEZIFISCHER FIX FÜR DEN GRÜNEN BUTTON IM LIGHTMODE */
-:root.light .ctrl-btn.primary-cta {
-  background: #34d573 !important; /* Dein grüner Farbton */
-  color: #000 !important;         /* Schwarzer Text für gute Lesbarkeit */
-  border: 1px solid #036e23 !important; /* Dunkelgrüne Kontur */
+/* Light Mode: Button Hover */
+:root.light .ctrl-btn:hover {
+background: rgba(0, 0, 0, 0.08);
+border-color: var(--accent);
+color: var(--text-strong);
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-/* Hover-Effekt nur für den grünen Button (damit er nicht grau wird) */
-:root.light .ctrl-btn.primary-cta:hover {
-  background: #2ebf65 !important; /* Ein etwas kräftigeres Grün */
-  color: #000 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.4) !important;
-}
-
-/* Hover */
-:root.light .ctrl-btn:hover,
-:root.light .home-action-btn:hover,
-:root.light .topic-btn:hover {
-  /* ✅ Grauer, dunklerer Hintergrund (z.B. 10% Schwarz) */
-  background: rgba(0, 0, 0, 0.1) !important; 
-  /* ✅ Schwarzer/sehr dunkler Text */
-  color: var(--text) !important; 
-  /* Neutraler, leicht sichtbarer Rand */
-  border-color: rgba(0, 0, 0, 0.25) !important; 
-  
-  transform: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
-}
-
-/* Active State */
+/* Light Mode: Button Active */
 :root.light .ctrl-btn.active {
-  background: rgba(4, 238, 90, 0.25) !important;
-  color: #065f46 !important;
-  border-color: rgba(4, 127, 49, 0.35) !important;
+background: rgba(22, 163, 74, 0.15);
+color: var(--accent-dark);
+border-color: var(--accent);
 }
 
-:root.light .quiz-answer-btn.correct {
-  color: #065f46 !important;
-  border-color: rgba(34, 197, 94, 0.35) !important;
-  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25) !important;
-  background: #22c55ec5 !important;
-  color: #000 !important;
+/* Light Mode: Primary CTA */
+:root.light .primary-cta {
+background: var(--accent) !important;
+color: #ffffff !important;
+border-color: var(--accent-dark) !important;
+box-shadow: 0 2px 8px var(--accent-glow) !important;
 }
 
-:root.light .quiz-answer-btn.wrong {
-  /*background: rgba(239, 68, 68, 0.30) !important;
-  color: #7f1d1d !important;
-  border-color: rgba(239, 68, 68, 0.40) !important;
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25) !important;
-  transform: none !important;*/
-  background: #d53434cf !important;
-  background-color: #d53434cf !important;
-  color: #fff !important;
-  border-color: rgba(238, 56, 36, 0.35) !important;
-}
-
-:root.light .quiz-answer-btn {
-  background: rgba(255, 255, 255, 0.55);
-  color: #1a1a1a;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(6px);
-  transition:
-    background 0.25s ease,
-    color 0.25s ease,
-    transform 0.2s ease,
-    box-shadow 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+:root.light .primary-cta:hover {
+background: var(--accent-light) !important;
+color: #ffffff !important;
+box-shadow: 0 4px 12px var(--accent-glow) !important;
 }
 
 
-:root.light .quiz-answer-btn:not(.correct):not(.wrong):hover {
-  background: rgba(0, 0, 0, 0.1) !important; /* 10% Schwarz */
-  color: var(--text-strong) !important;
-  border-color: rgba(0, 0, 0, 0.2) !important;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
 
-/* Light Mode: Hover auf roten/grünen Buttons deaktivieren */
-:root.light .quiz-answer-btn.wrong {
-  background: #d53434cf !important;
-  background-color: #d53434cf !important; /* Wichtig für sofortiges Feedback */
-  color: #fff !important;
-  border-color: rgba(238, 56, 36, 0.35) !important;
-}
-
-:root.light .quiz-answer-btn.correct:hover {
-    background-color: #22c55ec5 !important; /* Das Grün beibehalten */
-    color: #000 !important;
-    box-shadow: none !important;
-}
 
 /* ===============================
    LOGIN / REGISTER FORM STYLING
@@ -1338,23 +1514,68 @@ body::after {
     background-color: #d53434e2 !important;
 }
 
-
-:root.light .quiz-answer-btn.correct:hover,
-:root.light .quiz-answer-btn.wrong:hover {
-  background: inherit !important;
-  color: inherit !important;
-  border-color: inherit !important;
-  transform: none !important;
-  box-shadow: none !important;
+/* Mobile: Home Hero Optimierungen */
+@media (max-width: 780px) {
+  /* Logo kleiner */
+  .logo {
+    width: 140px;
+  }
+  
+  /* Hamburger größer für Touch */
+  .hamburger {
+    font-size: 28px;
+    padding: 8px 12px;
+    min-width: 48px;
+    min-height: 48px;
+  }
+  
+  /* Mobile Menu Links größer */
+  .mobile-menu a {
+    font-size: 1.125rem;
+    padding: 14px 8px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Home Actions vertikal auf Mobile */
+  .home-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+    margin: var(--space-8) auto 0;
+    gap: var(--space-4);
+  }
+  
+  .home-action-btn {
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Eyebrow kleiner */
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
 }
 
-:root.light .quiz-answer-btn.wrong:hover,
-:root.light .quiz-answer-btn.wrong:active {
-  background: #d53434cf !important;
-  background-color: #d53434cf !important;
-  transform: none !important;
-  box-shadow: none !important;
+/* Extra Small Devices */
+@media (max-width: 480px) {
+  body {
+    padding: var(--space-3);
+  }
+  
+  .main-content {
+    padding: var(--space-4);
+  }
+  
+  .title.gradient {
+    font-size: var(--text-3xl);
+  }
 }
+
+
+
 
 /*About seite*/
 .team-section {
@@ -1393,23 +1614,72 @@ body::after {
 
 
 /* Ranking Table Styles */
+/* Ranking Table Structure */
+.ranking-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.ranking-table thead {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  z-index: 1;
+}
+
 .ranking-table th {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 600;
-    letter-spacing: 0.05em;
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  font-weight: 600;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.ranking-table tr:last-child {
-    border-bottom: none !important;
+.ranking-table td {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Light Mode Anpassung für Tabelle */
+/* Rang-Spalte: Icons größer */
+.ranking-table td:first-child {
+  font-size: 1.25rem;
+  text-align: center;
+  width: 60px;
+}
+
+/* Name hervorheben */
+.ranking-table td:nth-child(2) {
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+/* Score hervorheben */
+.ranking-table td:last-child {
+  font-weight: 700;
+  color: var(--accent);
+  text-align: right;
+}
+
+/* Light Mode */
+:root.light .ranking-table {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 :root.light .ranking-table th {
-    background: rgba(0, 0, 0, 0.05) !important;
-    color: var(--text-strong);
+  background: rgba(0, 0, 0, 0.04);
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+  color: var(--text-strong);
 }
-:root.light .ranking-table tr {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+
+:root.light .ranking-table td {
+  border-bottom-color: rgba(0, 0, 0, 0.08);
 }
+
+

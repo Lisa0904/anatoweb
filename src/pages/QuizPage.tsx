@@ -1,16 +1,18 @@
 // src/pages/QuizPage.tsx
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import quizJson from "../data/quiz.json";
 import { type AnatomyTopic as Topic, TOPIC_OPTIONS_ALL } from "../utils/constants";
 import { supabase } from "../utils/supabase";
 import Ranking from "../components/Ranking";
 
-
+interface QuizData {
+  questions: Question[];
+}
 interface Question {
   question: string;
   answers: string[];
   correct: number;
-  topic: Topic; // ✅ Jetzt den Alias 'Topic' verwenden
+  topic: Topic; 
 }
 
 interface RankEntry {
@@ -40,16 +42,17 @@ export default function QuizPage() {
   
 
   // Prüfe beim Start, ob Nutzer eingeloggt ist
-  React.useEffect(() => {
+  useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
       setUserId(data.user?.id || null);
     });
   }, []);
 
-  // 💾 Quizdaten filtern & mischen
+
   const questions = useMemo(() => {
-  // Wir stellen sicher, dass quizJson als das erwartete Array typisiert ist.
-  const allQuestions: Question[] = (quizJson as any).questions; 
+  
+ const allQuestions: Question[] = (quizJson as QuizData).questions;
+
 
   const filtered = allQuestions.filter((q) =>
     topic === "Alle" ? true : q.topic === topic
@@ -64,69 +67,63 @@ export default function QuizPage() {
 
   const q = questions[index];
 
- function answer(i: number) {
+  const answer = useCallback((i: number) => {
     if (locked) return;
     
-    // Wir speichern nur die Auswahl und sperren die Frage,
-    // setzen aber revealCorrect noch NICHT auf true.
     setSelected(i);
     setLocked(true);
     
-    // Den Timer für das automatische Umblättern löschen wir, 
-    // da der User jetzt manuell auf "Weiter" klicken soll, um die Auflösung zu sehen.
     if (autoNextTimer) clearTimeout(autoNextTimer);
 
-    // Status speichern (ohne Reveal)
     setQuestionStates(prev => ({
         ...prev,
-        [index]: { selected: i, locked: true, reveal: false } // reveal bleibt false
+        [index]: { selected: i, locked: true, reveal: false }
     }));
-  }
+  }, [locked, autoNextTimer, index]);
 
-function nextQuestion() {
-  if (autoNextTimer) clearTimeout(autoNextTimer);
 
-  // FALL A: Nutzer hat gewählt, aber die Auflösung ist noch nicht zu sehen
-  if (selected !== null && !revealCorrect) {
-    setRevealCorrect(true);
-    
-    // Score erst hier berechnen, wenn die Auflösung gezeigt wird
-    const isCorrect = selected === q.correct;
-    if (isCorrect && !answeredCorrectly[index]) {
-      setScore((s) => s + 1);
-      setAnsweredCorrectly((prev) => {
-        const copy = [...prev];
-        copy[index] = true;
-        return copy;
-      });
+  const nextQuestion = useCallback(() => {
+    if (autoNextTimer) clearTimeout(autoNextTimer);
+
+    if (selected !== null && !revealCorrect) {
+      setRevealCorrect(true);
+      
+      const isCorrect = selected === q.correct;
+      if (isCorrect && !answeredCorrectly[index]) {
+        setScore((s) => s + 1);
+        setAnsweredCorrectly((prev) => {
+          const copy = [...prev];
+          copy[index] = true;
+          return copy;
+        });
+      }
+
+      setQuestionStates(prev => ({
+        ...prev,
+        [index]: { ...prev[index], reveal: true }
+      }));
+      return;
     }
 
-    // Zustand im Cache aktualisieren
-    setQuestionStates(prev => ({
-      ...prev,
-      [index]: { ...prev[index], reveal: true }
-    }));
-    return; // Funktion hier abbrechen, damit wir nicht sofort zur nächsten Frage springen
-  }
+    if (index < questions.length - 1) {
+      const newIndex = index + 1;
+      setIndex(newIndex);
+      loadQuestionState(newIndex);
+    } else {
+      setShowResult(true);
+    }
+  }, [autoNextTimer, selected, revealCorrect, q, index, questions.length, answeredCorrectly]);
 
-  // FALL B: Auflösung ist schon da oder noch nichts gewählt -> Weiter zur nächsten Frage
-  if (index < questions.length - 1) {
-    const newIndex = index + 1;
-    setIndex(newIndex);
-    loadQuestionState(newIndex);
-  } else {
-    setShowResult(true);
-  }
-}
 
- function prevQuestion() {
-  if (autoNextTimer) clearTimeout(autoNextTimer);
-  if (index > 0) {
-    const newIndex = index - 1;
-    setIndex(newIndex);
-    loadQuestionState(newIndex); // Zustand der vorherigen Frage laden
-  }
-}
+  const prevQuestion = useCallback(() => {
+    if (autoNextTimer) clearTimeout(autoNextTimer);
+    if (index > 0) {
+      const newIndex = index - 1;
+      setIndex(newIndex);
+      loadQuestionState(newIndex);
+    }
+  }, [autoNextTimer, index, questionStates]);
+
 
  function resetState() {
   // Löscht nur den automatischen Timer, sonst nichts
@@ -148,7 +145,7 @@ function loadQuestionState(newIndex: number) {
   }
 }
 
-  function resetQuiz() {
+  const resetQuiz = useCallback(() => {
     if (autoNextTimer) clearTimeout(autoNextTimer);
     setIndex(0);
     setScore(0);
@@ -156,7 +153,8 @@ function loadQuestionState(newIndex: number) {
     setAnsweredCorrectly([]);
     resetState();
     setResetKey((k) => k + 1);
-  }
+  }, [autoNextTimer]);
+
 
   const progress = ((index + (showResult ? 1 : 0)) / questions.length) * 100;
 
@@ -183,7 +181,7 @@ function loadQuestionState(newIndex: number) {
   }
 
   // Automatische Speicherung bei Quiz-Ende
-  React.useEffect(() => {
+  useEffect(() => {
     if (showResult && userId) {
         saveScoreToDatabase(score);
     }
@@ -197,20 +195,12 @@ function loadQuestionState(newIndex: number) {
       </p>
 
       {/* Themenauswahl */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: 12,
-          marginBottom: 30,
-          flexWrap: "wrap",
-        }}
-      >
+      <div className="quiz-topic-row">
         {TOPIC_OPTIONS_ALL.map((t) => (
   <button
     key={t}
     onClick={() => {
-      setTopic(t as Topic); // Hinzufügen des Type Casts, da setTopic den Typ erwartet
+      setTopic(t);
       resetQuiz();
     }}
     className={`ctrl-btn ${topic === t ? "active" : ""}`}
@@ -236,7 +226,7 @@ function loadQuestionState(newIndex: number) {
             <h2 style={{ marginTop: 12, lineHeight: 1.5 }}>{q.question}</h2>
 
             <div style={{ display: "grid", gap: 12, marginTop: 20 }}>
-              {q.answers.map((a: string, i: number) => {
+             {q.answers.map((a, i) => {
   // Richtig/Falsch Farben nur anzeigen, wenn revealCorrect true ist
   const isCorrect = revealCorrect && i === q.correct;
   const isWrong = revealCorrect && selected === i && selected !== q.correct;
@@ -263,31 +253,27 @@ function loadQuestionState(newIndex: number) {
 
             {/* Navigation */}
             <div className="quiz-nav">
-              <div>Punktzahl: {score} / {questions.length}</div>
-              <div style={{ display: "flex", gap: 10 }}>
-                <button
-                  className="ctrl-btn quiz-answer-btn"
-                  onClick={prevQuestion}
-                  disabled={index === 0}
-                  style={{ opacity: index === 0 ? 0.5 : 1 }}
-                >
-                  ← Zurück
-                </button>
-                <button 
-  className="ctrl-btn quiz-answer-btn" 
-  onClick={nextQuestion}
-  disabled={selected === null}
-  style={{ 
-    opacity: selected === null ? 0.5 : 1,
-    // Wenn ausgewählt aber noch nicht aufgelöst -> Auffälliges Grün
-    background: (selected !== null && !revealCorrect) ? 'var(--accent)' : '',
-    color: (selected !== null && !revealCorrect) ? '#000' : ''
-  }}
->
-  {selected !== null && !revealCorrect ? "Auflösung zeigen" : "Weiter →"}
-</button>
-              </div>
-            </div>
+  <div style={{ color: 'var(--muted)', fontSize: '0.938rem' }}>
+    Punktzahl: <strong>{score} / {questions.length}</strong>
+  </div>
+  <div style={{ display: "flex", gap: 'var(--space-3)' }}>
+    <button
+      className="ctrl-btn"
+      onClick={prevQuestion}
+      disabled={index === 0}
+    >
+      ← Zurück
+    </button>
+    <button 
+      className={`ctrl-btn ${(selected !== null && !revealCorrect) ? 'primary-cta' : ''}`}
+      onClick={nextQuestion}
+      disabled={selected === null}
+    >
+      {selected !== null && !revealCorrect ? "Auflösung zeigen" : "Weiter →"}
+    </button>
+  </div>
+</div>
+
           </div>
         </>
       ) : (
@@ -312,7 +298,10 @@ function loadQuestionState(newIndex: number) {
           </button>
         </div>
       )}
-      <Ranking refreshTrigger={refreshKey} />
+      <div style={{ marginTop: 'var(--space-16)' }}> {/* 4rem = 64px Abstand */}
+  <Ranking refreshTrigger={refreshKey} />
+</div>
+
     </div>
   );
 }

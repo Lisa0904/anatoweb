@@ -1,21 +1,19 @@
 import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react"; // Füge useEffect hinzu
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "../utils/supabase";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<{ user: { id: string } } | null>(null);
   const [username, setUsername] = useState("Profil");
 
-  // Überprüft beim Start den Login-Status und lädt den Benutzernamen
-useEffect(() => {
-  async function fetchSessionAndProfile() {
+  // ✅ Optimierung: useCallback verhindert doppelten Fetch
+  const fetchSessionAndProfile = useCallback(async () => {
     const { data: sessionData } = await supabase.auth.getSession();
     const session = sessionData.session;
     setSession(session);
 
     if (session?.user) {
-      // 2. Benutzernamen aus der 'profiles' Tabelle holen
       const { data: profileData, error } = await supabase
         .from('profiles')
         .select('username')
@@ -25,42 +23,44 @@ useEffect(() => {
       if (profileData) {
         setUsername(profileData.username);
       } else {
-         // Wenn kein Profil gefunden (z.B. nach Fehler bei Registrierung)
-         setUsername("Profil");
-         console.error("Profil nicht gefunden:", error);
+        setUsername("Profil");
+        console.error("Profil nicht gefunden:", error);
       }
     } else {
       setUsername("Login");
     }
-  }
+  }, []);
 
-  fetchSessionAndProfile();
+  useEffect(() => {
+    fetchSessionAndProfile();
 
-  // Abonniert Änderungen am Auth-Status (Login/Logout)
-  const { data: authListener } = supabase.auth.onAuthStateChange(
-    (_event, session) => {
-      setSession(session);
-      if (session) {
-         // Beim Login/Logout die Daten neu laden
-         fetchSessionAndProfile(); 
-      } else {
-         setUsername("Login");
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+        if (session) {
+          fetchSessionAndProfile();
+        } else {
+          setUsername("Login");
+        }
       }
-    }
-  );
+    );
 
-  return () => {
-    authListener.subscription.unsubscribe();
-  };
-}, []);
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, [fetchSessionAndProfile]);
 
-  const handleLogout = async () => {
+
+  const handleLogout = useCallback(async () => {
     await supabase.auth.signOut();
-    setOpen(false); // Mobile Menü schließen
-  };
+    setOpen(false);
+  }, []);
 
-  const linkClass = ({ isActive }: { isActive: boolean }) =>
-    isActive ? "active" : "";
+
+     const linkClass = useCallback(({ isActive }: { isActive: boolean }) =>
+    `nav-link ${isActive ? "active" : ""}`, []);
+
+
 
   return (
     <nav className="nav">
@@ -73,10 +73,12 @@ useEffect(() => {
 
       {/* Desktop Links */}
       <div className="links desktop-only">
-        <NavLink to="/model" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}> Anatomie-Explorer </NavLink>
-        <NavLink to="/flashcards" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Karteikarten</NavLink>
-        <NavLink to="/quiz" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Quiz</NavLink>
-        <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Über Uns</NavLink>
+                <NavLink to="/model" className={linkClass}>Anatomie-Explorer</NavLink>
+        <NavLink to="/flashcards" className={linkClass}>Karteikarten</NavLink>
+        <NavLink to="/quiz" className={linkClass}>Quiz</NavLink>
+        <NavLink to="/about" className={linkClass}>Über Uns</NavLink>
+
+
 
         {/* ---------------------------------------------------- */}
         {/* ✅ DYNAMISCHER PROFIL / LOGIN BUTTON */}
@@ -87,7 +89,8 @@ useEffect(() => {
             to="/profile"
             className="ctrl-btn primary-cta"
             // Verwende den Profilnamen als Text, hebt sich farblich ab
-            style={{ marginLeft: 10, padding: '8px 15px' }}
+                       style={{ marginLeft: 24, padding: '10px 20px' }}
+
           >
              {username}
           </NavLink>
@@ -96,7 +99,8 @@ useEffect(() => {
           <NavLink 
             to="/login" 
             className="ctrl-btn primary-cta" 
-            style={{ marginLeft: 10, padding: '8px 15px' }}
+                       style={{ marginLeft: 24, padding: '10px 20px' }}
+
           >
             Login
           </NavLink>

@@ -1,13 +1,13 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Preload } from "@react-three/drei";
 import * as THREE from "three";
-import { useRef, useMemo, useEffect, useState } from "react";
+import { useRef, useMemo, useEffect, useState, useCallback } from "react";
 
 
 // =======================================================
 // NEUE KOMPONENTE: Partikel-Mensch-Darstellung
 // =======================================================
-function ParticleHuman({ color }: { color: number }) {
+function ParticleHuman({ color, isVisible }: { color: number; isVisible: boolean }) {
 
   const mesh = useRef<THREE.Points>(null);
   
@@ -156,8 +156,8 @@ for (let i = 0; i < count; i++) {
   }, []);
 
   // 2. Animation: Rotation und Pulsieren
-  useFrame(({ clock }) => {
-    if (!mesh.current) return;
+   useFrame(({ clock }) => {
+    if (!mesh.current || !isVisible) return; // ✅ Skip wenn nicht sichtbar
     const t = clock.getElapsedTime();
 
     // Leichte vertikale Verschiebung (Atmen)
@@ -188,6 +188,8 @@ for (let i = 0; i < count; i++) {
 // =======================================================
 export default function HeroModel() {
   const [isLightMode, setIsLightMode] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // ✅ Sichtbarkeit tracken
+  const containerRef = useRef<HTMLDivElement>(null); // ✅ Ref für Container
 
 useEffect(() => {
   const media = window.matchMedia("(prefers-color-scheme: light)");
@@ -199,12 +201,39 @@ useEffect(() => {
   return () => media.removeEventListener("change", listener);
 }, []);
 
+// ✅ Intersection Observer: Animation pausiert, wenn nicht sichtbar
+useEffect(() => {
+  const element = containerRef.current;
+  if (!element) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        setIsVisible(entry.isIntersecting);
+      });
+    },
+    { threshold: 0.1 } // Mindestens 10% sichtbar
+  );
+
+  observer.observe(element);
+
+  return () => {
+    observer.disconnect();
+  };
+}, []);
+
+const particleColor = useCallback(() => {
+    return isLightMode ? 0x1f7a45 : 0x00ff55;
+  }, [isLightMode]);
+
   return (
     <div
+     ref={containerRef}
       style={{
         width: "100%",
         // 50vh ist ein guter Wert für den Hero-Bereich (nicht zu groß)
-        height: "50vh", 
+        height: "55vh",
+        minHeight: "400px",
         position: "relative",
         // Wichtig: Pointer Events deaktivieren, damit der Klick an den Link in Home.tsx geht
         pointerEvents: 'none', 
@@ -219,7 +248,7 @@ useEffect(() => {
       >
         <ambientLight intensity={2} /> 
 
-        <ParticleHuman color={isLightMode ? "#1f7a45" : "#00ff55"} />
+       <ParticleHuman color={particleColor()} isVisible={isVisible} />
 
 
         {/* OrbitControls für Maus-Steuerung und Eigenrotation */}

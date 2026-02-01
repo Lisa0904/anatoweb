@@ -314,6 +314,7 @@ function Tooltip({ name }: { name: string | null }) {
 export default function AnatomyViewer({ modelUrl, onSelect }: AnatomyViewerProps) {
   const lastSelectedRef = useRef<THREE.Mesh[] | null>(null);
 const [hoveredName, setHoveredName] = useState<string | null>(null); // State für Tooltip
+const controlsRef = useRef<any>(null);
   
 
 
@@ -340,6 +341,12 @@ function clearSelection() {
 
   lastSelectedRef.current = null;
 }
+
+ function resetView() {
+    if (controlsRef.current) {
+      controlsRef.current.reset();
+    }
+  }
   return (
     <>
     <Canvas
@@ -371,10 +378,23 @@ function clearSelection() {
       </EffectComposer>
 
       {/* 🧠 Zielpunkt leicht in Brusthöhe */}
-      <OrbitControls target={[0, 1.5, 0]} enablePan enableZoom enableRotate />
+      <OrbitControls 
+  ref={controlsRef}
+  target={[0, 1.5, 0]} 
+  enablePan 
+  enableZoom 
+  enableRotate 
+/>
     </Canvas>
     {/* Das Tooltip Overlay */}
       <Tooltip name={hoveredName} />
     </>
   );
 }
+
+// ✅ Preload all models on app start for instant switching
+useGLTF.preload("/models/anatoweb_full.glb");
+useGLTF.preload("/models/anatoweb_skeleton.glb");
+useGLTF.preload("/models/anatoweb_muscles.glb");
+useGLTF.preload("/models/anatoweb_organs.glb");
+useGLTF.preload("/models/anatoweb_circulatory.glb");

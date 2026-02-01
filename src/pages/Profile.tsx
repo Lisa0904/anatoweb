@@ -1,6 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabase";
+
+
+// Interface für Profile-Daten
+interface ProfileData {
+  username: string;
+}
 
   // Interface für die Score-Daten
 interface UserScore {
@@ -17,62 +23,94 @@ export default function Profile() {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const [myScores, setMyScores] = useState<UserScore[]>([]);
+   const [error, setError] = useState<string | null>(null);
 
 
 
- useEffect(() => {
-    async function getProfile() {
-      setLoading(true);
-      const { data: { user } } = await supabase.auth.getUser();
+  const getProfile = useCallback(async () => {
+    setLoading(true);
+    setError(null); // ✅ Reset error state
+    
+    const { data: { user } } = await supabase.auth.getUser();
 
-      if (!user) {
-        navigate("/login");
-        return;
-      }
-      
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    
+    try {
       // 1. Profil laden (Benutzername)
       const { data: profileData, error: profileError } = await supabase
         .from('profiles')
-        .select('*')
+        .select('username')
         .eq('id', user.id)
         .single();
+
+      if (profileError) throw profileError;
 
       if (profileData) {
         setUsername(profileData.username);
         setEmail(user.email || "Nicht verfügbar");
-      } else if (profileError) {
-        console.error("Fehler beim Laden des Profils:", profileError);
+      } else {
         setUsername("Gast");
       }
 
-      // 2. ✅ NEU: Eigene Scores laden
+      // 2. Eigene Scores laden
       const { data: scoreData, error: scoreError } = await supabase
         .from('quiz_scores')
         .select('*')
         .eq('user_id', user.id)
-        .order('created_at', { ascending: false }) // Neueste zuerst
-        .limit(5); // Nur die letzten 5 anzeigen
+        .order('created_at', { ascending: false })
+        .limit(5);
+
+      if (scoreError) throw scoreError;
 
       if (scoreData) {
         setMyScores(scoreData);
-      } else if (scoreError) {
-        console.error("Fehler beim Laden der Scores:", scoreError);
       }
-
+    } catch (err) {
+      // ✅ User-sichtbarer Fehler
+      const errorMessage = err instanceof Error ? err.message : "Unbekannter Fehler";
+      setError(`Fehler beim Laden: ${errorMessage}`);
+      console.error("Profil-Fehler:", err);
+    } finally {
       setLoading(false);
     }
-
-    getProfile();
   }, [navigate]);
 
-  const handleLogout = async () => {
+  useEffect(() => {
+    getProfile();
+  }, [getProfile]);
+
+
+  const handleLogout = useCallback(async () => {
     await supabase.auth.signOut();
     navigate("/");
-  };
+  }, [navigate]);
 
-  if (loading) {
-    return <div className="page-container" style={{ textAlign: "center", marginTop: 50 }}><p>Lade Profil...</p></div>;
+    if (loading) {
+    return (
+      <div className="page-container" style={{ textAlign: "center", marginTop: 50 }}>
+        <p>Lade Profil...</p>
+      </div>
+    );
   }
+
+  // ✅ Error State für User anzeigen
+  if (error) {
+    return (
+      <div className="page-container" style={{ maxWidth: '600px', margin: '50px auto', textAlign: 'center' }}>
+        <div className="panel" style={{ padding: '40px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
+          <h2 style={{ color: '#ef4444', marginBottom: '15px' }}>⚠️ Fehler</h2>
+          <p style={{ color: 'var(--text)', marginBottom: '25px' }}>{error}</p>
+          <button onClick={getProfile} className="ctrl-btn primary-cta">
+            Erneut versuchen
+          </button>
+        </div>
+      </div>
+    );
+  }
+
 
   return (
       // Zentrierter Container mit angenehmer maximaler Breite

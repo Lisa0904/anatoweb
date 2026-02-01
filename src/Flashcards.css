@@ -76,10 +76,13 @@
   font-size: 20px;
   color: rgba(70, 212, 57, 0.947);
 }
+
 :root.light .answer {
   font-size: 20px;
-  color: rgba(25, 141, 5, 0.968);
+  color: #15803d; /* ✅ Noch dunkler - gleiches Grün wie Accent */
+  font-weight: 500; /* Etwas fetter für bessere Lesbarkeit */
 }
+
 
 /* Bewertungsbuttons */
 .rating-btn {
@@ -205,13 +208,20 @@
   text-align: left;
 }
 
-/* Themen-Buttons row */
 .flashcards-topic-row {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: var(--space-2); /* 8px - kompakter */
+  margin-bottom: var(--space-6); /* 24px */
+  flex-wrap: wrap; /* Falls Buttons umbrechen müssen */
 }
+
+/* Kleinere Buttons wie auf Model Page */
+.flashcards-topic-row .ctrl-btn {
+  padding: var(--space-2) var(--space-4); /* 8px 16px */
+  font-size: 0.875rem;
+}
+
 
 /* Bewertungsbuttons row */
 .rating-row {
@@ -360,4 +370,75 @@
 :root.light .memory-link-btn:hover {
   background: #15803d;
   color: white;
+}
+
+/* ===============================
+   MOBILE OPTIMIERUNGEN
+   =============================== */
+
+@media (max-width: 768px) {
+  /* Kleinere Topic Buttons auf Tablets */
+  .flashcards-topic-row .ctrl-btn {
+    font-size: 0.813rem;
+    padding: var(--space-2) var(--space-3);
+  }
+  
+  /* Rating Buttons nebeneinander auf Tablets */
+  .rating-row {
+    gap: var(--space-3);
+  }
+}
+
+@media (max-width: 600px) {
+  /* Flashcard Anpassungen (bereits vorhanden, aber verbessert) */
+  .flashcard {
+    width: 100%;
+    max-width: 500px; /* Begrenzte Breite für sehr breite Phones */
+    height: 280px; /* Etwas höher als vorher (war 240px) */
+    padding: 20px;
+  }
+
+  .question,
+  .answer {
+    font-size: 17px; /* Etwas größer (war 18px) */
+    line-height: 1.5;
+  }
+
+  /* Rating Buttons gestapelt */
+  .rating-row {
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .rating-btn {
+    width: 100%; /* Volle Breite für einfacheres Tippen */
+    padding: 14px 16px; /* Größere Touch-Targets */
+    font-size: 15px;
+  }
+  
+  /* Topic Buttons: 2-3 pro Zeile */
+  .flashcards-topic-row {
+    gap: var(--space-2);
+  }
+  
+  .flashcards-topic-row .ctrl-btn {
+    flex: 1 1 calc(50% - 8px); /* 2 pro Zeile auf sehr kleinen Screens */
+    min-width: 0;
+  }
+  
+  /* Utility Buttons kleiner */
+  .utility-buttons-row {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  
+  .sound-toggle-btn,
+  .memory-link-btn {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
 }
