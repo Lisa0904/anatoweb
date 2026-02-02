@@ -12,6 +12,7 @@ export default function ModelPage() {
 
   const modelPaths: Record<Topic, string> = useMemo(
     () => ({
+      "Alle": "/models/anatoweb_full.glb",
       "Ganzer Mensch": "/models/anatoweb_full.glb",
       Muskeln: "/models/anatoweb_muscles.glb",
       Skelett: "/models/anatoweb_skeleton.glb",

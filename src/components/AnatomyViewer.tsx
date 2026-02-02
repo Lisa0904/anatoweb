@@ -354,11 +354,7 @@ function clearSelection() {
       shadows
       gl={{ antialias: true }}
       camera={{ position: [100, 90, 350], fov: 32 }}
-      onPointerDown={(e) => {
-    if (e.intersections.length === 0) {
-      clearSelection();
-    }
-  }}
+      
     >
       <ambientLight intensity={1} />
       <directionalLight castShadow intensity={1.2} position={[5, 10, 5]} color="#ffffff" />
