@@ -58,7 +58,7 @@ export default function Register() {
               onChange={(e) => setUsername(e.target.value)}
               required
               minLength={3}
-              placeholder="Tom_Anatomie_Profi"
+              placeholder="Jonas_Anatomie_Profi"
             />
           </div>
 

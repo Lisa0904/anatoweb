@@ -6,7 +6,7 @@ import { useGLTF, OrbitControls, Html, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 
-interface ModelProps {
+interface _ModelProps {
   url: string;
   onSelect?: (name: string, info: string) => void;
   onClearSelection?: () => void;
@@ -83,7 +83,7 @@ function LoaderFallback() {
 
 function Model({ url, onSelect, lastSelectedRef, clearSelection, setHovered }: {
   url: string;
-  onSelect?: (name: string) => void;
+ onSelect?: (name: string, info?: string) => void;
   lastSelectedRef: React.MutableRefObject<THREE.Mesh[] | null>;
   clearSelection: () => void;
   setHovered: (name: string | null) => void; // Neuer Prop
