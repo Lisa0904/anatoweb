@@ -12,6 +12,37 @@ interface _ModelProps {
   onClearSelection?: () => void;
 }
 
+// 🟢 Smooth Fade Animation für Emissive
+function animateEmissive(
+  material: THREE.MeshStandardMaterial,
+  startColor: THREE.Color,
+  endColor: THREE.Color,
+  startIntensity: number,
+  endIntensity: number,
+  duration: number
+) {
+  const start = performance.now();
+
+  function update(now: number) {
+    const t = Math.min((now - start) / duration, 1);
+
+    // Color interpolation
+    material.emissive.setRGB(
+      startColor.r + (endColor.r - startColor.r) * t,
+      startColor.g + (endColor.g - startColor.g) * t,
+      startColor.b + (endColor.b - startColor.b) * t
+    );
+
+    // Intensity interpolation
+    material.emissiveIntensity =
+      startIntensity + (endIntensity - startIntensity) * t;
+
+    if (t < 1) requestAnimationFrame(update);
+  }
+
+  requestAnimationFrame(update);
+}
+
 function LoaderFallback() {
   const { progress } = useProgress();
   const radius = 34;
@@ -193,36 +224,7 @@ mat.metalness = 0.05;
   onSelect?.(name, info);
 }
 
-// 🟢 Smooth Fade Animation für Emissive
-function animateEmissive(
-  material: THREE.MeshStandardMaterial,
-  startColor: THREE.Color,
-  endColor: THREE.Color,
-  startIntensity: number,
-  endIntensity: number,
-  duration: number
-) {
-  const start = performance.now();
 
-  function update(now: number) {
-    const t = Math.min((now - start) / duration, 1);
-
-    // Color interpolation
-    material.emissive.setRGB(
-      startColor.r + (endColor.r - startColor.r) * t,
-      startColor.g + (endColor.g - startColor.g) * t,
-      startColor.b + (endColor.b - startColor.b) * t
-    );
-
-    // Intensity interpolation
-    material.emissiveIntensity =
-      startIntensity + (endIntensity - startIntensity) * t;
-
-    if (t < 1) requestAnimationFrame(update);
-  }
-
-  requestAnimationFrame(update);
-}
 
 // --- NEU: Hover Handler ---
   function handlePointerOver(e: ThreeEvent<PointerEvent>) {
