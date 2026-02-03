@@ -8,7 +8,7 @@ const currentYear = new Date().getFullYear();
     <footer className="site-footer">
       <p>
         <Link to="/impressum">Impressum</Link> | &copy; {currentYear} AnatoWeb{" "}
-        {/* <Link to="/kontakt">Kontakt</Link> |{" "} */}
+        {/*  <Link to="/kontakt">Kontakt</Link> |{" "} */}
          
       </p>
     </footer>
